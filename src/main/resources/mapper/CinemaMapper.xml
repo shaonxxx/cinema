@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniu.woniuticket.cinema.dao.CinemaMapper">
+  <resultMap id="BaseResultMap" type="com.woniu.woniuticket.cinema.pojo.Cinema">
+    <id column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="ciname" jdbcType="VARCHAR" property="ciname" />
+    <result column="join_time" jdbcType="TIMESTAMP" property="joinTime" />
+    <result column="relation" jdbcType="VARCHAR" property="relation" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="lgt" jdbcType="DECIMAL" property="lgt" />
+    <result column="dim" jdbcType="DECIMAL" property="dim" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cinema_id, location, logo, ciname, join_time, relation, telphone, describe, state, 
+    lgt, dim
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cinema
+    where cinema_id = #{cinemaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cinema
+    where cinema_id = #{cinemaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.Cinema">
+    insert into cinema (cinema_id, location, logo, 
+      ciname, join_time, relation, 
+      telphone, describe, state, 
+      lgt, dim)
+    values (#{cinemaId,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, 
+      #{ciname,jdbcType=VARCHAR}, #{joinTime,jdbcType=TIMESTAMP}, #{relation,jdbcType=VARCHAR}, 
+      #{telphone,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{lgt,jdbcType=DECIMAL}, #{dim,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.woniu.woniuticket.cinema.pojo.Cinema">
+    insert into cinema
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cinemaId != null">
+        cinema_id,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="ciname != null">
+        ciname,
+      </if>
+      <if test="joinTime != null">
+        join_time,
+      </if>
+      <if test="relation != null">
+        relation,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="describe != null">
+        describe,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="lgt != null">
+        lgt,
+      </if>
+      <if test="dim != null">
+        dim,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cinemaId != null">
+        #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="ciname != null">
+        #{ciname,jdbcType=VARCHAR},
+      </if>
+      <if test="joinTime != null">
+        #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="relation != null">
+        #{relation,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="lgt != null">
+        #{lgt,jdbcType=DECIMAL},
+      </if>
+      <if test="dim != null">
+        #{dim,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.woniu.woniuticket.cinema.pojo.Cinema">
+    update cinema
+    <set>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="ciname != null">
+        ciname = #{ciname,jdbcType=VARCHAR},
+      </if>
+      <if test="joinTime != null">
+        join_time = #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="relation != null">
+        relation = #{relation,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="lgt != null">
+        lgt = #{lgt,jdbcType=DECIMAL},
+      </if>
+      <if test="dim != null">
+        dim = #{dim,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where cinema_id = #{cinemaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.woniu.woniuticket.cinema.pojo.Cinema">
+    update cinema
+    set location = #{location,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      ciname = #{ciname,jdbcType=VARCHAR},
+      join_time = #{joinTime,jdbcType=TIMESTAMP},
+      relation = #{relation,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      lgt = #{lgt,jdbcType=DECIMAL},
+      dim = #{dim,jdbcType=DECIMAL}
+    where cinema_id = #{cinemaId,jdbcType=INTEGER}
+  </update>
+</mapper>

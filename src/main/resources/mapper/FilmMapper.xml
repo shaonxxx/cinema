@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniu.woniuticket.cinema.dao.FilmMapper">
+  <resultMap id="BaseResultMap" type="com.woniu.woniuticket.cinema.pojo.Film">
+    <id column="film_id" jdbcType="INTEGER" property="filmId" />
+    <result column="film_name" jdbcType="VARCHAR" property="filmName" />
+    <result column="stars" jdbcType="VARCHAR" property="stars" />
+    <result column="duration" jdbcType="INTEGER" property="duration" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="grage" jdbcType="DOUBLE" property="grage" />
+    <result column="people_num" jdbcType="INTEGER" property="peopleNum" />
+    <result column="film_status" jdbcType="VARCHAR" property="filmStatus" />
+    <result column="covers" jdbcType="VARCHAR" property="covers" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="other_stats" jdbcType="VARCHAR" property="otherStats" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    film_id, film_name, stars, duration, info, grage, people_num, film_status, covers, 
+    language, other_stats
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from film
+    where film_id = #{filmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from film
+    where film_id = #{filmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.Film">
+    insert into film (film_id, film_name, stars, 
+      duration, info, grage, 
+      people_num, film_status, covers, 
+      language, other_stats)
+    values (#{filmId,jdbcType=INTEGER}, #{filmName,jdbcType=VARCHAR}, #{stars,jdbcType=VARCHAR}, 
+      #{duration,jdbcType=INTEGER}, #{info,jdbcType=VARCHAR}, #{grage,jdbcType=DOUBLE}, 
+      #{peopleNum,jdbcType=INTEGER}, #{filmStatus,jdbcType=VARCHAR}, #{covers,jdbcType=VARCHAR}, 
+      #{language,jdbcType=VARCHAR}, #{otherStats,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.woniu.woniuticket.cinema.pojo.Film">
+    insert into film
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="filmId != null">
+        film_id,
+      </if>
+      <if test="filmName != null">
+        film_name,
+      </if>
+      <if test="stars != null">
+        stars,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="grage != null">
+        grage,
+      </if>
+      <if test="peopleNum != null">
+        people_num,
+      </if>
+      <if test="filmStatus != null">
+        film_status,
+      </if>
+      <if test="covers != null">
+        covers,
+      </if>
+      <if test="language != null">
+        language,
+      </if>
+      <if test="otherStats != null">
+        other_stats,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="filmId != null">
+        #{filmId,jdbcType=INTEGER},
+      </if>
+      <if test="filmName != null">
+        #{filmName,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null">
+        #{stars,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="grage != null">
+        #{grage,jdbcType=DOUBLE},
+      </if>
+      <if test="peopleNum != null">
+        #{peopleNum,jdbcType=INTEGER},
+      </if>
+      <if test="filmStatus != null">
+        #{filmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="covers != null">
+        #{covers,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="otherStats != null">
+        #{otherStats,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.woniu.woniuticket.cinema.pojo.Film">
+    update film
+    <set>
+      <if test="filmName != null">
+        film_name = #{filmName,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null">
+        stars = #{stars,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="grage != null">
+        grage = #{grage,jdbcType=DOUBLE},
+      </if>
+      <if test="peopleNum != null">
+        people_num = #{peopleNum,jdbcType=INTEGER},
+      </if>
+      <if test="filmStatus != null">
+        film_status = #{filmStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="covers != null">
+        covers = #{covers,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="otherStats != null">
+        other_stats = #{otherStats,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where film_id = #{filmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.woniu.woniuticket.cinema.pojo.Film">
+    update film
+    set film_name = #{filmName,jdbcType=VARCHAR},
+      stars = #{stars,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=INTEGER},
+      info = #{info,jdbcType=VARCHAR},
+      grage = #{grage,jdbcType=DOUBLE},
+      people_num = #{peopleNum,jdbcType=INTEGER},
+      film_status = #{filmStatus,jdbcType=VARCHAR},
+      covers = #{covers,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      other_stats = #{otherStats,jdbcType=VARCHAR}
+    where film_id = #{filmId,jdbcType=INTEGER}
+  </update>
+</mapper>
