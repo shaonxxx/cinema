@@ -14,6 +14,7 @@ public class FilmController {
     @GetMapping("/film")
     public Object getFilmByfid( Integer fid){
         System.out.println(fid);
+        System.out.println(fid);
         return filmService.selectFilmByfid(fid);
     }
 }
