@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class FilmController {
@@ -28,10 +26,10 @@ public class FilmController {
      * @return
      */
     @GetMapping("/film")
-    public Map getFilmByfid( Integer id){
-        Map result = new HashMap();
+    public Result getFilmByfid( Integer id){
+        Result result = new Result();
         Film film = filmService.selectFilmByfid(id);
-        result.put("film",film);
+        result.setData(film);
         return result;
     }
 
@@ -54,7 +52,11 @@ public class FilmController {
         return result;
     }
 
-
+    /**
+     * 添加影片
+     * @param film
+     * @return
+     */
     @PostMapping("/add")
     public Result addFilm(Film film){
         Result result = new Result();
