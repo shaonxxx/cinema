@@ -1,16 +1,17 @@
 package com.woniu.woniuticket.cinema.service;
 
+import com.github.pagehelper.PageInfo;
 import com.woniu.woniuticket.cinema.pojo.Film;
-import com.woniu.woniuticket.cinema.vo.FilmVO;
-
-import java.util.List;
 
 public interface FilmService {
 
-
-    public List<Film> findFilmByCondition(FilmVO filmVO, Integer currentPage, Integer pageSize);
+    public PageInfo<Film> selectAllFilm();
 
     public Film selectFilmByfid(Integer fid);
 
-    void addFilm(Film film);
+    public int addFilm(Film film);
+
+    int deleteFilmByfid(Integer fid);
+
+    int updateFilmBySelective(Film film);
 }
