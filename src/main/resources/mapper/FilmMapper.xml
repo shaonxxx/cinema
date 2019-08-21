@@ -59,7 +59,8 @@
     where film_id = #{filmId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    update film set film_status="delete"  where fid=#{fid}
+    delete from film
+    where film_id = #{filmId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.Film">
     insert into film (film_id, film_name, stars, 
