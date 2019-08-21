@@ -19,7 +19,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.woniu.woniuticket.cinema.dao" targetProject="src/main/java"/>
 
 
-        <table tableName="user" mapperName="UserMapper" domainObjectName="User" enableDeleteByExample="false"
+        <table tableName="film" mapperName="FilmMapper" domainObjectName="Film" enableDeleteByExample="false"
                enableUpdateByExample="false"
                enableSelectByExample="false"
                enableCountByExample="false"

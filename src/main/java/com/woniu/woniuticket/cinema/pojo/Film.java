@@ -1,5 +1,7 @@
 package com.woniu.woniuticket.cinema.pojo;
 
+import java.util.Date;
+
 public class Film {
     private Integer filmId;
 
@@ -13,6 +15,8 @@ public class Film {
 
     private Double grage;
 
+    private Date releseDate;
+
     private Integer peopleNum;
 
     private String filmStatus;
@@ -22,6 +26,8 @@ public class Film {
     private String language;
 
     private String otherStats;
+
+    private Integer categoryId;
 
     public Integer getFilmId() {
         return filmId;
@@ -71,6 +77,14 @@ public class Film {
         this.grage = grage;
     }
 
+    public Date getReleseDate() {
+        return releseDate;
+    }
+
+    public void setReleseDate(Date releseDate) {
+        this.releseDate = releseDate;
+    }
+
     public Integer getPeopleNum() {
         return peopleNum;
     }
@@ -109,5 +123,13 @@ public class Film {
 
     public void setOtherStats(String otherStats) {
         this.otherStats = otherStats;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 }
