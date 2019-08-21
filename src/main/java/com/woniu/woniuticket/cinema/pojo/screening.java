@@ -2,14 +2,14 @@ package com.woniu.woniuticket.cinema.pojo;
 
 import java.util.Date;
 
-public class Screening {
+public class screening {
     private Integer chipId;
 
     private Date startTime;
 
     private Date endTime;
 
-    private Integer fileId;
+    private Integer filmId;
 
     private Integer cinemaId;
 
@@ -41,12 +41,12 @@ public class Screening {
         this.endTime = endTime;
     }
 
-    public Integer getFileId() {
-        return fileId;
+    public Integer getFilmId() {
+        return filmId;
     }
 
-    public void setFileId(Integer fileId) {
-        this.fileId = fileId;
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
     }
 
     public Integer getCinemaId() {

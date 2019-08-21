@@ -2,7 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniu.woniuticket.cinema.dao.FilmMapper">
 
+  <!-- 按名称查找film -->
+  <select id="selectFilmByName" resultMap="BaseResultMap">
+    select * from film where film_name =#{film.filmName}
+  </select>
 
+  <!-- 条件查询film -->
+  <select id="selectFilmByCondition" resultMap="BaseResultMap">
+    select * from film
+    <where>
+      <if test="filmVO != null">
+        <if test="filmVO.filmName != null and filmVO.filmName != ''">
+          and film_name like '%' #{filmVO.filmName} '%'
+        </if>
+        <if test="filmVO.stars != null and filmVO.stars != ''">
+          and film_stars like '%' #{filmVO.stars} '%'
+        </if>
+        <if test="filmVO.releseDate != null and filmVO.releseDate != ''">
+          and relese_date = #{filmVO.releseDate}
+        </if>
+        <if test="filmVO.categoryId != null and filmVO.categoryId != ''">
+          and category_id = #{filmVO.categoryId}
+        </if>
+        <if test="filmVO.filmStatus != null and filmVO.filmStatus != ''">
+          and film_filmStatus like '%' #{filmVO.filmStatus} '%'
+        </if>
+          <!-- order by relese_date -->
+      </if>
+    </where>
+  </select>
 
 
   <resultMap id="BaseResultMap" type="com.woniu.woniuticket.cinema.pojo.Film">

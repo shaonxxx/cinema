@@ -22,4 +22,6 @@ public interface FilmMapper {
     //条件查询影片，后台分页
     List<Film> selectFilmByCondition(@Param("filmVO")FilmVO filmVO,@Param("currentPage")Integer currentPage,
                                      @Param("pageSzie")Integer pageSize);
+
+   Film selectFilmByName(String filmName);
 }

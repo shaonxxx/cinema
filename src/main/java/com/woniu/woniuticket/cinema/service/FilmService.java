@@ -12,5 +12,5 @@ public interface FilmService {
 
     public Film selectFilmByfid(Integer fid);
 
-
+    void addFilm(Film film);
 }

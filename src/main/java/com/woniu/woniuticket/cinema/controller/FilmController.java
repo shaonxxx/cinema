@@ -2,7 +2,9 @@ package com.woniu.woniuticket.cinema.controller;
 
 
 import com.github.pagehelper.PageInfo;
+import com.woniu.woniuticket.cinema.execption.FilmException;
 import com.woniu.woniuticket.cinema.pojo.Film;
+import com.woniu.woniuticket.cinema.pojo.Result;
 import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,26 +43,31 @@ public class FilmController {
      * @return
      */
     @GetMapping("/filmlist")
-    public Map findfilmByCondition(@RequestParam(value = "filmVO",required = false)FilmVO filmVO,@RequestParam(value ="currentPage",defaultValue = "1")Integer currentPage,
+    public Result<PageInfo> findfilmByCondition(@RequestParam(value = "filmVO",required = false)FilmVO filmVO,@RequestParam(value ="currentPage",defaultValue = "1")Integer currentPage,
                                    @RequestParam(value = "pageSize",defaultValue = "10")Integer pagesize){
-        Map map = new HashMap();
+        Result result = new Result();
         List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
         PageInfo<Film> pageInfo = new PageInfo<Film>(films);
-        map.put("pageInfo",pageInfo);
-        return map;
+        result.setCode("200");
+        result.setMessage("查询成功");
+        result.setData(pageInfo);
+        return result;
     }
 
 
     @PostMapping("/add")
-    public Map addFilm(Film film){
-        Map result = new HashMap();
+    public Result addFilm(Film film){
+        Result result = new Result();
         try {
-//            filmService.addFilm(film);
-        } catch (Exception e) {
+            filmService.addFilm(film);
+            result.setCode("200");
+            result.setMessage("添加成功");
+        } catch (FilmException e) {
             e.printStackTrace();
+            result.setCode("500");
+            result.setMessage(e.getMessage());
         }
         return result;
     }
-
 
 }
