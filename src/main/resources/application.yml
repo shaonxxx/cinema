@@ -8,6 +8,8 @@ spring:
     date-format: yyyy-MM-dd
   jackson:
     date-format: yyyy-MM-dd
+#  application:
+#    name: cinema
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
@@ -19,3 +21,9 @@ pagehelper:
 logging:
   level:
     com.woniu.woniuticket.cinema.dao: debug
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://106.52.231.180:8761:8762/eureka
+server:
+  port: 8081

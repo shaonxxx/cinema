@@ -8,4 +8,10 @@ public interface FilmService {
     public PageInfo<Film> selectAllFilm();
 
     public Film selectFilmByfid(Integer fid);
+
+    public int addFilm(Film film);
+
+    int deleteFilmByfid(Integer fid);
+
+    int updateFilmBySelective(Film film);
 }

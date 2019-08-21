@@ -24,4 +24,20 @@ public class FilmServiceImpl implements FilmService {
     public Film selectFilmByfid(Integer fid) {
         return filmMapper.selectByPrimaryKey(fid);
     }
+
+    @Override
+    public int addFilm(Film film) {
+
+        return filmMapper.insertSelective(film);
+    }
+
+    @Override
+    public int deleteFilmByfid(Integer fid) {
+        return filmMapper.deleteByPrimaryKey(fid);
+    }
+
+    @Override
+    public int updateFilmBySelective(Film film) {
+        return filmMapper.updateByPrimaryKeySelective(film);
+    }
 }
