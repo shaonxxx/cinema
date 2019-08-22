@@ -19,3 +19,5 @@ pagehelper:
 logging:
   level:
     com.woniu.woniuticket.cinema.dao: debug
+server:
+  port: 8081

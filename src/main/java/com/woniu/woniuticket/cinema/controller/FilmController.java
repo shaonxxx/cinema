@@ -8,16 +8,14 @@ import com.woniu.woniuticket.cinema.pojo.Result;
 import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 public class FilmController {
     @Autowired
     FilmService filmService;
@@ -27,8 +25,8 @@ public class FilmController {
      * @param id
      * @return
      */
-    @GetMapping("/film")
-    public Map getFilmByfid( Integer id){
+    @GetMapping("/film/{fid}")
+    public Map getFilmByfid(@PathVariable("fid") Integer id){
         Map result = new HashMap();
         Film film = filmService.selectFilmByfid(id);
         result.put("film",film);
@@ -43,8 +41,8 @@ public class FilmController {
      * @return
      */
     @GetMapping("/filmlist")
-    public Result<PageInfo> findfilmByCondition(@RequestParam(value = "filmVO",required = false)FilmVO filmVO,@RequestParam(value ="currentPage",defaultValue = "1")Integer currentPage,
-                                   @RequestParam(value = "pageSize",defaultValue = "10")Integer pagesize){
+    public Result<PageInfo> findfilmByCondition(@RequestParam(value = "filmVO",required = false)FilmVO filmVO, @RequestParam(value ="currentPage",defaultValue = "1")Integer currentPage,
+                                                @RequestParam(value = "pageSize",defaultValue = "10")Integer pagesize){
         Result result = new Result();
         List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
         PageInfo<Film> pageInfo = new PageInfo<Film>(films);
@@ -55,7 +53,7 @@ public class FilmController {
     }
 
 
-    @PostMapping("/add")
+    @PostMapping("/film")
     public Result addFilm(Film film){
         Result result = new Result();
         try {
@@ -69,5 +67,4 @@ public class FilmController {
         }
         return result;
     }
-
 }
