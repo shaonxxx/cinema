@@ -13,4 +13,8 @@ public interface FilmService {
     public Film selectFilmByfid(Integer fid);
 
     void addFilm(Film film);
+
+    //批量删除
+    void removeFilms(List<String> ids);
+
 }

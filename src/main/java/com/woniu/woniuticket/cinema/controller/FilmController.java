@@ -9,12 +9,10 @@ import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.utils.ImgUpload;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +77,16 @@ public class FilmController {
             result.setCode("500");
             result.setMessage(e.getMessage());
         }
+        return result;
+    }
+
+    @DeleteMapping("/film")
+    public Result removeFilms(String id){
+        List<String> ids = Arrays.asList(id);
+        filmService.removeFilms(ids);
+        Result result = new Result();
+        result.setCode("200");
+        result.setMessage("删除成功");
         return result;
     }
 

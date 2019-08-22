@@ -24,4 +24,6 @@ public interface FilmMapper {
                                      @Param("pageSzie")Integer pageSize);
 
    Film selectFilmByName(String filmName);
+
+    void deleteFilms(List<String> ids);
 }
