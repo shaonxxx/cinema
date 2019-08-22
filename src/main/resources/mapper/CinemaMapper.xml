@@ -18,12 +18,40 @@
     cinema_id, location, logo, ciname, join_time, relation, telphone, describe, state, 
     lgt, dim
   </sql>
+
+  <select id="selectAllCinema" resultMap="BaseResultMap">
+    select * from cinema
+    <where>
+    <if test="cinema!=null">
+        <if test="cinema.ciname != null and cinema.ciname!=''">
+          and ciname like '%' #{cinema.ciname} '%' and state=1
+        </if>
+    </if>
+    <if test="cinema==null">
+      state=1
+    </if>
+    </where>
+  </select>
+
+  <select id="selectCinemaById" resultMap="BaseResultMap">
+    select * from cinema where cinema_id=#{cinemaId}
+  </select>
+
+  <select id="selectCinemaByName" resultMap="BaseResultMap">
+    select * from cinema where ciname=#{ciname}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from cinema
     where cinema_id = #{cinemaId,jdbcType=INTEGER}
   </select>
+
+  <update id="deleteCinemaById" parameterType="com.woniu.woniuticket.cinema.pojo.Cinema">
+    update cinema set state=2 where cinema_id=#{cinemaId}
+  </update>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cinema
     where cinema_id = #{cinemaId,jdbcType=INTEGER}

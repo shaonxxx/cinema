@@ -113,4 +113,21 @@ public class Cinema {
     public void setDim(BigDecimal dim) {
         this.dim = dim;
     }
+
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "cinemaId=" + cinemaId +
+                ", location='" + location + '\'' +
+                ", logo='" + logo + '\'' +
+                ", ciname='" + ciname + '\'' +
+                ", joinTime=" + joinTime +
+                ", relation='" + relation + '\'' +
+                ", telphone='" + telphone + '\'' +
+                ", describe='" + describe + '\'' +
+                ", state=" + state +
+                ", lgt=" + lgt +
+                ", dim=" + dim +
+                '}';
+    }
 }
