@@ -19,3 +19,4 @@ pagehelper:
 logging:
   level:
     com.woniu.woniuticket.cinema.dao: debug
+ImgUploa_folder: /static/img/

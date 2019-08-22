@@ -24,4 +24,11 @@ public class FilmTest {
         List<Film> films = filmMapper.selectFilmByCondition(filmVO, 1, 5);
         System.out.println(films);
     }
+
+    @Test
+    public void testinsertFilm(){
+        Film film = new Film();
+        film.setFilmName("精武门");
+        filmMapper.insertSelective(film);
+    }
 }
