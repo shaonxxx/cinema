@@ -2,7 +2,7 @@ package com.woniu.woniuticket.cinema.pojo;
 
 import java.util.Date;
 
-public class screening {
+public class Screening {
     private Integer chipId;
 
     private Date startTime;
