@@ -6,12 +6,14 @@ import com.woniu.woniuticket.cinema.execption.FilmException;
 import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.pojo.Result;
 import com.woniu.woniuticket.cinema.service.FilmService;
+import com.woniu.woniuticket.cinema.utils.ImgUpload;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,10 +57,20 @@ public class FilmController {
     }
 
 
-    @PostMapping("/add")
-    public Result addFilm(Film film){
+    /**
+     * 添加影片
+     * @param multipartFile
+     * @param film
+     * @return
+     */
+    @PostMapping("/film")
+    public Result addFilm(@RequestParam("img") MultipartFile multipartFile, Film film){
         Result result = new Result();
+        System.out.println(film.getFilmName());
         try {
+            //处理文件上传
+            String filename = ImgUpload.singleFileUpload(multipartFile, "film");
+            film.setCovers(filename);
             filmService.addFilm(film);
             result.setCode("200");
             result.setMessage("添加成功");
