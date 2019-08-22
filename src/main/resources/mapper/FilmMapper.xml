@@ -49,7 +49,7 @@
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
   </resultMap>
   <sql id="Base_Column_List">
-    film_id, film_name, stars, duration, info, grage, relese_date, people_num, film_status, 
+    film_id, film_name, stars, duration, info, grage, relese_date, people_num, film_status,
     covers, language, other_stats, category_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -59,19 +59,18 @@
     where film_id = #{filmId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from film
-    where film_id = #{filmId,jdbcType=INTEGER}
+    update film set film_status="delete"  where film_id=#{fid}
   </delete>
   <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.Film">
     insert into film (film_id, film_name, stars, 
       duration, info, grage, 
-      relese_date, people_num, film_status, 
-      covers, language, other_stats, 
+      relese_date, people_num, film_status,
+      covers, language, other_stats,
       category_id)
     values (#{filmId,jdbcType=INTEGER}, #{filmName,jdbcType=VARCHAR}, #{stars,jdbcType=VARCHAR}, 
       #{duration,jdbcType=INTEGER}, #{info,jdbcType=VARCHAR}, #{grage,jdbcType=DOUBLE}, 
-      #{releseDate,jdbcType=TIMESTAMP}, #{peopleNum,jdbcType=INTEGER}, #{filmStatus,jdbcType=VARCHAR}, 
-      #{covers,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{otherStats,jdbcType=VARCHAR}, 
+      #{releseDate,jdbcType=TIMESTAMP}, #{peopleNum,jdbcType=INTEGER}, #{filmStatus,jdbcType=VARCHAR},
+      #{covers,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{otherStats,jdbcType=VARCHAR},
       #{categoryId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.woniu.woniuticket.cinema.pojo.Film">
