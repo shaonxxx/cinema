@@ -38,4 +38,9 @@ public class FilmServiceImpl implements FilmService {
         filmMapper.insertSelective(film);
     }
 
+    @Override
+    public void removeFilms(List<String> ids) {
+        filmMapper.deleteFilms(ids);
+    }
+
 }
