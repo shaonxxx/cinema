@@ -31,6 +31,7 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public void addFilm(Film film) {
         Film findFilm = filmMapper.selectFilmByName(film.getFilmName());
+        System.out.println(findFilm);
         if(findFilm!=null){
             throw new FilmException("影片已存在");
         }

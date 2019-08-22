@@ -4,7 +4,7 @@
 
   <!-- 按名称查找film -->
   <select id="selectFilmByName" resultMap="BaseResultMap">
-    select * from film where film_name =#{film.filmName}
+    select * from film where film_name = #{film.filmName}
   </select>
 
   <!-- 条件查询film -->
@@ -107,7 +107,7 @@
         covers,
       </if>
       <if test="language != null">
-        language,
+        `language`,
       </if>
       <if test="otherStats != null">
         other_stats,

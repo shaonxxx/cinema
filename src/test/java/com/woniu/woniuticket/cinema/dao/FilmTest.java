@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -25,13 +23,5 @@ public class FilmTest {
         filmVO.setFilmName("精武门");
         List<Film> films = filmMapper.selectFilmByCondition(filmVO, 1, 5);
         System.out.println(films);
-    }
-    @Test
-    public void testDate(){
-        Date date=new Date();
-        System.out.println(date);
-        SimpleDateFormat format=new SimpleDateFormat();
-        String string = format.format(date);
-        System.out.println(string);
     }
 }
