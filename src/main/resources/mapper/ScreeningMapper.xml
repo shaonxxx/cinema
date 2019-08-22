@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniu.woniuticket.cinema.dao.ScreeningMapper">
-  <resultMap id="BaseResultMap" type="com.woniu.woniuticket.cinema.pojo.screening">
+
+
+  <!-- 软删除：批量删除 -->
+  <update id="deleteScreenings" parameterType="java.util.List">
+    update screening set state = 1 where chip_id in
+    <foreach collection="list" open="(" separator="," close=")" item="item">
+      #{item}
+    </foreach>
+  </update>
+
+  <select id="selectScreeningByCondition" resultMap="BaseResultMap">
+    select * from screening
+    <where>
+      <if test="screeningVO != null">
+        <if test="screeningVO.filmId != 0">
+          and film_id =#{screeningVO.filmId}
+        </if>
+        <if test="screeningVO.hallId != 0 ">
+          and hall_id = #{screeningVO.hallId}
+        </if>
+          and state = 1
+      </if>
+    </where>
+  </select>
+
+  <resultMap id="BaseResultMap" type="com.woniu.woniuticket.cinema.pojo.Screening">
     <id column="chip_id" jdbcType="INTEGER" property="chipId" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
@@ -26,7 +51,7 @@
     delete from screening
     where chip_id = #{chipId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.screening">
+  <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.Screening">
     insert into screening (chip_id, start_time, end_time, 
       film_id, cinema_id, hall_id, 
       price)
@@ -34,7 +59,7 @@
       #{filmId,jdbcType=INTEGER}, #{cinemaId,jdbcType=INTEGER}, #{hallId,jdbcType=INTEGER}, 
       #{price,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.woniu.woniuticket.cinema.pojo.screening">
+  <insert id="insertSelective" parameterType="com.woniu.woniuticket.cinema.pojo.Screening">
     insert into screening
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="chipId != null">
@@ -83,7 +108,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.woniu.woniuticket.cinema.pojo.screening">
+  <update id="updateByPrimaryKeySelective" parameterType="com.woniu.woniuticket.cinema.pojo.Screening">
     update screening
     <set>
       <if test="startTime != null">
@@ -107,7 +132,7 @@
     </set>
     where chip_id = #{chipId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.woniu.woniuticket.cinema.pojo.screening">
+  <update id="updateByPrimaryKey" parameterType="com.woniu.woniuticket.cinema.pojo.Screening">
     update screening
     set start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},

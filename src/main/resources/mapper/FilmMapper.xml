@@ -5,7 +5,7 @@
   <!-- 批量删除 -->
   <update id="deleteFilms" parameterType="java.util.List">
     update film set film_status ='已下架' where film_id in
-    <foreach collection="ids" open="(" separator="," close=")" item="item">
+    <foreach collection="list" open="(" separator="," close=")" item="item">
         #{item}
     </foreach>
   </update>
