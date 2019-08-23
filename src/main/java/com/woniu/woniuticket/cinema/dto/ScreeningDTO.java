@@ -1,8 +1,8 @@
-package com.woniu.woniuticket.cinema.pojo;
+package com.woniu.woniuticket.cinema.dto;
 
 import java.util.Date;
 
-public class Screening {
+public class ScreeningDTO {
 
     private Integer chipId;
 
@@ -12,9 +12,17 @@ public class Screening {
 
     private Integer filmId;
 
+    private String filmName;
+
+    private String covers;
+
     private Integer cinemaId;
 
+    private String cinema;
+
     private Integer hallId;
+
+    private String hallName;
 
     private Long price;
 
@@ -50,6 +58,22 @@ public class Screening {
         this.filmId = filmId;
     }
 
+    public String getFilmName() {
+        return filmName;
+    }
+
+    public void setFilmName(String filmName) {
+        this.filmName = filmName;
+    }
+
+    public String getCovers() {
+        return covers;
+    }
+
+    public void setCovers(String covers) {
+        this.covers = covers;
+    }
+
     public Integer getCinemaId() {
         return cinemaId;
     }
@@ -58,12 +82,28 @@ public class Screening {
         this.cinemaId = cinemaId;
     }
 
+    public String getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(String cinema) {
+        this.cinema = cinema;
+    }
+
     public Integer getHallId() {
         return hallId;
     }
 
     public void setHallId(Integer hallId) {
         this.hallId = hallId;
+    }
+
+    public String getHallName() {
+        return hallName;
+    }
+
+    public void setHallName(String hallName) {
+        this.hallName = hallName;
     }
 
     public Long getPrice() {

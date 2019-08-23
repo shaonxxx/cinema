@@ -44,11 +44,31 @@
                enableSelectByExample="false"
                enableCountByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="hall"  domainObjectName="Hall" enableDeleteByExample="false"
-               enableUpdateByExample="false"
-               enableSelectByExample="false"
-               enableCountByExample="false"
-               selectByExampleQueryId="false"></table>
+        <!--<table tableName="film_comment"  domainObjectName="FilmComment" enableDeleteByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableCountByExample="false"-->
+               <!--selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="cinema_comment"  domainObjectName="CinemaComment" enableDeleteByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableCountByExample="false"-->
+               <!--selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="cinema"  domainObjectName="Cinema" enableDeleteByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableCountByExample="false"-->
+               <!--selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="screening"  domainObjectName="screening" enableDeleteByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableCountByExample="false"-->
+               <!--selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="hall"  domainObjectName="Hall" enableDeleteByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableCountByExample="false"-->
+               <!--selectByExampleQueryId="false"></table>-->
 
 
 

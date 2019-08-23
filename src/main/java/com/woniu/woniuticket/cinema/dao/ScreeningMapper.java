@@ -1,5 +1,6 @@
 package com.woniu.woniuticket.cinema.dao;
 
+import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
 import com.woniu.woniuticket.cinema.pojo.Screening;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,6 +11,11 @@ public interface ScreeningMapper {
 
     int deleteByPrimaryKey(Integer chipId);
 
+    /**
+     * 添加排片信息
+     * @param record
+     * @return
+     */
     int insert(Screening record);
 
     int insertSelective(Screening record);
@@ -20,4 +26,18 @@ public interface ScreeningMapper {
 
     int updateByPrimaryKey(Screening record);
 
+    /**
+     * 条件查询排片信息
+     * @param screeningDTO
+     * @param currentPage
+     * @param pagesize
+     * @return
+     */
+    List<Screening> selectScreeningByCondition(@Param("screeningDTO") ScreeningDTO screeningDTO,
+                                               @Param("currentPage") Integer currentPage,
+                                               @Param("pageSize") Integer pagesize);
+
+    List<Screening> selectScreeningsByHallId(Integer hallId);
+
+    void deleteScreenings(List<String> ids);
 }

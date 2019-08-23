@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniu.woniuticket.cinema.dao.TicketMapper">
+
+  <select id="selectTicketsByHallId">
+    select * from ticket where chip_id=#{chipId}
+  </select>
+
+  <resultMap id="BaseResultMap" type="com.woniu.woniuticket.cinema.pojo.Ticket">
+    <id column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="chip_id" jdbcType="INTEGER" property="chipId" />
+    <result column="film_id" jdbcType="INTEGER" property="filmId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="hall_name" jdbcType="VARCHAR" property="hallName" />
+    <result column="seat" jdbcType="VARCHAR" property="seat" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="ticket_no" jdbcType="VARCHAR" property="ticketNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tid, chip_id, film_id, user_id, order_id, hall_name, seat, price, start_time, status, 
+    ticket_no
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ticket
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ticket
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.Ticket">
+    insert into ticket (tid, chip_id, film_id, 
+      user_id, order_id, hall_name, 
+      seat, price, start_time, 
+      status, ticket_no)
+    values (#{tid,jdbcType=INTEGER}, #{chipId,jdbcType=INTEGER}, #{filmId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{hallName,jdbcType=VARCHAR}, 
+      #{seat,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{ticketNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.woniu.woniuticket.cinema.pojo.Ticket">
+    insert into ticket
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="chipId != null">
+        chip_id,
+      </if>
+      <if test="filmId != null">
+        film_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="hallName != null">
+        hall_name,
+      </if>
+      <if test="seat != null">
+        seat,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="ticketNo != null">
+        ticket_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="chipId != null">
+        #{chipId,jdbcType=INTEGER},
+      </if>
+      <if test="filmId != null">
+        #{filmId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="hallName != null">
+        #{hallName,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null">
+        #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="ticketNo != null">
+        #{ticketNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.woniu.woniuticket.cinema.pojo.Ticket">
+    update ticket
+    <set>
+      <if test="chipId != null">
+        chip_id = #{chipId,jdbcType=INTEGER},
+      </if>
+      <if test="filmId != null">
+        film_id = #{filmId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="hallName != null">
+        hall_name = #{hallName,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null">
+        seat = #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="ticketNo != null">
+        ticket_no = #{ticketNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.woniu.woniuticket.cinema.pojo.Ticket">
+    update ticket
+    set chip_id = #{chipId,jdbcType=INTEGER},
+      film_id = #{filmId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      hall_name = #{hallName,jdbcType=VARCHAR},
+      seat = #{seat,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      ticket_no = #{ticketNo,jdbcType=VARCHAR}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+</mapper>

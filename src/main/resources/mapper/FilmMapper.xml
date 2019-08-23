@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniu.woniuticket.cinema.dao.FilmMapper">
 
+  <!-- 批量删除 -->
+  <update id="deleteFilms" parameterType="java.util.List">
+    update film set film_status ='已下架' where film_id in
+    <foreach collection="list" open="(" separator="," close=")" item="item">
+        #{item}
+    </foreach>
+  </update>
   <!-- 按名称查找film -->
   <select id="selectFilmByName" resultMap="BaseResultMap">
     select * from film where film_name = #{film.filmName}
@@ -25,7 +32,7 @@
           and category_id = #{filmVO.categoryId}
         </if>
         <if test="filmVO.filmStatus != null and filmVO.filmStatus != ''">
-          and film_filmStatus like '%' #{filmVO.filmStatus} '%'
+          and film_status like '%' #{filmVO.filmStatus} '%'
         </if>
           <!-- order by relese_date -->
       </if>
