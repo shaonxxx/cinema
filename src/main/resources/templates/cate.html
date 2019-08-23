@@ -107,7 +107,7 @@
 </body>
 <script>
     function handle(hid) {
-        xadmin.open('查看', '/test01/', hid);
+        xadmin.open('查看', '/details/', hid);
     }
 
     function testInput() {
@@ -131,6 +131,9 @@
     function member_del(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
             //发异步删除数据
+
+
+
             $(obj).parents("tr").remove();
             layer.msg('已删除!', {icon: 1, time: 1000});
         });

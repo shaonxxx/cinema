@@ -2,9 +2,13 @@ package com.woniu.woniuticket.cinema.controller;
 
 import com.woniu.woniuticket.cinema.pojo.Hall;
 import com.woniu.woniuticket.cinema.service.HallService;
+import com.woniu.woniuticket.cinema.service.ScreeningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -17,6 +21,9 @@ public class HallController {
 
     @Autowired
     private HallService hallService;
+    @Autowired
+    private ScreeningService screeningService;
+
 
     /**
      * 根据ID查找放映厅
@@ -44,17 +51,22 @@ public class HallController {
         List<Hall> halls=hallService.findAllHall();
         result.put("halls",halls);
         modelAndView.addObject("halls",halls);
-        modelAndView.setViewName("/cate.html");
+        modelAndView.setViewName("cate");
         return modelAndView;
     }
 
 
-    @GetMapping("/test01/{fid}")
-    public ModelAndView Test01(@PathVariable("fid") Integer fid){
+    /**
+     * 放映厅详情页面跳转
+     * @param hid
+     * @return
+     */
+    @GetMapping("/details/{hid}")
+    public ModelAndView Test01(@PathVariable("hid") Integer hid){
         ModelAndView modelAndView=new ModelAndView();
-        System.out.println("进入test");
-        modelAndView.addObject("msg","testtestest");
-        modelAndView.setViewName("/admin-cate.html");
+        Hall hall = hallService.findHallById(hid);
+        modelAndView.addObject("hall",hall);
+        modelAndView.setViewName("hall-details");
         return modelAndView;
     }
 }

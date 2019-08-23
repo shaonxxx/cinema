@@ -19,4 +19,6 @@ public interface ScreeningService {
     public int removeScreenings(List<String> ids);
 
     public int updateScreening(Screening screening);
+
+    List<Screening> findScreeningByhid(Integer hid);
 }

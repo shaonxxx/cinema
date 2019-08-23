@@ -40,4 +40,6 @@ public interface ScreeningMapper {
     List<Screening> selectScreeningsByHallId(Integer hallId);
 
     void deleteScreenings(List<String> ids);
+
+    List<Screening> selectScreeningByfid();
 }

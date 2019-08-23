@@ -48,6 +48,13 @@ public class ScreeningSeerviceImpl implements ScreeningService {
     }
 
     @Override
+    public List<Screening> findScreeningByhid(Integer hid) {
+
+        return  screeningMapper.selectScreeningByfid();
+    }
+
+
+    @Override
     public List<Screening> findScreeningByCondition(ScreeningDTO screeningDTO, Integer currentPage, Integer pagesize) {
         if(screeningDTO.getFilmName()!=null && !screeningDTO.getFilmName().equals("")){
             Film film = filmMapper.selectFilmByName(screeningDTO.getFilmName());
@@ -115,6 +122,7 @@ public class ScreeningSeerviceImpl implements ScreeningService {
 
         return 200;
     }
+
 
 
 }

@@ -22,6 +22,9 @@
   <select id="selectScreeningByNewDate" resultMap="BaseResultMap">
     SELECT * FROM screening  WHERE end_time > #{date} and hall_id=#{hid} ORDER BY start_time ASC
   </select>
+  <select id="selectScreeningByfid">
+    select * from screening where
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from screening
     where chip_id = #{chipId,jdbcType=INTEGER}
