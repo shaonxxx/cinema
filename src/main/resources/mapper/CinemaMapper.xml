@@ -15,7 +15,7 @@
     <result column="dim" jdbcType="DECIMAL" property="dim" />
   </resultMap>
   <sql id="Base_Column_List">
-    cinema_id, location, logo, ciname, join_time, relation, telphone, describe, state, 
+    cinema_id, location, logo, ciname, join_time, relation, telphone, `describe`, state,
     lgt, dim
   </sql>
 

@@ -33,7 +33,7 @@ public class ScreeningController {
     @GetMapping("/queryScreening")
     public ModelAndView queryScreening(ScreeningVO screeningVO, @RequestParam(value = "currentPage",defaultValue = "1")Integer currentPage,
                                        @RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize){
-        ModelAndView mv = new ModelAndView("viewname");
+        ModelAndView mv = new ModelAndView("hall-details");
         List<ScreeningDTO> list = screeningService.findScreeningByCondition(screeningVO, currentPage, pageSize);
         PageInfo<ScreeningDTO> pageInfo = new PageInfo<>(list);
         mv.addObject("pageInfo",pageInfo);

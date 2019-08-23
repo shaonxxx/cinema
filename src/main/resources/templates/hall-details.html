@@ -19,199 +19,45 @@
     <![endif]-->
 </head>
 <body>
-    <div class="layui-container"  style="overflow-y:auto; overflow-x:auto; width:400px; height:400px;">
-        <div class="layui-row">
-            <div class="layui-col-md3" id="slideTest1">
-                <span>排片信息</span>
+    <div class="layui-container"  >
+        <div >
+            <div class="layui-col-md5" >
+                <h1>排片信息</h1>
                 <br/>
-                <ul class="layui-timeline">
-                    <li class="layui-timeline-item">
+                <ul class="layui-timeline" style="overflow-y:auto; overflow-x:auto; width:400px; height: 720px;">
+                    <li class="layui-timeline-item" th:each="screening:${pageInfo.list}">
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月18日</h3>
+                            <h3 class="layui-timeline-title">[[${#dates.format(screening.startTime,'HH-mm-ss')}]]----[[${#dates.format(screening.endTime,'HH-mm-ss')}]]</h3>
                             <p>
+                                [[${screening.film.filmName}]]
                                 影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息 <i class="layui-icon"></i>
+                                <i class="layui-icon"></i>
                             </p>
                         </div>
                     </li>
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月18日</h3>
-                            <p>
-                                影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息 <i class="layui-icon"></i>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月18日</h3>
-                            <p>
-                                影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息 <i class="layui-icon"></i>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月18日</h3>
-                            <p>
-                                影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息 <i class="layui-icon"></i>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月18日</h3>
-                            <p>
-                                影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息 <i class="layui-icon"></i>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月18日</h3>
-                            <p>
-                                影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息 <i class="layui-icon"></i>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月18日</h3>
-                            <p>
-                                影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息 <i class="layui-icon"></i>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <h3 class="layui-timeline-title">8月18日</h3>
-                            <p>
-                                影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息
-                                <br>影片信息影片信息影片信息影片信息影片信息影片信息 <i class="layui-icon"></i>
-                            </p>
-                        </div>
-                    </li>
-
                 </ul>
             </div>
             <div class="layui-col-md3">
+                <h1 >影厅座次表</h1>
                 <div class="layui-timeline-content layui-text">
-                    <h3 class="layui-timeline-title">影厅座次表</h3>
-                    <p>
-                        详情详情详情详情详情详情详情详情详情详情详情详情详情详情
-                        <br>详情详情详情详情详情详情详情详情详情详情详情详情详情详情
-                        <br>详情详情详情详情详情详情详情详情详情详情详情详情 <i class="layui-icon"></i>
-                    </p>
+                    <div style="margin-top: 30px;">
+                        <div class="hall-seat" >
+                            <h2>这里是座位表</h2>
+                        </div>
+                    </div>
+
+                   <div style="margin-top: 30px;">
+                       <h1>总览</h1>
+                       <div class="hall-msg">
+                           <h2>这里放映厅基本信息</h2>
+
+                       </div>
+                   </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="layui-row">
-
-    </div>
-
-<!--<div class="layui-fluid">
-    <div class="layui-row">
-        <form class="layui-form">
-          <div class="layui-form-item">
-              <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>登录名
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required="" lay-verify="required"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>将会成为您唯一的登入名
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                  <span class="x-red">*</span>手机
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="phone" name="phone" required="" lay-verify="phone"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>将会成为您唯一的登入名
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>邮箱
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" required="" lay-verify="email"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label class="layui-form-label"><span class="x-red">*</span>角色</label>
-              <div class="layui-input-block">
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="超级管理员" checked="">
-                <input type="checkbox" name="like1[read]" lay-skin="primary" title="编辑人员">
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="宣传人员" checked="">
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>密码
-              </label>
-              <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  6到16个字符
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_repass" class="layui-form-label">
-                  <span class="x-red">*</span>确认密码
-              </label>
-              <div class="layui-input-inline">
-                  <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_repass" class="layui-form-label">
-              </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  增加
-              </button>
-          </div>
-      </form>
-    </div>
-</div>-->
-
 <script>
 
 

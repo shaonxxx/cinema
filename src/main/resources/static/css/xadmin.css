@@ -20,6 +20,8 @@ body{
     background: #f1f1f1;
     /*background: #fff;*/
 }
+.hall-seat{width: 500px;height:300px;border: 2px red solid;margin-left: 50px;margin-top: 20px;}
+.hall-msg{ width: 500px;height: 200px;border: 2px black solid;margin-left: 50px;margin-top: 20px;}
 .x-red{
     color: red;
 }

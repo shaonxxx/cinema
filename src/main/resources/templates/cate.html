@@ -67,15 +67,12 @@
                             <td>[[${hall.hallId}]]</td>
                             <td th:text="${hall.hallName}"></td>
                             <td>
-                                <input type="checkbox" lay-skin="primary">
+                                <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">
                                <!-- <input type="checkbox" lay-skin="switch" lay-text="开启|关闭">-->
                             </td>
                             <td class="td-manage">
                                 <button class="layui-btn layui-btn layui-btn-xs"
                                         th:onclick="'handle('+${hall.hallId}+')'"><i class="layui-icon">&#xe615;</i>查看
-                                </button>
-                                <button class="layui-btn layui-btn layui-btn-xs"
-                                        onclick="xadmin.open('编辑','admin-edit.html')"><i class="layui-icon">&#xe642;</i>编辑
                                 </button>
                                 <button class="layui-btn layui-btn-warm layui-btn-xs"
                                         onclick="xadmin.open('排片设置','admin-edit.html')"><i
@@ -107,7 +104,7 @@
 </body>
 <script>
     function handle(hid) {
-        xadmin.open('查看', '/details/', hid);
+        xadmin.open('查看', '/queryScreening?hallId=', hid);
     }
 
     function testInput() {
