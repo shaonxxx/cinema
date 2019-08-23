@@ -39,7 +39,7 @@
                enableSelectByExample="false"
                enableCountByExample="false"
                selectByExampleQueryId="false"></table>
-        <table tableName="screening"  domainObjectName="screening" enableDeleteByExample="false"
+        <table tableName="screening"  domainObjectName="Screening" enableDeleteByExample="false"
                enableUpdateByExample="false"
                enableSelectByExample="false"
                enableCountByExample="false"

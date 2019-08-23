@@ -40,7 +40,7 @@ public class FilmController {
     }
 
     /**
-     * 条件查询影片，没有调价则查询所有影片
+     * 条件查询影片，没有条件则查询所有影片
      * @param filmVO
      * @param currentPage
      * @param pagesize

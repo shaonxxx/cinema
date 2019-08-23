@@ -1,6 +1,8 @@
 package com.woniu.woniuticket.cinema.pojo;
 
 public class Hall {
+
+
     private Integer hallId;
 
     private String hallName;
@@ -59,5 +61,17 @@ public class Hall {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Hall{" +
+                "hallId=" + hallId +
+                ", hallName='" + hallName + '\'' +
+                ", seatNum=" + seatNum +
+                ", cinemaId=" + cinemaId +
+                ", seats='" + seats + '\'' +
+                ", state=" + state +
+                '}';
     }
 }

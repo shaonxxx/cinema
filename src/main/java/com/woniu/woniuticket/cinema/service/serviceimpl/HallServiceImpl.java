@@ -6,6 +6,8 @@ import com.woniu.woniuticket.cinema.service.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HallServiceImpl implements HallService {
 
@@ -15,5 +17,11 @@ public class HallServiceImpl implements HallService {
     @Override
     public Hall findHallById(Integer hid) {
         return hallMapper.selectByPrimaryKey(hid);
+    }
+
+    @Override
+    public List<Hall> findAllHall() {
+
+        return hallMapper.selectAllHall();
     }
 }
