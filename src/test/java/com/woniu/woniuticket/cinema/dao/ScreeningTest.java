@@ -1,6 +1,6 @@
 package com.woniu.woniuticket.cinema.dao;
 
-import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
+import com.woniu.woniuticket.cinema.vo.ScreeningVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +19,16 @@ public class ScreeningTest {
 
     @Test
     public void testselectScreeningByCondition(){
-        ScreeningDTO screeningDTO = new ScreeningDTO();
-        screeningDTO.setFilmId(1);
-        screeningMapper.selectScreeningByCondition(screeningDTO,1,10);
+        ScreeningVO screeningVO = new ScreeningVO();
+        screeningVO.setFilmId(1);
+        screeningMapper.selectScreeningByCondition(screeningVO,1,10);
     }
 
     @Test
     public void testdeleteScreenings(){
         List<String> ids = new ArrayList<>();
         ids.add("16");
-
+        System.out.println(16);
         screeningMapper.deleteScreenings(ids);
 
     }

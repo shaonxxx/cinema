@@ -1,5 +1,9 @@
 package com.woniu.woniuticket.cinema.dto;
 
+import com.woniu.woniuticket.cinema.pojo.Cinema;
+import com.woniu.woniuticket.cinema.pojo.Film;
+import com.woniu.woniuticket.cinema.pojo.Hall;
+
 import java.util.Date;
 
 public class ScreeningDTO {
@@ -10,19 +14,11 @@ public class ScreeningDTO {
 
     private Date endTime;
 
-    private Integer filmId;
+    private Film film;
 
-    private String filmName;
+    private Hall hall;
 
-    private String covers;
-
-    private Integer cinemaId;
-
-    private String cinema;
-
-    private Integer hallId;
-
-    private String hallName;
+    private Cinema cinema;
 
     private Long price;
 
@@ -50,60 +46,28 @@ public class ScreeningDTO {
         this.endTime = endTime;
     }
 
-    public Integer getFilmId() {
-        return filmId;
+    public Film getFilm() {
+        return film;
     }
 
-    public void setFilmId(Integer filmId) {
-        this.filmId = filmId;
+    public void setFilm(Film film) {
+        this.film = film;
     }
 
-    public String getFilmName() {
-        return filmName;
+    public Hall getHall() {
+        return hall;
     }
 
-    public void setFilmName(String filmName) {
-        this.filmName = filmName;
+    public void setHall(Hall hall) {
+        this.hall = hall;
     }
 
-    public String getCovers() {
-        return covers;
-    }
-
-    public void setCovers(String covers) {
-        this.covers = covers;
-    }
-
-    public Integer getCinemaId() {
-        return cinemaId;
-    }
-
-    public void setCinemaId(Integer cinemaId) {
-        this.cinemaId = cinemaId;
-    }
-
-    public String getCinema() {
+    public Cinema getCinema() {
         return cinema;
     }
 
-    public void setCinema(String cinema) {
+    public void setCinema(Cinema cinema) {
         this.cinema = cinema;
-    }
-
-    public Integer getHallId() {
-        return hallId;
-    }
-
-    public void setHallId(Integer hallId) {
-        this.hallId = hallId;
-    }
-
-    public String getHallName() {
-        return hallName;
-    }
-
-    public void setHallName(String hallName) {
-        this.hallName = hallName;
     }
 
     public Long getPrice() {

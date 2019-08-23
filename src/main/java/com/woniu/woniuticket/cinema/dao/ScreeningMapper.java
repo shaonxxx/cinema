@@ -1,7 +1,7 @@
 package com.woniu.woniuticket.cinema.dao;
 
-import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
 import com.woniu.woniuticket.cinema.pojo.Screening;
+import com.woniu.woniuticket.cinema.vo.ScreeningVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,12 +28,12 @@ public interface ScreeningMapper {
 
     /**
      * 条件查询排片信息
-     * @param screeningDTO
+     * @param screeningVO
      * @param currentPage
      * @param pagesize
      * @return
      */
-    List<Screening> selectScreeningByCondition(@Param("screeningDTO") ScreeningDTO screeningDTO,
+    List<Screening> selectScreeningByCondition(@Param("screeningVO") ScreeningVO screeningVO,
                                                @Param("currentPage") Integer currentPage,
                                                @Param("pageSize") Integer pagesize);
 

@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniu.woniuticket.cinema.dao.ScreeningMapper">
+
+  <!-- 根据放映厅id查询 -->
+  <select id="selectScreeningsByHallId" resultMap="BaseResultMap">
+  select * from screening where hall_id = #{hallId}
+  </select>
+
+  <!--条件查询-->
+  <select id="selectScreeningByCondition" resultMap="BaseResultMap">
+    select * from screening
+    <where>
+      <if test="screeningVO !=null ">
+        <if test="screeningVO.filmId != null">
+          and film_id = #{screeningVO.filmId}
+        </if>
+        <if test="screeningVO.hallId != null">
+          and hall_id = #{screeningVO.hallId}
+        </if>
+        and state = 1
+      </if>
+    </where>
+  </select>
+
   <resultMap id="BaseResultMap" type="com.woniu.woniuticket.cinema.pojo.Screening">
     <id column="chip_id" jdbcType="INTEGER" property="chipId" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />

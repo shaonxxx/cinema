@@ -1,19 +1,16 @@
 package com.woniu.woniuticket.cinema.service.serviceimpl;
 
-import com.woniu.woniuticket.cinema.dao.FilmMapper;
-import com.woniu.woniuticket.cinema.dao.HallMapper;
-import com.woniu.woniuticket.cinema.dao.ScreeningMapper;
-import com.woniu.woniuticket.cinema.dao.TicketMapper;
+import com.woniu.woniuticket.cinema.dao.*;
 import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
 import com.woniu.woniuticket.cinema.execption.ScreeningExecption;
-import com.woniu.woniuticket.cinema.pojo.Film;
-import com.woniu.woniuticket.cinema.pojo.Screening;
-import com.woniu.woniuticket.cinema.pojo.Ticket;
+import com.woniu.woniuticket.cinema.pojo.*;
 import com.woniu.woniuticket.cinema.service.ScreeningService;
+import com.woniu.woniuticket.cinema.vo.ScreeningVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +29,9 @@ public class ScreeningSeerviceImpl implements ScreeningService {
 
     @Autowired
     HallMapper hallMapper;
+
+    @Autowired
+    CinemaMapper cinemaMapper;
 
     @Override
     public List<Screening> findScreeningByNowDate(Integer hid) {
@@ -55,13 +55,32 @@ public class ScreeningSeerviceImpl implements ScreeningService {
 
 
     @Override
-    public List<Screening> findScreeningByCondition(ScreeningDTO screeningDTO, Integer currentPage, Integer pagesize) {
-        if(screeningDTO.getFilmName()!=null && !screeningDTO.getFilmName().equals("")){
-            Film film = filmMapper.selectFilmByName(screeningDTO.getFilmName());
-            screeningDTO.setFilmId(film.getFilmId());
+    public List<ScreeningDTO> findScreeningByCondition(ScreeningVO screeningVO, Integer currentPage, Integer pagesize) {
+        if(screeningVO.getFilmName()!=null && !screeningVO.getFilmName().equals("")){
+            Film film = filmMapper.selectFilmByName(screeningVO.getFilmName());
+            screeningVO.setFilmId(film.getFilmId());
         }
-
-        return screeningMapper.selectScreeningByCondition(screeningDTO,currentPage,pagesize);
+        List<ScreeningDTO> screeningDTOS = new ArrayList<>();
+        List<Screening> screenings = screeningMapper.selectScreeningByCondition(screeningVO, currentPage, pagesize);
+        for (Screening screening : screenings) {
+                //查找电影信息
+            Film film = filmMapper.selectByPrimaryKey(screening.getFilmId());
+            //查找放映厅信息
+            Hall hall = hallMapper.selectByPrimaryKey(screening.getHallId());
+            //查找影院(放映点)信息
+            Cinema cinema = cinemaMapper.selectByPrimaryKey(screening.getCinemaId());
+            //封装ScreeningDTO对象
+            ScreeningDTO screeningDTO = new ScreeningDTO();
+                screeningDTO.setChipId(screening.getChipId());
+                screeningDTO.setCinema(cinema);
+                screeningDTO.setFilm(film);
+                screeningDTO.setEndTime(screening.getEndTime());
+                screeningDTO.setStartTime(screening.getStartTime());
+                screeningDTO.setPrice(screening.getPrice());
+            //将封装好的ScreeningDTO添加到集合中
+            screeningDTOS.add(screeningDTO);
+        }
+        return screeningDTOS ;
     }
 
     @Override
