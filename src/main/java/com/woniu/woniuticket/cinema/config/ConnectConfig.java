@@ -12,6 +12,6 @@ public class ConnectConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/welcome").setViewName("welcome");
-        registry.addViewController("/order-list").setViewName("order-list");
+/*        registry.addViewController("/order-list").setViewName("order-list");*/
     }
 }
