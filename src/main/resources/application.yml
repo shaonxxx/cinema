@@ -28,11 +28,11 @@ eureka:
   client:
     service-url:
       defaultZone: http://106.52.231.180:8761/eureka,http://106.52.231.180:8762/eureka
-#  instance:
-#    hostname: q2632h0347.zicp.vip:47853
-#    status-page-url: http://${eureka.instance.hostname}
-#    instance-id: http://${eureka.instance.hostname}
-#    ip-address: ${eureka.instance.hostname}
+  instance:
+    hostname: q2632h0347.zicp.vip:47853
+    status-page-url: http://${eureka.instance.hostname}
+    instance-id: http://${eureka.instance.hostname}
+    ip-address: ${eureka.instance.hostname}
 feign:
   hystrix:
     enabled: true
