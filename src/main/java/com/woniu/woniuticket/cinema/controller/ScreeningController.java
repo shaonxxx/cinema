@@ -41,15 +41,18 @@ public class ScreeningController {
      */
     @GetMapping("/queryScreening")
     public ModelAndView queryScreening(ScreeningVO screeningVO,
+                                       @RequestParam(value = "resUrl") String resUrl,
                                        @RequestParam(value = "currentPage",defaultValue = "1")Integer currentPage,
                                        @RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize){
-        ModelAndView mv = new ModelAndView("hall-details");
+        ModelAndView mv = new ModelAndView(resUrl);
        /* ModelAndView mv = new ModelAndView(resUrl);*/
         List<ScreeningDTO> list = screeningService.findScreeningByCondition(screeningVO, currentPage, pageSize);
         PageInfo<ScreeningDTO> pageInfo = new PageInfo<>(list);
         mv.addObject("pageInfo",pageInfo);
         return mv;
     }
+
+
 
     /**
      * 添加排片信息

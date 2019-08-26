@@ -69,4 +69,18 @@ public class HallController {
         modelAndView.setViewName("hall-details");
         return modelAndView;
     }
+
+    /**
+     *  放映厅添加排片页面跳转
+     * @param hid
+     * @return
+     */
+    @GetMapping("/skipScreening")
+    public ModelAndView skipScreening(Integer hid){
+        ModelAndView modelAndView=new ModelAndView();
+        Hall hall = hallService.findHallById(hid);
+        modelAndView.addObject("hall",hall);
+        modelAndView.setViewName("addScreening");
+        return modelAndView;
+    }
 }

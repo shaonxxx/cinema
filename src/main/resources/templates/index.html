@@ -6,10 +6,10 @@
         <meta name="renderer" content="webkit|ie-comp|ie-stand">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta http-equiv="Cache-Control" content="no-siteapp" />
-        <link href="./css/font.css" rel="stylesheet">
+        <link th:href="@{/css/font.css}" rel="stylesheet">
         <link rel="stylesheet" href="./css/xadmin.css">
-        <script src="./layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./js/xadmin.js"></script>
+        <script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+        <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
         <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
         <!--[if lt IE 9]>
           <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -133,7 +133,7 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('放映厅列表','/cinema-m/hall')">
+                                <a onclick="xadmin.add_tab('放映厅列表','/hall')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>放映列表</cite></a>
                             </li>
@@ -141,8 +141,8 @@
                     </li>
                     <li>
                         <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="城市联动">&#xe723;</i>
-                            <cite>城市联动</cite>
+                            <i class="iconfont left-nav-li" lay-tips="影片管理">&#xe723;</i>
+                            <cite>影片管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
@@ -331,7 +331,7 @@
                 </div>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
-                        <iframe src='/cinema-m/welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                        <iframe src='/welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
                     </div>
                 </div>
                 <div id="tab_show"></div>

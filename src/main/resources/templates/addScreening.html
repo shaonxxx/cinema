@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>欢迎页面-X-admin2.2</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <link rel="stylesheet" th:href="@{/css/font.css}">
+        <link rel="stylesheet" th:href="@{/css/xadmin.css}">
+        <link rel="stylesheet" th:href="@{/css/timestyles.css}">
+        <script type="text/javascript" th:src="@{/layui/layui.js}" charset="utf-8"></script>
+        <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+        <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/jquery.timelinr-0.9.7.js}"></script>
+        <script type="text/javascript">
+            $(function(){
+                $().timelinr()
+            });
+        </script>
+    </head>
+    <body id="introduction">
+    <div class="demotips"><a href="index.html">演示一</a><a href="demo2.html">演示二</a><a href="demo3.html">演示三</a></div>
+    <div id="container" class="content clearfix">
+        <div id="timeline">
+            <ul id="dates">
+                <li><a href="#1900">1900</a></li>
+                <li><a href="#1944">1944</a></li>
+                <li><a href="#1950">1950</a></li>
+                <li><a href="#1971">1971</a></li>
+                <li><a href="#1999">1999</a></li>
+                <li><a href="#2001">2001</a></li>
+                <li><a href="#2011">2011</a></li>
+            </ul>
+            <ul id="issues">
+                <li id="1900">
+                    <img th:src="@{/images/1.png}" width="256" height="256" />
+                    <h1>1900</h1>
+                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+                </li>
+                <li id="1944">
+                    <img th:src="@{/images/1.png}" width="256" height="256" />
+                    <h1>1944</h1>
+                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+                </li>
+                <li id="1950">
+                    <img th:src="@{/images/1.png}" width="256" height="256" />
+                    <h1>1950</h1>
+                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+                </li>
+                <li id="1971">
+                    <img th:src="@{/images/1.png}" width="256" height="256" />
+                    <h1>1971</h1>
+                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+                </li>
+                <li id="1999">
+                    <img th:src="@{/images/1.png}" width="256" height="256" />
+                    <h1>1999</h1>
+                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+                </li>
+                <li id="2001">
+                    <img th:src="@{/images/1.png}" width="256" height="256" />
+                    <h1>2001</h1>
+                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+                </li>
+                <li id="2011">
+                    <img th:src="@{/images/1.png}" width="256" height="256" />
+                    <h1>2011</h1>
+                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+                </li>
+            </ul>
+            <div id="grad_left"></div>
+            <div id="grad_right"></div>
+            <a href="#" id="next">+</a>
+            <a href="#" id="prev">-</a>
+        </div>
+    </div>
+    <p align="center">适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p><br>
+    <p align="center">来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
+    </div>
+    </div>
+
+       <!-- <script>
+            $(function() {
+                $("timeline").timeline({
+                    orientation:'horizontal'
+                })});
+
+        </script>
+        <script>layui.use(['form', 'layer','jquery'],
+            function() {
+                $ = layui.jquery;
+                var form = layui.form,
+                layer = layui.layer;
+
+                //自定义验证规则
+                form.verify({
+                    nikename: function(value) {
+                        if (value.length < 5) {
+                            return '昵称至少得5个字符啊';
+                        }
+                    },
+                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
+                    repass: function(value) {
+                        if ($('#L_pass').val() != $('#L_repass').val()) {
+                            return '两次密码不一致';
+                        }
+                    }
+                });
+
+                //监听提交
+                form.on('submit(add)',
+                function(data) {
+                    console.log(data);
+                    //发异步，把数据提交给php
+                    layer.alert("增加成功", {
+                        icon: 6
+                    },
+                    function() {
+                        //关闭当前frame
+                        xadmin.close();
+
+                        // 可以对父窗口进行刷新 
+                        xadmin.father_reload();
+                    });
+                    return false;
+                });
+
+            });</script>
+        <script>var _hmt = _hmt || []; (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();</script>-->
+    </body>
+
+</html>
