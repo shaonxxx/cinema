@@ -44,6 +44,7 @@ public class ScreeningController {
                                        @RequestParam(value = "currentPage",defaultValue = "1")Integer currentPage,
                                        @RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize){
         ModelAndView mv = new ModelAndView("hall-details");
+       /* ModelAndView mv = new ModelAndView(resUrl);*/
         List<ScreeningDTO> list = screeningService.findScreeningByCondition(screeningVO, currentPage, pageSize);
         PageInfo<ScreeningDTO> pageInfo = new PageInfo<>(list);
         mv.addObject("pageInfo",pageInfo);

@@ -19,7 +19,7 @@ public class orderController {
     OrderClient orderClient;
 
     /**
-     *  查询所有订单集合
+     *  查询所有订单
      * @return 所有订单集合
      */
     @GetMapping("/order")
