@@ -15,6 +15,8 @@ public class Hall {
 
     private Integer state;
 
+    private String seatmap;
+
     public Integer getHallId() {
         return hallId;
     }
@@ -63,6 +65,14 @@ public class Hall {
         this.state = state;
     }
 
+    public String getSeatmap() {
+        return seatmap;
+    }
+
+    public void setSeatmap(String seatmap) {
+        this.seatmap = seatmap;
+    }
+
     @Override
     public String toString() {
         return "Hall{" +
@@ -72,6 +82,7 @@ public class Hall {
                 ", cinemaId=" + cinemaId +
                 ", seats='" + seats + '\'' +
                 ", state=" + state +
+                ", seatmap='" + seatmap + '\'' +
                 '}';
     }
 }

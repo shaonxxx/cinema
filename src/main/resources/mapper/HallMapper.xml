@@ -8,9 +8,10 @@
     <result column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
     <result column="seats" jdbcType="VARCHAR" property="seats" />
     <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="seatmap" jdbcType="INTEGER" property="seatmap"/>
   </resultMap>
   <sql id="Base_Column_List">
-    hall_id, hall_name, seat_num, cinema_id, seats, state
+    hall_id, hall_name, seat_num, cinema_id, seats, state,seatmap
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,10 +28,10 @@
   </delete>
   <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.Hall">
     insert into hall (hall_id, hall_name, seat_num, 
-      cinema_id, seats, state
+      cinema_id, seats, state,seatmap
       )
     values (#{hallId,jdbcType=INTEGER}, #{hallName,jdbcType=VARCHAR}, #{seatNum,jdbcType=INTEGER}, 
-      #{cinemaId,jdbcType=INTEGER}, #{seats,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}
+      #{cinemaId,jdbcType=INTEGER}, #{seats,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER},#{seatmap,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.woniu.woniuticket.cinema.pojo.Hall">
@@ -54,6 +55,9 @@
       <if test="state != null">
         state,
       </if>
+      <if test="seatmap!=null">
+        seatmap,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="hallId != null">
@@ -73,6 +77,9 @@
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
+      </if>
+      <if test="seatmap != null">
+        #{seatmap,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -94,6 +101,9 @@
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
       </if>
+      <if test="seatmap != null">
+        seatmap = #{seatmap,jdbcType=INTEGER},
+      </if>
     </set>
     where hall_id = #{hallId,jdbcType=INTEGER}
   </update>
@@ -103,7 +113,8 @@
       seat_num = #{seatNum,jdbcType=INTEGER},
       cinema_id = #{cinemaId,jdbcType=INTEGER},
       seats = #{seats,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER}
+      state = #{state,jdbcType=INTEGER},
+      seatmap = #{seatmap,jdbcType=INTEGER}
     where hall_id = #{hallId,jdbcType=INTEGER}
   </update>
 </mapper>
