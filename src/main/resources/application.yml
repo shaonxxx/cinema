@@ -36,3 +36,10 @@ eureka:
 feign:
   hystrix:
     enabled: true
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 1000
+zull:
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 10000
