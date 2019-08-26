@@ -17,4 +17,5 @@ public interface FilmService {
     //批量删除
     void removeFilms(List<String> ids);
 
+
 }

@@ -83,26 +83,22 @@ public class ScreeningSeerviceImpl implements ScreeningService {
         return screeningDTOS ;
     }
 
+    /**
+     * 添加排片信息
+     * @param screening
+     * @return
+     */
     @Override
     public int addScreening(Screening screening) {
-        long starTime = screening.getStartTime().getTime();
-        long endTime = screening.getEndTime().getTime();
-        /**
-         * 校验时间是否合理
-         */
-        if(starTime>endTime){
-            return 500;
+        //校验排片时间是否合理
+        boolean bl = this.checkTime(screening);
+        if(bl){
+            throw new ScreeningExecption("时间安排不合理");
         }
         //校验放映厅当前时段是否已安排排片
-        boolean flag = false;//默认没有排片
-        List<Screening> screenings = screeningMapper.selectScreeningsByHallId(screening.getHallId());
-        for (Screening s : screenings) {
-            if(endTime>s.getStartTime().getTime() || starTime<s.getEndTime().getTime()){
-                flag = true;
-            }
-        }
+        boolean flag = this.checkHall(screening);
         if(flag){
-            return 500;
+            throw new ScreeningExecption("当前时段已有排片");
         }else{
             screeningMapper.insertSelective(screening);
             return 200;
@@ -115,6 +111,11 @@ public class ScreeningSeerviceImpl implements ScreeningService {
         return 200;
     }
 
+    /**
+     * 更新指定排片信息
+     * @param screening
+     * @return
+     */
     @Override
     public int updateScreening(Screening screening) {
         /**
@@ -130,18 +131,59 @@ public class ScreeningSeerviceImpl implements ScreeningService {
             }
         }
 
-
-        Long startTime = screening.getStartTime().getTime();
-        Long endTime = screening.getEndTime().getTime();
-        if(startTime>endTime){
-            return 500;
+        //校验排片时间是否合理
+        boolean bl = this.checkTime(screening);
+        if(bl){
+            throw new ScreeningExecption("时间安排不合理");
+        }
+        //校验放映厅当前时段是否已安排排片
+        boolean flag = this.checkHall(screening);
+        if(flag){
+            throw new ScreeningExecption("当前时段已有排片");
+        }else{
+            screeningMapper.updateByPrimaryKeySelective(screening);
+            return 200;
         }
 
-
-
-        return 200;
     }
 
 
+    /**
+     * 校验当前放映厅当前时段是否已有排片
+     * @param screening
+     * @return
+     */
+    public boolean checkHall(Screening screening){
+        long startTime = screening.getStartTime().getTime();
+        long endTime = screening.getEndTime().getTime();
+        //校验放映厅当前时段是否已安排排片
+        boolean flag = false;//默认没有排片
+        List<Screening> screenings = screeningMapper.selectScreeningsByHallId(screening.getHallId());
+        for (Screening s : screenings) {
+            if(endTime>s.getStartTime().getTime() || startTime<s.getEndTime().getTime()){
+                flag = true;
+            }
+        }
+       return flag;
+    }
+
+    /**
+     * 校验排片时间是否安排合理
+     * @param screening
+     * @return
+     */
+    public boolean checkTime(Screening screening){
+        boolean flag = false;
+        long startTime = screening.getStartTime().getTime();
+        long endTime = screening.getEndTime().getTime();
+        /**
+         * 开始时间在结束时间之后 返回false
+         */
+        if(startTime>endTime){
+            flag = true;
+        }
+
+        return flag;
+    }
 
 }

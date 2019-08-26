@@ -7,13 +7,12 @@ import com.woniu.woniuticket.cinema.pojo.Screening;
 import com.woniu.woniuticket.cinema.service.ScreeningService;
 import com.woniu.woniuticket.cinema.vo.ScreeningVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ScreeningController {
@@ -45,9 +44,45 @@ public class ScreeningController {
                                        @RequestParam(value = "currentPage",defaultValue = "1")Integer currentPage,
                                        @RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize){
         ModelAndView mv = new ModelAndView("hall-details");
+       /* ModelAndView mv = new ModelAndView(resUrl);*/
         List<ScreeningDTO> list = screeningService.findScreeningByCondition(screeningVO, currentPage, pageSize);
         PageInfo<ScreeningDTO> pageInfo = new PageInfo<>(list);
         mv.addObject("pageInfo",pageInfo);
         return mv;
+    }
+
+    /**
+     * 添加排片信息
+     * @param screening
+     * @return
+     */
+    @PostMapping("/addScreening")
+    public Map addScreening(Screening screening){
+        Map result = new HashMap();
+        try {
+            screeningService.addScreening(screening);
+            result.put("code",200);
+            result.put("message","添加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("code",500);
+            result.put("message",e.getMessage());
+        }
+        return result;
+    }
+
+    @PutMapping("/updateScreening")
+    public Map updateScreeening(Screening screening){
+        Map result = new HashMap();
+        try {
+            screeningService.updateScreening(screening);
+            result.put("code",200);
+            result.put("message","更新成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("code",500);
+            result.put("message",e.getMessage());
+        }
+        return result;
     }
 }
