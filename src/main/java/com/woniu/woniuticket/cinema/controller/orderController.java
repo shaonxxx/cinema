@@ -4,10 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.woniu.woniuticket.cinema.client.OrderClient;
 import com.woniu.woniuticket.cinema.pojo.Order;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +33,9 @@ public class orderController {
 
         return map;
     }
+
+
+    //@RequestMapping("/orders/show.do")
 
 
 }

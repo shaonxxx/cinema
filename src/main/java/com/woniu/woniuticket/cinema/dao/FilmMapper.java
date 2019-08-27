@@ -28,9 +28,15 @@ public interface FilmMapper {
 
     void deleteFilms(List<String> ids);
 
+    @Select("select count(*) from film")
+    Integer selectCount();
 
-    @Select("select * from film ")
-    List<Film> selectHot(Integer num);
+    @Select("select * from film limit #{0},1")
+    Film selectRandom(Integer num);
 
-    List<Film> selectNew(Integer num);
+    @Select("SELECT * FROM film ORDER BY people_num DESC LIMIT #{currentPage},#{pageSize}")
+    List<Film> selectHot(@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
+
+    @Select("SELECT * FROM film WHERE NOW()<relese_date ORDER BY relese_date LIMIT #{currentPage},#{pageSize}")
+    List<Film> selectNew(@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
 }

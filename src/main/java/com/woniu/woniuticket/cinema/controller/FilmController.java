@@ -88,7 +88,9 @@ public class FilmController {
     }
 
 
-    @GetMapping("/getRandom")
+
+
+    @GetMapping("/film/getRandom")
     public Result getRandom(Integer num){
         Result result=new Result();
         List<Film> films=filmService.selectRandom(num);
@@ -98,10 +100,12 @@ public class FilmController {
     }
 
 
-    @GetMapping("/getHot")
-    public Result getHot(Integer num){
+    @GetMapping("/film/getHot")
+    @CrossOrigin
+    public Result getHot(@RequestParam(value = "currentPage",defaultValue = "1",required = true) Integer currentPage,
+                         @RequestParam(value="pageSize",defaultValue = "8",required = true) Integer pageSize){
         Result result=new Result();
-        List<Film> films=filmService.selectHot(num);
+        List<Film> films=filmService.selectHot(currentPage,pageSize);
         result.setData(films);
         result.setCode("0");
         return result;
@@ -125,9 +129,17 @@ public class FilmController {
             film.setStars("林正阴");
             filmService.add(film);
         }
-
-
         return "成功";
+    }
+
+    @GetMapping("/film/getNew/{currentPage}/{pageSize}")
+    public Result getNew(@PathVariable("currentPage") Integer currentPage,
+                         @PathVariable("pageSize") Integer pageSize){
+        Result result=new Result();
+        List<Film> films=filmService.selectNew(currentPage,pageSize);
+        result.setData(films);
+        result.setCode("0");
+        return result;
     }
 
 
