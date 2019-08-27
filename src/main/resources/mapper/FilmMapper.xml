@@ -9,6 +9,7 @@
         #{item}
     </foreach>
   </update>
+
   <!-- 按名称查找film -->
   <select id="selectFilmByName" resultMap="BaseResultMap">
     select * from film where film_name = #{film.filmName}
@@ -53,7 +54,7 @@
     <result column="covers" jdbcType="VARCHAR" property="covers" />
     <result column="language" jdbcType="VARCHAR" property="language" />
     <result column="other_stats" jdbcType="VARCHAR" property="otherStats" />
-    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="category_id" jdbcType="VARCHAR" property="categoryId" />
   </resultMap>
   <sql id="Base_Column_List">
     film_id, film_name, stars, duration, info, grage, relese_date, people_num, film_status,
@@ -78,7 +79,7 @@
       #{duration,jdbcType=INTEGER}, #{info,jdbcType=VARCHAR}, #{grage,jdbcType=DOUBLE}, 
       #{releseDate,jdbcType=TIMESTAMP}, #{peopleNum,jdbcType=INTEGER}, #{filmStatus,jdbcType=VARCHAR},
       #{covers,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{otherStats,jdbcType=VARCHAR},
-      #{categoryId,jdbcType=INTEGER})
+      #{categoryId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.woniu.woniuticket.cinema.pojo.Film">
     insert into film
@@ -161,7 +162,7 @@
         #{otherStats,jdbcType=VARCHAR},
       </if>
       <if test="categoryId != null">
-        #{categoryId,jdbcType=INTEGER},
+        #{categoryId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -202,7 +203,7 @@
         other_stats = #{otherStats,jdbcType=VARCHAR},
       </if>
       <if test="categoryId != null">
-        category_id = #{categoryId,jdbcType=INTEGER},
+        category_id = #{categoryId,jdbcType=VARCHAR},
       </if>
     </set>
     where film_id = #{filmId,jdbcType=INTEGER}
@@ -220,7 +221,7 @@
       covers = #{covers,jdbcType=VARCHAR},
       language = #{language,jdbcType=VARCHAR},
       other_stats = #{otherStats,jdbcType=VARCHAR},
-      category_id = #{categoryId,jdbcType=INTEGER}
+      category_id = #{categoryId,jdbcType=VARCHAR}
     where film_id = #{filmId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -27,7 +27,7 @@ public class Film {
 
     private String otherStats;
 
-    private Integer categoryId;
+    private String categoryId;
 
     public Integer getFilmId() {
         return filmId;
@@ -125,11 +125,11 @@ public class Film {
         this.otherStats = otherStats;
     }
 
-    public Integer getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 }

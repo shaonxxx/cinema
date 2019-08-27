@@ -43,4 +43,25 @@ public class FilmServiceImpl implements FilmService {
         filmMapper.deleteFilms(ids);
     }
 
+    @Override
+    public List<Film> selectRandom(Integer num) {
+        return null;
+    }
+
+    @Override
+    public List<Film> selectHot(Integer num) {
+        return filmMapper.selectHot(num);
+    }
+
+    @Override
+    public List<Film> selectNew(Integer num) {
+        return filmMapper.selectNew(num);
+    }
+
+    @Override
+    public void add(Film film) {
+        filmMapper.insertSelective(film);
+    }
+
+
 }

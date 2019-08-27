@@ -3,6 +3,7 @@ package com.woniu.woniuticket.cinema.dao;
 import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -26,4 +27,10 @@ public interface FilmMapper {
    Film selectFilmByName(String filmName);
 
     void deleteFilms(List<String> ids);
+
+
+    @Select("select * from film ")
+    List<Film> selectHot(Integer num);
+
+    List<Film> selectNew(Integer num);
 }

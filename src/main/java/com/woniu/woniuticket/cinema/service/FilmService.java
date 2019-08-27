@@ -17,5 +17,12 @@ public interface FilmService {
     //批量删除
     void removeFilms(List<String> ids);
 
+    List<Film> selectRandom(Integer num);
+
+    List<Film> selectHot(Integer num);
+
+    List<Film> selectNew(Integer num);
+
+    void add(Film film);
 
 }

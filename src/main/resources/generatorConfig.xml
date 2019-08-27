@@ -8,8 +8,8 @@
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://106.52.231.180:3306/cinema"
-                        userId="root" password="123">
+                        connectionURL="jdbc:mysql://cdb-e4a6q0m8.cd.tencentcdb.com:10006/cinema"
+                        userId="root" password="huangyulong123--">
         </jdbcConnection>
         <!--存放生成实体类的路径-->
         <javaModelGenerator targetPackage="com.woniu.woniuticket.cinema.pojo" targetProject="src/main/java/"/>
@@ -19,27 +19,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.woniu.woniuticket.cinema.dao" targetProject="src/main/java"/>
 
 
-        <table tableName="category" mapperName="CategoryMapper" domainObjectName="Category" enableDeleteByExample="false"
-               enableUpdateByExample="false"
-               enableSelectByExample="false"
-               enableCountByExample="false"
-               selectByExampleQueryId="false"></table>
-        <table tableName="film_comment"  domainObjectName="FilmComment" enableDeleteByExample="false"
-               enableUpdateByExample="false"
-               enableSelectByExample="false"
-               enableCountByExample="false"
-               selectByExampleQueryId="false"></table>
-        <table tableName="cinema_comment"  domainObjectName="CinemaComment" enableDeleteByExample="false"
-               enableUpdateByExample="false"
-               enableSelectByExample="false"
-               enableCountByExample="false"
-               selectByExampleQueryId="false"></table>
-        <table tableName="cinema"  domainObjectName="Cinema" enableDeleteByExample="false"
-               enableUpdateByExample="false"
-               enableSelectByExample="false"
-               enableCountByExample="false"
-               selectByExampleQueryId="false"></table>
-        <table tableName="screening"  domainObjectName="Screening" enableDeleteByExample="false"
+        <table tableName="user" mapperName="UserMapper" domainObjectName="User" enableDeleteByExample="false"
                enableUpdateByExample="false"
                enableSelectByExample="false"
                enableCountByExample="false"

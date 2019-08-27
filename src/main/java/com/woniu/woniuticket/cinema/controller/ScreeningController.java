@@ -19,8 +19,9 @@ public class ScreeningController {
 
     @Autowired
     ScreeningService screeningService;
+
     /**
-     *  根据放映查找拍片
+     *  根据放映查找拍片(暂时没用)
      * @param  hid 放映厅编号
      * @return 当前时间有效拍片信息。
      */
@@ -46,6 +47,9 @@ public class ScreeningController {
                                        @RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize){
         ModelAndView mv = new ModelAndView(resUrl);
        /* ModelAndView mv = new ModelAndView(resUrl);*/
+
+
+
         List<ScreeningDTO> list = screeningService.findScreeningByCondition(screeningVO, currentPage, pageSize);
         PageInfo<ScreeningDTO> pageInfo = new PageInfo<>(list);
         mv.addObject("pageInfo",pageInfo);
