@@ -61,6 +61,12 @@
     film_id, film_name, local,stars, duration, info, grage, relese_date, people_num, film_status,
     covers, language, other_stats, category_id
   </sql>
+    <select id="selectHot" resultMap="BaseResultMap">
+        SELECT * FROM film ORDER BY people_num DESC
+    </select>
+    <select id="selectNew" resultMap="BaseResultMap">
+        SELECT * FROM film WHERE NOW() <![CDATA[<]]> relese_date ORDER BY relese_date LIMIT #{currentPage},#{pageSize}
+    </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

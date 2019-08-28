@@ -1,33 +1,41 @@
 package com.woniu.woniuticket.cinema.pojo;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
 import java.util.Date;
 import java.util.List;
 
+@Document(indexName = "filmIndex",type = "film",shards = 5,replicas = 1)
 public class Film {
+
+    @Id
     private Integer filmId;
-
+    @Field(type = FieldType.Text,analyzer = "ik_max_word")
     private String filmName;
-
+    @Field(type = FieldType.Text,analyzer = "ik_max_word")
     private String stars;
-
+    @Field(type = FieldType.Keyword)
     private Integer duration;
-
+    @Field(type = FieldType.Keyword)
     private String info;
-
+    @Field(type = FieldType.Double)
     private Double grage;
-
+    @Field(type = FieldType.Date)
     private Date releseDate;
-
+    @Field(index = false,type = FieldType.Keyword)
     private Integer peopleNum;
-
+    @Field(type = FieldType.Keyword)
     private String filmStatus;
-
+    @Field(index = false,type = FieldType.Keyword)
     private String covers;
-
+    @Field(type = FieldType.Keyword)
     private String language;
-
+    @Field(index = false,type = FieldType.Keyword)
     private String otherStats;
-
+    @Field(type = FieldType.Keyword)
     private String categoryId;
 
     private List<Category> categories;
@@ -162,5 +170,24 @@ public class Film {
 
     public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
+    }
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "filmId=" + filmId +
+                ", filmName='" + filmName + '\'' +
+                ", stars='" + stars + '\'' +
+                ", duration=" + duration +
+                ", info='" + info + '\'' +
+                ", grage=" + grage +
+                ", releseDate=" + releseDate +
+                ", peopleNum=" + peopleNum +
+                ", filmStatus='" + filmStatus + '\'' +
+                ", covers='" + covers + '\'' +
+                ", language='" + language + '\'' +
+                ", otherStats='" + otherStats + '\'' +
+                ", categoryId='" + categoryId + '\'' +
+                '}';
     }
 }
