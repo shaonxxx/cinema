@@ -38,7 +38,7 @@ public class ShiroConfig {
         map.put("/*.jpg","logout");
 //        map.put("/static/*.jpg","anon");
 //        map.put("/static/*.png","anon");
-        map.put("/**","authc");
+        map.put("/**","anon");
         factoryBean.setFilterChainDefinitionMap(map);
         return factoryBean;
     }
