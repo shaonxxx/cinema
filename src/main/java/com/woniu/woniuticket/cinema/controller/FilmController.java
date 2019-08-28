@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
 
 @RestController
+@CrossOrigin
 public class FilmController {
     @Autowired
     FilmService filmService;

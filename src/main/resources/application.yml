@@ -12,6 +12,11 @@ spring:
     name: cinema-m
   resources:
     static-locations: classpath:/templates/,classpath:/static/
+  #Elasticsearch配置
+  data:
+    elasticsearch:
+      cluster-name: my-application
+      cluster-nodes: 127.0.0.1:9300
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
