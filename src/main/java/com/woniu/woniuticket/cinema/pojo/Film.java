@@ -34,6 +34,16 @@ public class Film {
 
     private String categoryString;
 
+    private String local;
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
     public String getCategoryString() {
         return categoryString;
     }

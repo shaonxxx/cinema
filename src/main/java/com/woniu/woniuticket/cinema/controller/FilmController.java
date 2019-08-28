@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
 
 @RestController
+@CrossOrigin
 public class FilmController {
     @Autowired
     FilmService filmService;
@@ -40,8 +41,10 @@ public class FilmController {
      * @return
      */
     @GetMapping("/filmlist")
-    public Result<PageInfo> findfilmByCondition(@RequestParam(value = "filmVO",required = false)FilmVO filmVO,@RequestParam(value ="currentPage",defaultValue = "1")Integer currentPage,
-                                   @RequestParam(value = "pageSize",defaultValue = "10")Integer pagesize){
+    public Result<PageInfo> findfilmByCondition(
+                                    @RequestParam(value = "filmVO",required = false)FilmVO filmVO,
+                                    @RequestParam(value ="currentPage",defaultValue = "1",required = true)Integer currentPage,
+                                    @RequestParam(value = "pageSize",defaultValue = "10",required = true)Integer pagesize){
         Result result = new Result();
         List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
         PageInfo<Film> pageInfo = new PageInfo<Film>(films);
@@ -110,6 +113,7 @@ public class FilmController {
         result.setCode("0");
         return result;
     }
+
 
     @RequestMapping("/film/add")
     public String add(){

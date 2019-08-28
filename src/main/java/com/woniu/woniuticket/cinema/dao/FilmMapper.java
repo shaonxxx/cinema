@@ -21,8 +21,9 @@ public interface FilmMapper {
     int updateByPrimaryKey(Film record);
 
     //条件查询影片，后台分页
-    List<Film> selectFilmByCondition(@Param("filmVO")FilmVO filmVO,@Param("currentPage")Integer currentPage,
-                                     @Param("pageSzie")Integer pageSize);
+    List<Film> selectFilmByCondition(@Param("filmVO")FilmVO filmVO,
+                                     @Param("currentPage")Integer currentPage,
+                                     @Param("pageSize")Integer pageSize);
 
    Film selectFilmByName(String filmName);
 
