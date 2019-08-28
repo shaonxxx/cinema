@@ -107,7 +107,9 @@ public class FilmController {
                          @RequestParam(value="pageSize",defaultValue = "8",required = true) Integer pageSize){
         Result result=new Result();
         List<Film> films=filmService.selectHot(currentPage,pageSize);
-        result.setData(films);
+        PageInfo<Film> pageInfo=new PageInfo<>(films);
+
+        result.setData(pageInfo);
         result.setCode("0");
         return result;
     }
