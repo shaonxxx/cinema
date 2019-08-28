@@ -38,4 +38,7 @@ public interface FilmMapper {
     List<Film> selectHot(@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
 
     List<Film> selectNew(@Param("currentPage") Integer currentPage,@Param("pageSize") Integer pageSize);
+
+    @Select("select * from film")
+    List<Film> selectAll();
 }

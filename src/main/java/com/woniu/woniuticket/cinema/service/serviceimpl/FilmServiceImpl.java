@@ -21,6 +21,8 @@ public class FilmServiceImpl implements FilmService {
     @Autowired
     CategoryMapper categoryMapper;
 
+    @Autowired
+    FilmRepository filmRepository;
 
     @Override
     public List<Film> findFilmByCondition(FilmVO filmVO, Integer currentPage, Integer pageSize) {
@@ -29,8 +31,8 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Film selectFilmByfid(Integer filmId) {
-        Film film=filmMapper.selectByPrimaryKey(filmId);
+    public Film selectFilmByfid(Integer fid) {
+        Film film=filmMapper.selectByPrimaryKey(fid);
         PaseCategory(film);
         return film;
 }
@@ -102,6 +104,34 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public void add(Film film) {
         filmMapper.insertSelective(film);
+    }
+
+    @Override
+    public List<Film> findAll() {
+        return filmMapper.selectAll();
+    }
+
+    @Override
+    public Page<Film> findByKeyword(FilmVO filmVO) {
+        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
+        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+
+        if(filmVO.getFilmName()!=null && !filmVO.getFilmName().equals("")){
+            boolQueryBuilder.should(QueryBuilders.termQuery("filmName",filmVO.getFilmName()));
+        }
+        if(filmVO.getStars()!=null && !filmVO.getStars().equals("")){
+            boolQueryBuilder.should(QueryBuilders.termQuery("stars",filmVO.getStars()));
+        }
+        if(filmVO.getLocal()!=null && !filmVO.getLocal().equals("")){
+            boolQueryBuilder.should(QueryBuilders.termQuery("local",filmVO.getLocal()));
+        }
+        if(filmVO.getLanguage()!=null && !filmVO.getLanguage().equals("")){
+            boolQueryBuilder.should((QueryBuilders.termQuery("language",filmVO.getLanguage())));
+        }
+        queryBuilder.withQuery(boolQueryBuilder);
+        queryBuilder.withPageable(PageRequest.of(1,10));
+        Page<Film> films = filmRepository.search(queryBuilder.build());
+        return films;
     }
 
 

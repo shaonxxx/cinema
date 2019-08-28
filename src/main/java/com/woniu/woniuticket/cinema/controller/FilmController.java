@@ -9,6 +9,7 @@ import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.utils.ImgUpload;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -110,7 +111,9 @@ public class FilmController {
                          @RequestParam(value="pageSize",defaultValue = "8",required = true) Integer pageSize){
         Result result=new Result();
         List<Film> films=filmService.selectHot(currentPage,pageSize);
-        result.setData(films);
+        PageInfo<Film> pageInfo=new PageInfo<>(films);
+
+        result.setData(pageInfo);
         result.setCode("0");
         return result;
     }
@@ -148,4 +151,11 @@ public class FilmController {
     }
 
 
+    @GetMapping("/keyword")
+    public PageInfo<Film> getByKeyword(FilmVO filmVO){
+        Page<Film> page = filmService.findByKeyword(filmVO);
+        List<Film> films = page.getContent();
+        PageInfo<Film> pageInfo = new PageInfo<>(films);
+        return pageInfo;
+    }
 }
