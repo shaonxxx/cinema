@@ -14,8 +14,28 @@ public class FilmVO {
 
     private Date releseDate;
 
+    private String local;
+
+    private String language;
+
     public Date getReleseDate() {
         return releseDate;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public void setReleseDate(Date releseDate) {

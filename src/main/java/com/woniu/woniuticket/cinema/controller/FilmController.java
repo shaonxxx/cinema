@@ -9,6 +9,7 @@ import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.utils.ImgUpload;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +28,7 @@ public class FilmController {
      */
     @GetMapping("/film")
     public Map getFilmByfid( Integer id){
+        System.out.println(id);
         Map result = new HashMap();
         Film film = filmService.selectFilmByfid(id);
         result.put("film",film);
@@ -41,8 +43,10 @@ public class FilmController {
      * @return
      */
     @GetMapping("/filmlist")
-    public Result<PageInfo> findfilmByCondition(@RequestParam(value = "filmVO",required = false)FilmVO filmVO,@RequestParam(value ="currentPage",defaultValue = "1")Integer currentPage,
-                                   @RequestParam(value = "pageSize",defaultValue = "10")Integer pagesize){
+    public Result<PageInfo> findfilmByCondition(
+                                    @RequestParam(value = "filmVO",required = false)FilmVO filmVO,
+                                    @RequestParam(value ="currentPage",defaultValue = "1",required = true)Integer currentPage,
+                                    @RequestParam(value = "pageSize",defaultValue = "10",required = true)Integer pagesize){
         Result result = new Result();
         List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
         PageInfo<Film> pageInfo = new PageInfo<Film>(films);
@@ -114,6 +118,7 @@ public class FilmController {
         return result;
     }
 
+
     @RequestMapping("/film/add")
     public String add(){
         Film film=new Film();
@@ -146,4 +151,9 @@ public class FilmController {
     }
 
 
+    @GetMapping("/keyword")
+    public Page<Film> getByKeyword(FilmVO filmVO){
+        Page<Film> page = filmService.findByKeyword(filmVO);
+        return page;
+    }
 }

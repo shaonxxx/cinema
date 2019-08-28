@@ -48,6 +48,7 @@
     <result column="duration" jdbcType="INTEGER" property="duration" />
     <result column="info" jdbcType="VARCHAR" property="info" />
     <result column="grage" jdbcType="DOUBLE" property="grage" />
+    <result column="local" jdbcType="VARCHAR" property="local" />
     <result column="relese_date" jdbcType="TIMESTAMP" property="releseDate" />
     <result column="people_num" jdbcType="INTEGER" property="peopleNum" />
     <result column="film_status" jdbcType="VARCHAR" property="filmStatus" />
@@ -57,7 +58,7 @@
     <result column="category_id" jdbcType="VARCHAR" property="categoryId" />
   </resultMap>
   <sql id="Base_Column_List">
-    film_id, film_name, stars, duration, info, grage, relese_date, people_num, film_status,
+    film_id, film_name, local,stars, duration, info, grage, relese_date, people_num, film_status,
     covers, language, other_stats, category_id
   </sql>
     <select id="selectHot" resultMap="BaseResultMap">
@@ -76,12 +77,12 @@
     update film set film_status="delete"  where film_id=#{fid}
   </delete>
   <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.Film">
-    insert into film (film_id, film_name, stars, 
+    insert into film (film_id, film_name, local,stars,
       duration, info, grage, 
       relese_date, people_num, film_status,
       covers, language, other_stats,
       category_id)
-    values (#{filmId,jdbcType=INTEGER}, #{filmName,jdbcType=VARCHAR}, #{stars,jdbcType=VARCHAR}, 
+    values (#{filmId,jdbcType=INTEGER}, #{filmName,jdbcType=VARCHAR},  #{local,jdbcType=VARCHAR},#{stars,jdbcType=VARCHAR},
       #{duration,jdbcType=INTEGER}, #{info,jdbcType=VARCHAR}, #{grage,jdbcType=DOUBLE}, 
       #{releseDate,jdbcType=TIMESTAMP}, #{peopleNum,jdbcType=INTEGER}, #{filmStatus,jdbcType=VARCHAR},
       #{covers,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{otherStats,jdbcType=VARCHAR},
@@ -95,6 +96,9 @@
       </if>
       <if test="filmName != null">
         film_name,
+      </if>
+      <if test="local != null">
+        local,
       </if>
       <if test="stars != null">
         stars,
@@ -137,6 +141,9 @@
       <if test="filmName != null">
         #{filmName,jdbcType=VARCHAR},
       </if>
+      <if test="local != null">
+        #{local,jdbcType=VARCHAR},
+      </if>
       <if test="stars != null">
         #{stars,jdbcType=VARCHAR},
       </if>
@@ -178,6 +185,9 @@
       <if test="filmName != null">
         film_name = #{filmName,jdbcType=VARCHAR},
       </if>
+      <if test="local != null">
+        local = #{local,jdbcType=VARCHAR},
+      </if>
       <if test="stars != null">
         stars = #{stars,jdbcType=VARCHAR},
       </if>
@@ -217,6 +227,7 @@
   <update id="updateByPrimaryKey" parameterType="com.woniu.woniuticket.cinema.pojo.Film">
     update film
     set film_name = #{filmName,jdbcType=VARCHAR},
+        local = #{local,jdbcType=VARCHAR},
       stars = #{stars,jdbcType=VARCHAR},
       duration = #{duration,jdbcType=INTEGER},
       info = #{info,jdbcType=VARCHAR},

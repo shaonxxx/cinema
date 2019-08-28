@@ -8,7 +8,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.util.Date;
 import java.util.List;
 
-@Document(indexName = "filmIndex",type = "film",shards = 5,replicas = 1)
+@Document(indexName = "filmindex",type = "film",shards = 5,replicas = 1)
 public class Film {
 
     @Id
@@ -41,6 +41,16 @@ public class Film {
     private List<Category> categories;
 
     private String categoryString;
+    @Field(type = FieldType.Keyword)
+    private String local;
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
 
     public String getCategoryString() {
         return categoryString;
