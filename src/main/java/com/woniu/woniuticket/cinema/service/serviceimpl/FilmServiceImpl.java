@@ -12,6 +12,7 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
@@ -118,6 +119,7 @@ public class FilmServiceImpl implements FilmService {
     public Page<Film> findByKeyword(FilmVO filmVO) {
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+
         if(filmVO.getFilmName()!=null && !filmVO.getFilmName().equals("")){
             boolQueryBuilder.should(QueryBuilders.termQuery("filmName",filmVO.getFilmName()));
         }
@@ -131,6 +133,7 @@ public class FilmServiceImpl implements FilmService {
             boolQueryBuilder.should((QueryBuilders.termQuery("language",filmVO.getLanguage())));
         }
         queryBuilder.withQuery(boolQueryBuilder);
+        queryBuilder.withPageable(PageRequest.of(1,10));
         Page<Film> films = filmRepository.search(queryBuilder.build());
         return films;
     }
