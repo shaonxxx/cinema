@@ -26,14 +26,14 @@ public class FilmController {
      * @return
      */
     @GetMapping("/film")
-    public Map getFilmByfid( Integer id){
+    public Result getFilmByfid(Integer id){
         System.out.println(id);
-        Map result = new HashMap();
+        Result result = new Result();
         Film film = filmService.selectFilmByfid(id);
-        result.put("film",film);
+        result.setCode("200");
+        result.setData(film);
         return result;
     }
-
     /**
      * 条件查询影片，没有条件则查询所有影片
      * @param filmVO

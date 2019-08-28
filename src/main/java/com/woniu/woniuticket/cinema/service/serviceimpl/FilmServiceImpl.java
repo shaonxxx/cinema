@@ -29,8 +29,10 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Film selectFilmByfid(Integer fid) {
-        return filmMapper.selectByPrimaryKey(fid);
+    public Film selectFilmByfid(Integer filmId) {
+        Film film=filmMapper.selectByPrimaryKey(filmId);
+        PaseCategory(film);
+        return film;
 }
 
     @Override

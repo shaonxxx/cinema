@@ -10,7 +10,7 @@ public interface FilmService {
 
     public List<Film> findFilmByCondition(FilmVO filmVO, Integer currentPage, Integer pageSize);
 
-    public Film selectFilmByfid(Integer fid);
+    public Film selectFilmByfid(Integer filmId);
 
     void addFilm(Film film);
 
