@@ -150,8 +150,10 @@ public class FilmController {
 
 
     @GetMapping("/keyword")
-    public Page<Film> getByKeyword(FilmVO filmVO){
+    public PageInfo<Film> getByKeyword(FilmVO filmVO){
         Page<Film> page = filmService.findByKeyword(filmVO);
-        return page;
+        List<Film> films = page.getContent();
+        PageInfo<Film> pageInfo = new PageInfo<>(films);
+        return pageInfo;
     }
 }
