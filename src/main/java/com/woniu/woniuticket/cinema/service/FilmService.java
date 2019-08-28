@@ -2,7 +2,6 @@ package com.woniu.woniuticket.cinema.service;
 
 import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -30,8 +29,8 @@ public interface FilmService {
 
     /**
      * 关键字查找  通过Elasticsearch
-     * @param filmVO
+     * @param filmName
      * @return
      */
-    Page<Film> findByKeyword(FilmVO filmVO);
+    List<Film> findByFilmNameKeyword(String filmName);
 }

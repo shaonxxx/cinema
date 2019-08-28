@@ -83,6 +83,16 @@ public class FilmTest {
         for (Film film1 : films) {
             System.out.println(film1);
         }
+    }
 
+    @Test
+    public void testFuzzyQuery(){
+        NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
+        builder.withQuery(QueryBuilders.fuzzyQuery("filmName","僵尸"));
+        Page<Film> page = filmRepository.search(builder.build());
+        System.out.println(page.getTotalElements());
+        for (Film film : page) {
+            System.out.println(film);
+        }
     }
 }

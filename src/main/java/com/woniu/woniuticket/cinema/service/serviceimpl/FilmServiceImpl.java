@@ -8,7 +8,6 @@ import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.repository.FilmRepository;
 import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
-import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -118,26 +117,21 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Page<Film> findByKeyword(FilmVO filmVO) {
+    public List<Film> findByFilmNameKeyword(String filmName) {
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
 
-        if(filmVO.getFilmName()!=null && !filmVO.getFilmName().equals("")){
-            boolQueryBuilder.should(QueryBuilders.termQuery("filmName",filmVO.getFilmName()));
+        if(filmName == null || filmName.equals("")) {
+            System.out.println(1111111);
+            throw new FilmException("未找到任何数据");
         }
-        if(filmVO.getStars()!=null && !filmVO.getStars().equals("")){
-            boolQueryBuilder.should(QueryBuilders.termQuery("stars",filmVO.getStars()));
-        }
-        if(filmVO.getLocal()!=null && !filmVO.getLocal().equals("")){
-            boolQueryBuilder.should(QueryBuilders.termQuery("local",filmVO.getLocal()));
-        }
-        if(filmVO.getLanguage()!=null && !filmVO.getLanguage().equals("")){
-            boolQueryBuilder.should((QueryBuilders.termQuery("language",filmVO.getLanguage())));
-        }
-        queryBuilder.withQuery(boolQueryBuilder);
+        queryBuilder.withQuery(QueryBuilders.fuzzyQuery("filmName",filmName));
         queryBuilder.withPageable(PageRequest.of(1,10));
-        Page<Film> films = filmRepository.search(queryBuilder.build());
-        return films;
+        Page<Film> page = filmRepository.search(queryBuilder.build());
+        if(page.getContent().size()==0){
+            System.out.println(2222);
+            throw new FilmException("未找到任何数据");
+        }
+        return page.getContent();
     }
 
 
