@@ -6,6 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.Date;
+import java.util.List;
 
 @Document(indexName = "filmIndex",type = "film",shards = 5,replicas = 1)
 public class Film {
@@ -36,6 +37,26 @@ public class Film {
     private String otherStats;
     @Field(type = FieldType.Keyword)
     private String categoryId;
+
+    private List<Category> categories;
+
+    private String categoryString;
+
+    public String getCategoryString() {
+        return categoryString;
+    }
+
+    public void setCategoryString(String categoryString) {
+        this.categoryString = categoryString;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
 
     public Integer getFilmId() {
         return filmId;

@@ -19,9 +19,9 @@ public interface FilmService {
 
     List<Film> selectRandom(Integer num);
 
-    List<Film> selectHot(Integer num);
+    List<Film> selectHot(Integer currentPage,Integer pageSize);
 
-    List<Film> selectNew(Integer num);
+    List<Film> selectNew(Integer currentPage,Integer pageSize);
 
     void add(Film film);
 
