@@ -27,6 +27,7 @@ public class FilmController {
      */
     @GetMapping("/film")
     public Map getFilmByfid( Integer id){
+        System.out.println(id);
         Map result = new HashMap();
         Film film = filmService.selectFilmByfid(id);
         result.put("film",film);
