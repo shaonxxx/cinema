@@ -88,6 +88,8 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public List<Film> selectNew(Integer currentPage,Integer pageSize) {
+
+
         List<Film> films=  filmMapper.selectNew(currentPage,pageSize);
         for (Film film : films){
             PaseCategory(film);
