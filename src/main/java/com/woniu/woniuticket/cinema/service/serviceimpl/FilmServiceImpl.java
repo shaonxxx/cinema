@@ -5,9 +5,14 @@ import com.woniu.woniuticket.cinema.dao.FilmMapper;
 import com.woniu.woniuticket.cinema.execption.FilmException;
 import com.woniu.woniuticket.cinema.pojo.Category;
 import com.woniu.woniuticket.cinema.pojo.Film;
+import com.woniu.woniuticket.cinema.repository.FilmRepository;
 import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -21,6 +26,8 @@ public class FilmServiceImpl implements FilmService {
     @Autowired
     CategoryMapper categoryMapper;
 
+    @Autowired
+    FilmRepository filmRepository;
 
     @Override
     public List<Film> findFilmByCondition(FilmVO filmVO, Integer currentPage, Integer pageSize) {
@@ -100,6 +107,32 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public void add(Film film) {
         filmMapper.insertSelective(film);
+    }
+
+    @Override
+    public List<Film> findAll() {
+        return filmMapper.selectAll();
+    }
+
+    @Override
+    public Page<Film> findByKeyword(FilmVO filmVO) {
+        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
+        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+        if(filmVO.getFilmName()!=null && !filmVO.getFilmName().equals("")){
+            boolQueryBuilder.should(QueryBuilders.termQuery("filmName",filmVO.getFilmName()));
+        }
+        if(filmVO.getStars()!=null && !filmVO.getStars().equals("")){
+            boolQueryBuilder.should(QueryBuilders.termQuery("stars",filmVO.getStars()));
+        }
+        if(filmVO.getLocal()!=null && !filmVO.getLocal().equals("")){
+            boolQueryBuilder.should(QueryBuilders.termQuery("local",filmVO.getLocal()));
+        }
+        if(filmVO.getLanguage()!=null && !filmVO.getLanguage().equals("")){
+            boolQueryBuilder.should((QueryBuilders.termQuery("language",filmVO.getLanguage())));
+        }
+        queryBuilder.withQuery(boolQueryBuilder);
+        Page<Film> films = filmRepository.search(queryBuilder.build());
+        return films;
     }
 
 

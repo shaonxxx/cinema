@@ -9,6 +9,7 @@ import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.utils.ImgUpload;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -148,4 +149,9 @@ public class FilmController {
     }
 
 
+    @GetMapping("/keyword")
+    public Page<Film> getByKeyword(FilmVO filmVO){
+        Page<Film> page = filmService.findByKeyword(filmVO);
+        return page;
+    }
 }
