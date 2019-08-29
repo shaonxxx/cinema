@@ -9,6 +9,7 @@ public interface FilmCommentMapper {
     int deleteByPrimaryKey(Integer filmCommentId);
 
     int insert(FilmComment record);
+    Double selectAvgScore (Integer filmId);
 
     int insertSelective(FilmComment record);
 

@@ -1,13 +1,20 @@
 package com.woniu.woniuticket.cinema.service.serviceimpl;
 
 import com.woniu.woniuticket.cinema.dao.CategoryMapper;
+import com.woniu.woniuticket.cinema.dao.FilmCommentMapper;
 import com.woniu.woniuticket.cinema.dao.FilmMapper;
 import com.woniu.woniuticket.cinema.execption.FilmException;
 import com.woniu.woniuticket.cinema.pojo.Category;
 import com.woniu.woniuticket.cinema.pojo.Film;
+import com.woniu.woniuticket.cinema.repository.FilmRepository;
 import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,6 +27,8 @@ public class FilmServiceImpl implements FilmService {
     FilmMapper filmMapper;
     @Autowired
     CategoryMapper categoryMapper;
+    @Autowired
+    FilmCommentMapper filmCommentMapper;
 
     @Autowired
     FilmRepository filmRepository;
@@ -34,6 +43,7 @@ public class FilmServiceImpl implements FilmService {
     public Film selectFilmByfid(Integer fid) {
         Film film=filmMapper.selectByPrimaryKey(fid);
         PaseCategory(film);
+        getAvgScore(film);
         return film;
 }
 
@@ -158,6 +168,11 @@ public class FilmServiceImpl implements FilmService {
             stringBuilder.deleteCharAt(stringBuilder.length()-1);
             film.setCategoryString(stringBuilder.toString());
         }
+    }
+
+    public void getAvgScore(Film film){
+       double avgScore = filmCommentMapper.selectAvgScore(film.getFilmId());
+        film.setGrage(avgScore);
     }
 
 }
