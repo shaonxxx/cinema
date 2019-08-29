@@ -7,13 +7,9 @@
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <link rel="stylesheet" th:href="@{/css/font.css}">
-        <link rel="stylesheet" th:href="@{/css/xadmin.css}">
-        <link rel="stylesheet" th:href="@{/css/timestyles.css}">
-        <script type="text/javascript" th:src="@{/layui/layui.js}" charset="utf-8"></script>
-        <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
-        <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
-        <script type="text/javascript" th:src="@{/js/jquery.timelinr-0.9.7.js}"></script>
+        <link rel="stylesheet" href="css/timestyles.css">
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.timelinr-0.9.7.js"></script>
         <script type="text/javascript">
             $(function(){
                 $().timelinr()
@@ -25,48 +21,36 @@
     <div id="container" class="content clearfix">
         <div id="timeline">
             <ul id="dates">
-                <li><a href="#1900">早场1</a></li>
-                <li><a href="#1944">早场2</a></li>
-                <li><a href="#1950">中午大剧</a></li>
-                <li><a href="#1971">午后剧场</a></li>
-                <li><a href="#1999">午2</a></li>
-                <li><a href="#2001">午3</a></li>
-                <li><a href="#2011">深夜剧</a></li>
+                <li><a href="#1900">15:30:00</a></li>
+                <li><a href="#1944">16:30:00</a></li>
+                <li><a href="#1950">17:30:00</a></li>
+                <li><a href="#1971">18:30:00</a></li>
+                <li><a href="#1999">19:30:00</a></li>
+                <li><a href="#2001">20:30:00</a></li>
+                <li><a href="#2011">21:30:00</a></li>
             </ul>
             <ul id="issues">
-                <li id="1900">
-                    <img th:src="@{/images/1.png}" width="256" height="256" />
-                    <h1>1900</h1>
-                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
+                <li id="1900"><!--@{/images/nezha.png}-->
+                    <img th:src="@{/images/nezha.png}" width="256" height="256" />
+                    <div class="filmName">哪吒之魔童降世</div>
+                   	<div class="filmSub">
+						<div class="filmTime">
+							播放时间：2019-08-28 15:30:00 -- 19:30:00
+						</div>
+						<div class="filmeLong">
+							播放时长：134分钟
+						</div>
+						<div class="filmePrice">
+							当前票价：134 RMB
+						</div>
+						<div class="caozuo">
+							操作：<button>修改</button><button>修改</button><button>修改</button>
+						</div>
+					</div>
                 </li>
                 <li id="1944">
                     <img th:src="@{/images/1.png}" width="256" height="256" />
                     <h1>1944</h1>
-                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
-                </li>
-                <li id="1950">
-                    <img th:src="@{/images/1.png}" width="256" height="256" />
-                    <h1>1950</h1>
-                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
-                </li>
-                <li id="1971">
-                    <img th:src="@{/images/1.png}" width="256" height="256" />
-                    <h1>1971</h1>
-                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
-                </li>
-                <li id="1999">
-                    <img th:src="@{/images/1.png}" width="256" height="256" />
-                    <h1>1999</h1>
-                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
-                </li>
-                <li id="2001">
-                    <img th:src="@{/images/1.png}" width="256" height="256" />
-                    <h1>2001</h1>
-                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
-                </li>
-                <li id="2011">
-                    <img th:src="@{/images/1.png}" width="256" height="256" />
-                    <h1>2011</h1>
                     <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
                 </li>
             </ul>
@@ -76,10 +60,7 @@
             <a href="#" id="prev">-</a>
         </div>
     </div>
-    <p align="center">适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p><br>
-    <p align="center">来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
-    </div>
-    </div>
+
 
        <!-- <script>
             $(function() {
