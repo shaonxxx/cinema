@@ -5,6 +5,7 @@ import com.woniu.woniuticket.cinema.client.OrderClient;
 import com.woniu.woniuticket.cinema.pojo.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +35,13 @@ public class orderController {
         return map;
     }
 
+
+    @GetMapping("/list")
+    public void listOrder(){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("order-list");
+
+    }
 
     //@RequestMapping("/orders/show.do")
 

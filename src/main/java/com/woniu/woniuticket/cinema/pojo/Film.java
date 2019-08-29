@@ -38,6 +38,16 @@ public class Film {
     @Field(type = FieldType.Keyword)
     private String categoryId;
 
+    public String[] getTypenames() {
+        return typenames;
+    }
+
+    public void setTypenames(String[] typenames) {
+        this.typenames = typenames;
+    }
+
+    private String[] typenames;
+
     private List<Category> categories;
 
     private String categoryString;
