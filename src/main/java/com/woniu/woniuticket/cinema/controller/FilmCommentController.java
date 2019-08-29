@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 public class FilmCommentController {
 
     @Autowired
@@ -29,6 +30,7 @@ public class FilmCommentController {
             result.put("code",200);
             result.put("message","评论成功");
         } catch (Exception e) {
+            e.printStackTrace();
             result.put("code",500);
             result.put("message","评论失败");
         }

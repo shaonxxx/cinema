@@ -8,6 +8,8 @@ public interface FilmCommentService {
 
     public void addFilmComment(FilmComment filmComment);
 
+    public Double selectAvgScore(Integer filmId);
+
     public void removeFilmCommentByNickName(Integer filmId);
 
     public List<FilmComment> findFilmCommentsByFilmId(Integer filmId,Integer currentPage, Integer pageSize);

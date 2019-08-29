@@ -19,8 +19,19 @@ public class FilmCommentServiceImpl implements FilmCommentService {
         try {
             filmCommentMapper.insertSelective(filmComment);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new FilmCommentException("评论失败");
         }
+    }
+
+    @Override
+    public Double selectAvgScore(Integer filmId) {
+        try {
+            return filmCommentMapper.selectAvgScore(filmId);
+        } catch (Exception e) {
+            throw new FilmCommentException("获取平均值失败");
+        }
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.woniu.woniuticket.cinema.service.serviceimpl;
 
 import com.woniu.woniuticket.cinema.dao.CategoryMapper;
+import com.woniu.woniuticket.cinema.dao.FilmCommentMapper;
 import com.woniu.woniuticket.cinema.dao.FilmMapper;
 import com.woniu.woniuticket.cinema.execption.FilmException;
 import com.woniu.woniuticket.cinema.pojo.Category;
@@ -25,6 +26,8 @@ public class FilmServiceImpl implements FilmService {
     FilmMapper filmMapper;
     @Autowired
     CategoryMapper categoryMapper;
+    @Autowired
+    FilmCommentMapper filmCommentMapper;
 
     @Autowired
     FilmRepository filmRepository;
@@ -39,6 +42,7 @@ public class FilmServiceImpl implements FilmService {
     public Film selectFilmByfid(Integer fid) {
         Film film=filmMapper.selectByPrimaryKey(fid);
         PaseCategory(film);
+        getAvgScore(film);
         return film;
 }
 
@@ -158,6 +162,11 @@ public class FilmServiceImpl implements FilmService {
             stringBuilder.deleteCharAt(stringBuilder.length()-1);
             film.setCategoryString(stringBuilder.toString());
         }
+    }
+
+    public void getAvgScore(Film film){
+       double avgScore = filmCommentMapper.selectAvgScore(film.getFilmId());
+        film.setGrage(avgScore);
     }
 
 }
