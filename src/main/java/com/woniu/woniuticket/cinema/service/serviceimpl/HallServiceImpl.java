@@ -24,4 +24,10 @@ public class HallServiceImpl implements HallService {
 
         return hallMapper.selectAllHall();
     }
+
+    @Override
+    public int addHall(Hall hall) {
+        hallMapper.insertSelective(hall);
+        return 0;
+    }
 }

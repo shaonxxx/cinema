@@ -106,8 +106,9 @@ public class FilmTest {
     }
 
     @Test
-    public void testRedis(){
-        redisTemplate.opsForValue().set("aaaa","bbbb");}
+    public void testRedis() {
+        redisTemplate.opsForValue().set("aaaa", "bbbb");
+    }
     @Test
     public void testFuzzyQuery(){
         NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();

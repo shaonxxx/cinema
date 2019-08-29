@@ -1,14 +1,13 @@
 package com.woniu.woniuticket.cinema.controller;
 
 import com.woniu.woniuticket.cinema.pojo.Hall;
+import com.woniu.woniuticket.cinema.pojo.Result;
 import com.woniu.woniuticket.cinema.service.HallService;
 import com.woniu.woniuticket.cinema.service.ScreeningService;
+import com.woniu.woniuticket.cinema.utils.HallUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -38,6 +37,17 @@ public class HallController {
         result.put("hall",hall);
         System.out.println(result);
         return result;
+    }
+
+    @GetMapping("/findhallById")
+    public ModelAndView findHallByOneId(@RequestParam(value = "hid",required = false) Integer hid){
+        ModelAndView mv=new ModelAndView();
+        Hall hall = hallService.findHallById(hid);
+        String[] sts=(hall.getSeatmap()).split(",");
+        mv.addObject("hall",hall);
+        mv.addObject("sts",sts);
+        mv.setViewName("hall-details");
+        return mv;
     }
 
     /**
@@ -83,4 +93,21 @@ public class HallController {
         modelAndView.setViewName("addScreening");
         return modelAndView;
     }
+
+
+    @PostMapping("/addhall")
+    @ResponseBody
+    public Result addHall(@RequestBody  Hall hall){
+        Result result=new Result();
+        String seats = HallUtil.seattransmap(hall.getSeats());
+        hall.setSeatmap(seats);
+        hall.setSeats(HallUtil.seat(seats));
+        hall.setSeatNum(HallUtil.seattotal(seats));
+        hallService.addHall(hall);
+        result.setCode("0");
+        result.setMessage("成功");
+        result.setData(hall);
+        return result;
+    }
+
 }
