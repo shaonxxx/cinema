@@ -8,4 +8,5 @@ public interface HallService {
 
     Hall findHallById(Integer hid);
     List<Hall> findAllHall();
+    int addHall(Hall hall);
 }

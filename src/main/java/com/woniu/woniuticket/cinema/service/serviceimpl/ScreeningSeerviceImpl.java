@@ -74,6 +74,7 @@ public class ScreeningSeerviceImpl implements ScreeningService {
                 screeningDTO.setChipId(screening.getChipId());
                 screeningDTO.setCinema(cinema);
                 screeningDTO.setFilm(film);
+                screeningDTO.setHall(hall);
                 screeningDTO.setEndTime(screening.getEndTime());
                 screeningDTO.setStartTime(screening.getStartTime());
                 screeningDTO.setPrice(screening.getPrice());
