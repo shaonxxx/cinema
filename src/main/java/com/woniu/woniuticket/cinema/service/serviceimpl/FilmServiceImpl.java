@@ -5,9 +5,14 @@ import com.woniu.woniuticket.cinema.dao.FilmMapper;
 import com.woniu.woniuticket.cinema.execption.FilmException;
 import com.woniu.woniuticket.cinema.pojo.Category;
 import com.woniu.woniuticket.cinema.pojo.Film;
+import com.woniu.woniuticket.cinema.repository.FilmRepository;
 import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -21,16 +26,20 @@ public class FilmServiceImpl implements FilmService {
     @Autowired
     CategoryMapper categoryMapper;
 
+    @Autowired
+    FilmRepository filmRepository;
 
     @Override
-    public List<Film> findFilmByCondition(FilmVO filmVO, Integer currenPage, Integer pageSize) {
+    public List<Film> findFilmByCondition(FilmVO filmVO, Integer currentPage, Integer pageSize) {
 
-        return filmMapper.selectFilmByCondition(filmVO,currenPage,pageSize);
+        return filmMapper.selectFilmByCondition(filmVO,currentPage,pageSize);
     }
 
     @Override
     public Film selectFilmByfid(Integer fid) {
-        return filmMapper.selectByPrimaryKey(fid);
+        Film film=filmMapper.selectByPrimaryKey(fid);
+        PaseCategory(film);
+        return film;
 }
 
     @Override
@@ -100,6 +109,29 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public void add(Film film) {
         filmMapper.insertSelective(film);
+    }
+
+    @Override
+    public List<Film> findAll() {
+        return filmMapper.selectAll();
+    }
+
+    @Override
+    public List<Film> findByFilmNameKeyword(String filmName) {
+        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
+
+        if(filmName == null || filmName.equals("")) {
+            System.out.println(1111111);
+            throw new FilmException("未找到任何数据");
+        }
+        queryBuilder.withQuery(QueryBuilders.fuzzyQuery("filmName",filmName));
+        queryBuilder.withPageable(PageRequest.of(1,10));
+        Page<Film> page = filmRepository.search(queryBuilder.build());
+        if(page.getContent().size()==0){
+            System.out.println(2222);
+            throw new FilmException("未找到任何数据");
+        }
+        return page.getContent();
     }
 
 

@@ -25,4 +25,12 @@ public interface FilmService {
 
     void add(Film film);
 
+    List<Film> findAll();
+
+    /**
+     * 关键字查找  通过Elasticsearch
+     * @param filmName
+     * @return
+     */
+    List<Film> findByFilmNameKeyword(String filmName);
 }

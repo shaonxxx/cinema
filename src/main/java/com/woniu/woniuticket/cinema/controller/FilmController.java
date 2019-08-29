@@ -27,6 +27,7 @@ public class FilmController {
      */
     @GetMapping("/film")
     public Map getFilmByfid( Integer id){
+        System.out.println(id);
         Map result = new HashMap();
         Film film = filmService.selectFilmByfid(id);
         result.put("film",film);
@@ -41,8 +42,10 @@ public class FilmController {
      * @return
      */
     @GetMapping("/filmlist")
-    public Result<PageInfo> findfilmByCondition(@RequestParam(value = "filmVO",required = false)FilmVO filmVO,@RequestParam(value ="currentPage",defaultValue = "1")Integer currentPage,
-                                   @RequestParam(value = "pageSize",defaultValue = "10")Integer pagesize){
+    public Result<PageInfo> findfilmByCondition(
+                                    @RequestParam(value = "filmVO",required = false)FilmVO filmVO,
+                                    @RequestParam(value ="currentPage",defaultValue = "1",required = true)Integer currentPage,
+                                    @RequestParam(value = "pageSize",defaultValue = "10",required = true)Integer pagesize){
         Result result = new Result();
         List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
         PageInfo<Film> pageInfo = new PageInfo<Film>(films);
@@ -107,10 +110,13 @@ public class FilmController {
                          @RequestParam(value="pageSize",defaultValue = "8",required = true) Integer pageSize){
         Result result=new Result();
         List<Film> films=filmService.selectHot(currentPage,pageSize);
-        result.setData(films);
+        PageInfo<Film> pageInfo=new PageInfo<>(films);
+
+        result.setData(pageInfo);
         result.setCode("0");
         return result;
     }
+
 
     @RequestMapping("/film/add")
     public String add(){
@@ -144,4 +150,11 @@ public class FilmController {
     }
 
 
+    @GetMapping("/keyword")
+    public PageInfo<Film> getByKeyword(String filmName){
+        System.out.println(filmName);
+       List<Film> films = filmService.findByFilmNameKeyword(filmName);
+        PageInfo<Film> pageInfo = new PageInfo<>(films);
+        return pageInfo;
+    }
 }
