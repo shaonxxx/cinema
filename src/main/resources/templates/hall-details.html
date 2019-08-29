@@ -33,9 +33,9 @@
 
         div.seatCharts-seat.focused {background-color: #76B474;border: none;}
 
-        /*div.seatCharts-seat.selected {background-color: red;}
+        div.seatCharts-seat.selected {background-color: red;}
 
-        div.seatCharts-seat.unavailable {background-color: red;cursor: not-allowed;}*/
+        div.seatCharts-seat.unavailable {background-color: red;cursor: not-allowed;}
 
         div.seatCharts-container {width: 400px;padding: 20px;float: left;}
 
@@ -54,7 +54,6 @@
         #seats_chose li{float:left; width:72px; height:26px; line-height:26px; border:1px solid #d3d3d3; background:#f7f7f7; margin:6px; font-size:14px; font-weight:bold; text-align:center}
 
     </style>
-    <script th:src="@{/js/jquery-2.1.4.js}"></script>
     <script type="text/javascript" th:src="@{/layui/layui.js}" charset="utf-8"></script>
     <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
@@ -62,6 +61,7 @@
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" th:src="@{/js/jquery-2.1.4.js}"></script>
     <script type="text/javascript" th:src="@{/js/jquery.seat-charts.js}"></script>
 </head>
 <body>
@@ -69,38 +69,51 @@
         <div >
             <div class="layui-col-md5" >
                 <h1>排片信息</h1>
+                <br/>
+                <ul class="layui-timeline" style="overflow-y:auto; overflow-x:auto; width:400px; height: 720px;">
+                    <li class="layui-timeline-item" th:each="screening:${pageInfo.list}">
 
+                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text">
+                            <h3 class="layui-timeline-title">[[${#dates.format(screening.startTime,'HH-mm-ss')}]]----[[${#dates.format(screening.endTime,'HH-mm-ss')}]]</h3>
+                            <p>
+                                [[${screening.film.filmName}]]
+                                影片信息影片信息影片信息影片信息影片信息影片信息
+                                <i class="layui-icon"></i>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="layui-col-md3">
                 <h1 >影厅座次表</h1>
-                        <div class="layui-timeline-content layui-text">
-                            <div style="margin-top: 30px;">
-                                <div class="hall-seat" >
+                <div class="layui-timeline-content layui-text">
+                    <div style="margin-top: 30px;">
+                        <div class="hall-seat" >
+                            <h2>这里是座位表</h2>
 
-                                            <h2>[[${hall.hallName}]]</h2>
+                            <div id="seat_area">
 
-                                                    <!---左边座位列表----->
+                                <div class="front">屏幕</div>
 
-                                                    <div id="seat_area">
-
-                                                        <div class="front">屏幕</div>
-
-                                                    </div>
-
-                                </div>
                             </div>
 
-                           <div style="margin-top: 30px;">
-                               <h1>总览</h1>
-                               <div class="hall-msg">
-                                   <h2>这里放映厅基本信息</h2>
 
 
-
-
-                               </div>
-                           </div>
                         </div>
+                    </div>
+
+                   <div style="margin-top: 30px;">
+                       <h1>总览</h1>
+                       <div class="hall-msg">
+                           <h2>这里放映厅基本信息</h2>
+
+
+
+
+                       </div>
+                   </div>
+                </div>
             </div>
         </div>
     </div>
@@ -153,16 +166,19 @@
 </script>
 <script th:inline="javascript">
 
-    var ary=[[${sts}]];
-
-
-
-    var seatlable=1;
-
-    var ss=1;
+    var list=[[${pageInfo.list}]]
+    var ary=[];
+    $.each(list,function (k,v) {
+        if(v.hall!=null){
+            ary=(v.hall.seatmap).split(",");
+            return false;
+        }
+    })
 
     $(document).ready(function() {
-        alert(ary);
+
+        var seatlable=1;
+        var ss=1;
 
         var $cart = $('#seats_chose'), //座位区
 
@@ -193,11 +209,9 @@
                         ss=row;
                     }
                     return seatlable++;
-
                 }
 
             },
-
 
 
         });
@@ -206,10 +220,7 @@
         /*售出的选择数据格式['1_3', '1_4', '4_4', '4_5', '4_6', '4_7', '4_8','6_1','6_2']*/
         sc.get().status('unavailable');
 
-
-
     });
-
 </script>
 <script>
     var _hmt = _hmt || [];
