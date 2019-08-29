@@ -106,17 +106,14 @@ public class FilmController {
 
     @GetMapping("/film/getHot")
     @CrossOrigin
-    public Result getHot(@RequestParam(value = "currentPage",defaultValue = "1",required = true) Integer currentPage,
+    public PageInfo getHot(@RequestParam(value = "currentPage",defaultValue = "1",required = true) Integer currentPage,
                          @RequestParam(value="pageSize",defaultValue = "8",required = true) Integer pageSize){
         Result result=new Result();
         List<Film> films=filmService.selectHot(currentPage,pageSize);
         PageInfo<Film> pageInfo=new PageInfo<>(films);
 
-        result.setData(pageInfo);
-        result.setCode("0");
-        return result;
+        return pageInfo;
     }
-
 
     @RequestMapping("/film/add")
     public String add(){
@@ -139,14 +136,13 @@ public class FilmController {
         return "成功";
     }
 
-    @GetMapping("/film/getNew/{currentPage}/{pageSize}")
-    public Result getNew(@PathVariable("currentPage") Integer currentPage,
-                         @PathVariable("pageSize") Integer pageSize){
-        Result result=new Result();
+    @GetMapping("/film/getNew")
+    public PageInfo getNew(@RequestParam(value = "currentPage",defaultValue = "1",required = true) Integer currentPage,
+                           @RequestParam(value="pageSize",defaultValue = "8",required = true) Integer pageSize){
+        System.out.println(pageSize);
         List<Film> films=filmService.selectNew(currentPage,pageSize);
-        result.setData(films);
-        result.setCode("0");
-        return result;
+        PageInfo<Film> pageInfo=new PageInfo<>(films);
+        return pageInfo;
     }
 
 

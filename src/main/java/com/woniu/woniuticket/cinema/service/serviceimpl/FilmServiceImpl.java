@@ -101,9 +101,8 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public List<Film> selectNew(Integer currentPage,Integer pageSize) {
-
-
         List<Film> films=  filmMapper.selectNew(currentPage,pageSize);
+        if(films==null)return null;
         for (Film film : films){
             PaseCategory(film);
         }
@@ -162,6 +161,7 @@ public class FilmServiceImpl implements FilmService {
             stringBuilder.deleteCharAt(stringBuilder.length()-1);
             film.setCategoryString(stringBuilder.toString());
         }
+        film.setTypenames(film.getCategoryString().split(","));
     }
 
     public void getAvgScore(Film film){
