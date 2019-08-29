@@ -136,7 +136,7 @@ public class FilmServiceImpl implements FilmService {
             throw new FilmException("未找到任何数据");
         }
         return page.getContent();
-    }
+}
 
 
 //    public void PaseCategory(Film film){

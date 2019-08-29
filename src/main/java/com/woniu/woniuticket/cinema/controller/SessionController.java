@@ -10,7 +10,6 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("/")
 public class SessionController {
     @RequestMapping(value = "/set", method = RequestMethod.GET)
     public Map<String, Object> firstResp (HttpServletRequest request){

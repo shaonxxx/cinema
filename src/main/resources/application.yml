@@ -35,7 +35,7 @@ logging:
   level:
     com.woniu.woniuticket.cinema.dao: debug
 server:
-  port: 8081
+  port: 8082
 ImgUploa_folder: /static/img/
 #注册中心注册
 eureka:
