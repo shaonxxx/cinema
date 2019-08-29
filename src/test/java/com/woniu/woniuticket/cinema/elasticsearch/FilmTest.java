@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -21,6 +22,9 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FilmTest {
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Autowired
     FilmService filmService;
@@ -83,6 +87,10 @@ public class FilmTest {
         for (Film film1 : films) {
             System.out.println(film1);
         }
+    }
 
+    @Test
+    public void testRedis(){
+        redisTemplate.opsForValue().set("aaaa","bbbb");
     }
 }
