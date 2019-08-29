@@ -17,6 +17,11 @@ spring:
     elasticsearch:
       cluster-name: my-application
       cluster-nodes: 127.0.0.1:9300
+  #redis配置
+  redis:
+    host: 148.70.167.3
+    port: 6666
+    password: 123
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
