@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -90,7 +91,7 @@ public class FilmTest {
 
     @Test
     public void testRedis(){
-        redisTemplate.opsForValue().set("aaaa","bbbb");
+        redisTemplate.opsForValue().set("aaaa","bbbb");}
     @Test
     public void testFuzzyQuery(){
         NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
