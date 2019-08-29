@@ -45,7 +45,12 @@ public class FilmCommentServiceImpl implements FilmCommentService {
 
     @Override
     public List<FilmComment> findFilmCommentsByFilmId(Integer filmId,Integer currentPage,Integer pageSize) {
-        filmCommentMapper.selectFilmCommentsByFilmCommentId(filmId,currentPage,pageSize);
-        return null;
+        try {
+            List<FilmComment> list = filmCommentMapper.selectFilmCommentsByFilmId(filmId, currentPage, pageSize);
+            return list;
+        } catch (NullPointerException e) {
+            return null;
+        }
+
     }
 }

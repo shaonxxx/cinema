@@ -1,6 +1,7 @@
 package com.woniu.woniuticket.cinema.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,5 +18,13 @@ public class ConnectConfig implements WebMvcConfigurer {
         /*registry.addViewController("/addScreening").setViewName("addScreening");*/
 /*        registry.addViewController("/login").setViewName("login");*/
 /*        registry.addViewController("/order-list").setViewName("order-list");*/
+    }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .maxAge(3600);
     }
 }

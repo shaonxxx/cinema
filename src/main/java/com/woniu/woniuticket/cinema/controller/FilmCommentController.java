@@ -50,7 +50,7 @@ public class FilmCommentController {
                                       @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
 
         Map result = new HashMap();
-        System.out.println("---------------------------------------进入评论");
+        System.out.println("-------------------------------------"+filmId+"--进入评论");
         List<FilmComment> list = filmCommentService.findFilmCommentsByFilmId(filmId, currentPage, pageSize);
         PageInfo<FilmComment> pageInfo = new PageInfo<>(list);
         result.put("code",200);

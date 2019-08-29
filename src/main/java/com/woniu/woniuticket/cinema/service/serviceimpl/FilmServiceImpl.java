@@ -165,8 +165,12 @@ public class FilmServiceImpl implements FilmService {
     }
 
     public void getAvgScore(Film film){
-       double avgScore = filmCommentMapper.selectAvgScore(film.getFilmId());
-        film.setGrage(avgScore);
+       try{
+           double avgScore = filmCommentMapper.selectAvgScore(film.getFilmId());
+           film.setGrage(avgScore);
+       }catch (NullPointerException e){
+           film.setGrage(0.0);
+       }
     }
 
 }

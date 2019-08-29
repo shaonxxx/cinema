@@ -19,7 +19,7 @@ public interface FilmCommentMapper {
 
     int updateByPrimaryKey(FilmComment record);
 
-    List<FilmComment> selectFilmCommentsByFilmCommentId(@Param("filmCommentId") Integer filmCommentId,
+    List<FilmComment> selectFilmCommentsByFilmId(@Param("filmId") Integer filmId,
                                                         @Param("currentPage") Integer currentPage,
                                                         @Param("pageSize") Integer pageSize);
 }
