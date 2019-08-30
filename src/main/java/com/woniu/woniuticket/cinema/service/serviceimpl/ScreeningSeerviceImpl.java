@@ -48,6 +48,11 @@ public class ScreeningSeerviceImpl implements ScreeningService {
     }
 
     @Override
+    public List<ScreeningDTO> findScreeningByFilmId(Integer filmId) {
+        return screeningMapper.selectScreeningByFilmId(filmId);
+    }
+
+    @Override
     public List<Screening> findScreeningByhid(Integer hid) {
 
         return  screeningMapper.selectScreeningByfid();
