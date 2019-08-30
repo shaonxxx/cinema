@@ -110,4 +110,11 @@ public class HallController {
         return result;
     }
 
+    @PutMapping("/testUpdate")
+    public String testUpdate(String state){
+        System.out.println("=============="+state);
+
+        return "200";
+    }
+
 }
