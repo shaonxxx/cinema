@@ -115,26 +115,26 @@ public class FilmController {
         return pageInfo;
     }
 
-    @RequestMapping("/film/add")
-    public String add(){
-        Film film=new Film();
-        for(int i=100;i<=200;i++){
-            film.setCovers("封面"+i);
-            film.setCategoryId(""+(i%6)+(i%7));
-            film.setDuration(60+i%50);
-            film.setFilmName("僵尸大战"+i);
-            film.setFilmStatus("0"+i);
-            film.setGrage(7.7);
-            film.setInfo("讲述了一个僵尸故事"+i);
-            film.setLanguage("中文");
-            film.setOtherStats("金刚葫芦娃，水娃，火娃"+i);
-            film.setPeopleNum(+i);
-            film.setReleseDate(new Date());
-            film.setStars("林正阴");
-            filmService.add(film);
-        }
-        return "成功";
-    }
+//    @RequestMapping("/film/add")
+//    public String add(){
+//        Film film=new Film();
+//        for(int i=100;i<=200;i++){
+//            film.setCovers("封面"+i);
+//            film.setCategoryId(""+(i%6)+(i%7));
+//            film.setDuration(60+i%50);
+//            film.setFilmName("僵尸大战"+i);
+//            film.setFilmStatus("0"+i);
+//            film.setGrage(7.7);
+//            film.setInfo("讲述了一个僵尸故事"+i);
+//            film.setLanguage("中文");
+//            film.setOtherStats("金刚葫芦娃，水娃，火娃"+i);
+//            film.setPeopleNum(+i);
+//            film.setReleseDate(new Date());
+//            film.setStars("林正阴");
+//            filmService.add(film);
+//        }
+//        return "成功";
+//    }
 
     @GetMapping("/film/getNew")
     public PageInfo getNew(@RequestParam(value = "currentPage",defaultValue = "1",required = true) Integer currentPage,
