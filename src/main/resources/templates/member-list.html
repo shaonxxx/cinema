@@ -31,8 +31,14 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5">
-                                <input id="index" type="hidden" name="index" th:value="${page.pageNum}">
+                            <form id="hideForm" method="get" action="/member/list.do">
+                                <input id="index" type="hidden" name="currentPage" th:value="${page.pageNum}">
+                                <input type="hidden" name="start" th:value="${#dates.format(con.start,'yyyy-MM-dd')}">
+                                <input type="hidden" name="end" th:value="${#dates.format(con.start,'yyyy-MM-dd')}">
+                                <input type="hidden" th:value="${con.nikeName}" name="nikeName">
+                            </form>
+                            <form id="conf" method="get" action="/member/list.do" class="layui-form layui-col-space5">
+                                <!--<input id="index" type="hidden" name="currentPage" th:value="${page.pageNum}">-->
                                 <div class="layui-inline layui-show-xs-block">
                                     <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
                                 </div>
@@ -40,10 +46,10 @@
                                     <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="nikename"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                                    <input type="text" name="nikeName"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                                    <input type="submit" class="layui-btn"   lay-filter="sreach"><i class="layui-icon">&#xe615;</i></input>
                                 </div>
                             </form>
                         </div>
@@ -69,7 +75,7 @@
                                     <th>邀请码</th>
                                       <th>头像</th>
                                       <th>状态</th>
-                                      <th>操作</th>
+                                      <!--<th>操作</th>-->
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -89,20 +95,20 @@
                                       <td th:text="${it.inviteCode}"></td>
                                       <td><img style="width: 30px;height:30px ;" th:src="${it.heading}"/></td>
                                       <td><span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-                                    <td class="td-manage">
-                                      <a onclick="member_stop(this,'10001')" href="javascript:;"  title="禁用">
-                                        <i class="layui-icon">&#xe601;</i>
-                                      </a>
-                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
-                                        <i class="layui-icon">&#xe642;</i>
-                                      </a>
-                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
-                                        <i class="layui-icon">&#xe631;</i>
-                                      </a>
-                                      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                        <i class="layui-icon">&#xe640;</i>
-                                      </a>
-                                    </td>
+                                    <!--<td class="td-manage">-->
+                                      <!--<a onclick="member_stop(this,'10001')" href="javascript:;"  title="禁用">-->
+                                        <!--<i class="layui-icon">&#xe601;</i>-->
+                                      <!--</a>-->
+                                      <!--<a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">-->
+                                        <!--<i class="layui-icon">&#xe642;</i>-->
+                                      <!--</a>-->
+                                      <!--<a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">-->
+                                        <!--<i class="layui-icon">&#xe631;</i>-->
+                                      <!--</a>-->
+                                      <!--<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">-->
+                                        <!--<i class="layui-icon">&#xe640;</i>-->
+                                      <!--</a>-->
+                                    <!--</td>-->
                                   </tr>
                                 </tbody>
                             </table>
@@ -110,12 +116,10 @@
                         <div class="layui-card-body ">
                             <div class="page">
                                 <div>
-                                  <a class="prev" href="">&lt;&lt;</a>
-                                  <a class="num" href="">1</a>
-                                  <span class="current">2</span>
-                                  <a class="num" href="">3</a>
-                                  <a class="num" href="">489</a>
-                                  <a class="next" href="">&gt;&gt;</a>
+                                  <a th:if="${page.pageNum>1}" class="prev" th:href="|javascript:jumpto(${page.prePage})|">&lt;&lt;</a>
+                                  <a th:each="index:${page.navigatepageNums}" class="num" th:href="|javascript:jumpto(${index})|">[[${index}]]</a>
+                                  <!--<a class="next" href="">&gt;&gt;</a>-->
+                                    <a th:if="${page.pageNum<page.pages}" class="prev" th:href="|javascript:jumpto(${page.pageNum+1})|">&gt;&gt;</a>
                                 </div>
                             </div>
                         </div>
@@ -126,8 +130,11 @@
     </body>
     <script>
 
-        function jumpto(i){
 
+
+        function jumpto(i){
+            $("#index").val(i);
+            $("#hideForm").submit();
         }
 
       layui.use(['laydate','form'], function(){

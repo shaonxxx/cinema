@@ -2,14 +2,19 @@ package com.woniu.woniuticket.cinema.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.woniu.woniuticket.cinema.pojo.User;
+import com.woniu.woniuticket.cinema.pojo.condition.UserCondition;
 import com.woniu.woniuticket.cinema.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.DataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -22,12 +27,15 @@ public class MemberController {
 
     @RequestMapping("/list.do")
     @ResponseBody
-    public ModelAndView showPage(@RequestParam(value="index",required = true,defaultValue = "1") Integer index,
-                                 User user){
+    public ModelAndView showPage(@RequestParam(value="currentPage",required = true,defaultValue = "1") Integer currentPage,
+                                 UserCondition condition){
         //System.out.println("123");
+        System.out.println("start:"+condition.getStart());
+        System.out.println("nikeName:"+condition.getNikeName());
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("/member-list");
-        List<User> users=memberService.selectPageCondition(index,10,user);
+        modelAndView.addObject("con",condition);
+        List<User> users=memberService.selectPageCondition(currentPage,10,condition);
         PageInfo<User> pageInfo=new PageInfo<>(users);
         System.out.println(pageInfo);
         modelAndView.addObject("page",pageInfo);
@@ -91,5 +99,11 @@ public class MemberController {
             return "更新失败";
         }
         return "更新成功";
+    }
+
+    @InitBinder
+    public void convertTime(DataBinder binder){
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class,new CustomDateEditor(simpleDateFormat,true));
     }
 }

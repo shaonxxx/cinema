@@ -9,12 +9,16 @@ import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.utils.ImgUpload;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
-@RestController
+@Controller
 @CrossOrigin
 public class FilmController {
     @Autowired
@@ -26,6 +30,7 @@ public class FilmController {
      * @return
      */
     @GetMapping("/film")
+    @ResponseBody
     public Result getFilmByfid(Integer id){
         System.out.println(id);
         Result result = new Result();
@@ -42,6 +47,7 @@ public class FilmController {
      * @return
      */
     @GetMapping("/filmlist")
+    @ResponseBody
     public Result<PageInfo> findfilmByCondition(
                                     @RequestParam(value = "filmVO",required = false)FilmVO filmVO,
                                     @RequestParam(value ="currentPage",defaultValue = "1",required = true)Integer currentPage,
@@ -63,6 +69,7 @@ public class FilmController {
      * @return
      */
     @PostMapping("/film")
+    @ResponseBody
     public Result addFilm(@RequestParam("img") MultipartFile multipartFile, Film film){
         Result result = new Result();
         System.out.println(film.getFilmName());
@@ -82,6 +89,7 @@ public class FilmController {
     }
 
     @DeleteMapping("/film")
+    @ResponseBody
     public Result removeFilms(String id){
         List<String> ids = Arrays.asList(id);
         filmService.removeFilms(ids);
@@ -95,6 +103,7 @@ public class FilmController {
 
 
     @GetMapping("/film/getRandom")
+    @ResponseBody
     public Result getRandom(Integer num){
         Result result=new Result();
         List<Film> films=filmService.selectRandom(num);
@@ -105,6 +114,7 @@ public class FilmController {
 
 
     @GetMapping("/film/getHot")
+    @ResponseBody
     @CrossOrigin
     public PageInfo getHot(@RequestParam(value = "currentPage",defaultValue = "1",required = true) Integer currentPage,
                          @RequestParam(value="pageSize",defaultValue = "8",required = true) Integer pageSize){
@@ -115,28 +125,29 @@ public class FilmController {
         return pageInfo;
     }
 
-    @RequestMapping("/film/add")
-    public String add(){
-        Film film=new Film();
-        for(int i=100;i<=200;i++){
-            film.setCovers("封面"+i);
-            film.setCategoryId(""+(i%6)+(i%7));
-            film.setDuration(60+i%50);
-            film.setFilmName("僵尸大战"+i);
-            film.setFilmStatus("0"+i);
-            film.setGrage(7.7);
-            film.setInfo("讲述了一个僵尸故事"+i);
-            film.setLanguage("中文");
-            film.setOtherStats("金刚葫芦娃，水娃，火娃"+i);
-            film.setPeopleNum(+i);
-            film.setReleseDate(new Date());
-            film.setStars("林正阴");
-            filmService.add(film);
-        }
-        return "成功";
-    }
+//    @RequestMapping("/film/add")
+//    public String add(){
+//        Film film=new Film();
+//        for(int i=100;i<=200;i++){
+//            film.setCovers("封面"+i);
+//            film.setCategoryId(""+(i%6)+(i%7));
+//            film.setDuration(60+i%50);
+//            film.setFilmName("僵尸大战"+i);
+//            film.setFilmStatus("0"+i);
+//            film.setGrage(7.7);
+//            film.setInfo("讲述了一个僵尸故事"+i);
+//            film.setLanguage("中文");
+//            film.setOtherStats("金刚葫芦娃，水娃，火娃"+i);
+//            film.setPeopleNum(+i);
+//            film.setReleseDate(new Date());
+//            film.setStars("林正阴");
+//            filmService.add(film);
+//        }
+//        return "成功";
+//    }
 
     @GetMapping("/film/getNew")
+    @ResponseBody
     public PageInfo getNew(@RequestParam(value = "currentPage",defaultValue = "1",required = true) Integer currentPage,
                            @RequestParam(value="pageSize",defaultValue = "8",required = true) Integer pageSize){
         System.out.println(pageSize);
@@ -146,9 +157,26 @@ public class FilmController {
     }
 
     @GetMapping("/keyword")
+    @ResponseBody
     public Map getByKeyword(String keyword){
         System.out.println(keyword);
         Map result = filmService.findByKeyword(keyword);
         return result;
     }
+
+    @GetMapping("/film/showList")
+    public ModelAndView showList(
+            @RequestParam(value = "filmVO",required = false)FilmVO filmVO,
+            @RequestParam(value ="currentPage",defaultValue = "1",required = true)Integer currentPage,
+            @RequestParam(value = "pageSize",defaultValue = "10",required = true)Integer pagesize){
+        List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
+        ModelAndView modelAndView=new ModelAndView();
+
+        PageInfo<Film> pageInfo = new PageInfo<Film>(films);
+        modelAndView.addObject("page",pageInfo);
+        modelAndView.setViewName("/film-list");
+        return modelAndView;
+    }
+
+
 }

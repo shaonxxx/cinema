@@ -21,9 +21,21 @@
   </sql>
   <select id="selectPageCondition" resultMap="BaseResultMap">
     select * from user where user_state= 0
-    <if test="user!=null">
+    <choose>
+      <when test="start!= null and end==null">
+        and regist_time > #{start}
+      </when>
+      <when test="start== null and end!=null">
+        and #{end} > regist_time
+      </when>
+      <when test="start!= null and end!=null">
+        and regist_time between #{start} and #{end}
+      </when>
+    </choose>
+      <if test="nikeName!=null">
+         and nickname like CONCAT('%',#{nikeName},'%')
+      </if>
 
-    </if>
   </select>
   <update id="updateActive">
     update user set user_state=#{state} where user_id=#{id}
