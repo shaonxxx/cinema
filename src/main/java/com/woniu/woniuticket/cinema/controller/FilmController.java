@@ -174,6 +174,7 @@ public class FilmController {
 
         PageInfo<Film> pageInfo = new PageInfo<Film>(films);
         modelAndView.addObject("page",pageInfo);
+        modelAndView.addObject("con",filmVO);
         modelAndView.setViewName("/film-list");
         return modelAndView;
     }
