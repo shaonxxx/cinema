@@ -46,7 +46,6 @@ public class ScreeningController {
                                        @RequestParam(value = "currentPage",defaultValue = "1")Integer currentPage,
                                        @RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize){
         ModelAndView mv = new ModelAndView(resUrl);
-       /* ModelAndView mv = new ModelAndView(resUrl);*/
         System.out.println(screeningVO.getFilmId());
         List<ScreeningDTO> list = screeningService.findScreeningByCondition(screeningVO, currentPage, pageSize);
         PageInfo<ScreeningDTO> pageInfo = new PageInfo<>(list);

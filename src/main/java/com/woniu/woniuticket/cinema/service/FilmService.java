@@ -4,6 +4,7 @@ import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FilmService {
 
@@ -29,8 +30,8 @@ public interface FilmService {
 
     /**
      * 关键字查找  通过Elasticsearch
-     * @param filmName
+     * @param keyword
      * @return
      */
-    List<Film> findByFilmNameKeyword(String filmName);
+    Map findByKeyword(String keyword);
 }

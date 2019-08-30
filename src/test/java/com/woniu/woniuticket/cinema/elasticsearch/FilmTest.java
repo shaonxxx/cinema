@@ -1,7 +1,10 @@
 package com.woniu.woniuticket.cinema.elasticsearch;
 
+import com.woniu.woniuticket.cinema.dao.FilmCommentMapper;
 import com.woniu.woniuticket.cinema.pojo.Film;
+import com.woniu.woniuticket.cinema.pojo.FilmComment;
 import com.woniu.woniuticket.cinema.repository.FilmRepository;
+import com.woniu.woniuticket.cinema.service.FilmCommentService;
 import com.woniu.woniuticket.cinema.service.FilmService;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -10,13 +13,18 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -34,6 +42,14 @@ public class FilmTest {
 
     @Autowired
     FilmRepository filmRepository;
+    @Autowired
+    FilmCommentMapper filmCommentMapper;
+
+    @Autowired
+    FilmCommentService filmCommentService;
+
+    @Value("${template.path}")
+    private String path;
 
     @Test
     public void testCreateIndex(){
@@ -104,4 +120,46 @@ public class FilmTest {
         }
     }
 
-}
+    @Test
+    public void testselectComment(){
+        List<FilmComment> list = filmCommentMapper.selectFilmCommentsByFilmId(1, 1, 8);
+
+        for (FilmComment filmComment : list) {
+            System.out.println(filmComment.getContent());
+        }
+    }
+    @Autowired
+    private TemplateEngine engine;
+
+    @Test
+    public void test05(){
+        try {
+            List<Film> films=filmService.findAll();
+            for (Film film : films) {
+                Film film1=filmService.selectFilmByfid(film.getFilmId());
+                List<FilmComment> filmComments=filmCommentService.findFilmCommentsByFilmId(film.getFilmId(),1,4);
+                List<Film> recommends=filmService.selectRandom(9);
+                Context context = new Context();
+                if(filmComments==null){
+                    context.setVariable("filmComments",filmComments);
+                }
+                context.setVariable("film",film1);
+                context.setVariable("recommends",recommends);
+
+                File file = new File(path);//目录d:/template/goodsDetail
+                if(!file.exists()){
+                    file.mkdirs();
+                }
+
+                File f = new File(file,film.getFilmId()+".html");//参数1是文件的路径，参数2是文件名称
+                FileWriter writer = null;
+                    writer = new FileWriter(f);
+                engine.process("dilates",context,writer);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    }
+

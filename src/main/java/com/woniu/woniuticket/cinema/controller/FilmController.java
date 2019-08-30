@@ -145,13 +145,11 @@ public class FilmController {
         return pageInfo;
     }
 
-
     @GetMapping("/keyword")
-    public PageInfo<Film> getByKeyword(String filmName){
-        System.out.println(filmName);
-       List<Film> films = filmService.findByFilmNameKeyword(filmName);
-        PageInfo<Film> pageInfo = new PageInfo<>(films);
-        return pageInfo;
+    public Map getByKeyword(String keyword){
+        System.out.println(keyword);
+        Map result = filmService.findByKeyword(keyword);
+        return result;
     }
 
 //    @GetMapping("/filmlist")

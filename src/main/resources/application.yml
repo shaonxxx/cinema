@@ -16,7 +16,7 @@ spring:
   data:
     elasticsearch:
       cluster-name: my-application
-      cluster-nodes: 127.0.0.1:9300
+      cluster-nodes: 148.70.167.3:9300
   #redis配置
   redis:
     host: 148.70.167.3
@@ -36,7 +36,8 @@ logging:
     com.woniu.woniuticket.cinema.dao: debug
 server:
   port: 8081
-ImgUploa_folder: /static/img/
+template:
+  path: e:\template\
 #注册中心注册
 eureka:
   client:

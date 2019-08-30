@@ -2,6 +2,7 @@ package com.woniu.woniuticket.cinema.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
@@ -14,4 +15,5 @@ public class MVCconfig  {
         internalResourceViewResolver.setSuffix(".html");
         return internalResourceViewResolver;
     }
+
 }
