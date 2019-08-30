@@ -31,19 +31,25 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <form id="conf" method="get" action="/member/list.do" class="layui-form layui-col-space5">
+                            <form id="hideForm" method="get" action="/member/list.do">
                                 <input id="index" type="hidden" name="currentPage" th:value="${page.pageNum}">
+                                <input type="hidden" name="start" th:value="${#dates.format(con.start,'yyyy-MM-dd')}">
+                                <input type="hidden" name="end" th:value="${#dates.format(con.start,'yyyy-MM-dd')}">
+                                <input type="hidden" th:value="${con.nikeName}" name="nikeName">
+                            </form>
+                            <form id="conf" method="get" action="/member/list.do" class="layui-form layui-col-space5">
+                                <!--<input id="index" type="hidden" name="currentPage" th:value="${page.pageNum}">-->
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input" th:value="${#dates.format(con.start,'yyyy-MM-dd')}"  autocomplete="off" placeholder="开始日" name="start" id="start">
+                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input" th:value="${#dates.format(con.end,'yyyy-MM-dd')}"  autocomplete="off" placeholder="截止日" name="end" id="end">
+                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" th:value="${con.nikeName}" name="nikeName"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                                    <input type="text" name="nikeName"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <button class="layui-btn"  lay-submit="/member/list.do" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                                    <input type="submit" class="layui-btn"   lay-filter="sreach"><i class="layui-icon">&#xe615;</i></input>
                                 </div>
                             </form>
                         </div>
@@ -125,11 +131,10 @@
     <script>
 
 
-        function jumpto(i){
 
+        function jumpto(i){
             $("#index").val(i);
-            //alert($("#index").val());
-            $("#conf").submit();
+            $("#hideForm").submit();
         }
 
       layui.use(['laydate','form'], function(){
