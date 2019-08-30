@@ -39,22 +39,30 @@
                 </div>
                 <div class="layui-col-sm12 layui-col-md6">
                     <div class="layui-card">
+                        <div class="layui-card-header">最新一周PV/UV量</div>
+                        <div class="layui-card-body" style="min-height: 280px;">
+                            <div id="main21" class="layui-col-sm12" style="height: 300px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="layui-col-sm12 layui-col-md6">
+                    <div class="layui-card">
                         <div class="layui-card-header">用户来源</div>
                         <div class="layui-card-body" style="min-height: 280px;">
                             <div id="main3" class="layui-col-sm12" style="height: 300px;"></div>
 
                         </div>
                     </div>
-                </div>
-                <div class="layui-col-sm12 layui-col-md6">
+                </div>-->
+<!--                <div class="layui-col-sm12 layui-col-md6">
                     <div class="layui-card">
                         <div class="layui-card-header">硬盘使用量</div>
                         <div class="layui-card-body" style="min-height: 280px;">
                             <div id="main4" class="layui-col-sm12" style="height: 300px;"></div>
-
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
         </div>
@@ -92,14 +100,64 @@
         };
 
 
+
+
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main2'));
-
+        var myChart1 = echarts.init(document.getElementById('main21'));
         // 指定图表的配置项和数据
         var option = {
+            tooltip : {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            grid: {
+                top: '5%',
+                right: '2%',
+                left: '1%',
+                bottom: '10%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : ['周一','周二','周三','周四','周五','周六','周日']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'PV',
+                    type:'line',
+                    areaStyle: {normal: {}},
+                    data:[120, 132, 101, 134, 90, 230, 210],
+                    smooth: true
+                },
+                {
+                    name:'UV',
+                    type:'line',
+                    areaStyle: {normal: {}},
+                    data:[45, 182, 191, 234, 290, 330, 310],
+                    smooth: true,
+
+                }
+            ]
+        };
+        //男女比例
+        var option2 = {
             tooltip : {
                 trigger: 'axis',
                 axisPointer: {
@@ -150,10 +208,11 @@
 
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
+        myChart1.setOption(option2);
 
 
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main3'));
+        /*var myChart = echarts.init(document.getElementById('main3'));
 
         // 指定图表的配置项和数据
         var option = {
@@ -213,7 +272,7 @@
             ]
         };
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+        myChart.setOption(option);*/
     </script>
     <script>
         var _hmt = _hmt || [];

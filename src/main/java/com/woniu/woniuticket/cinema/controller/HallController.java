@@ -111,6 +111,8 @@ public class HallController {
     }
 
     @PutMapping("/testUpdate")
+    @ResponseBody
+    @CrossOrigin
     public String testUpdate(String state){
         System.out.println("=============="+state);
 
