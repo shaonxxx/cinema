@@ -1,5 +1,6 @@
 package com.woniu.woniuticket.cinema.service.serviceimpl;
 
+import com.github.pagehelper.PageInfo;
 import com.woniu.woniuticket.cinema.dao.CategoryMapper;
 import com.woniu.woniuticket.cinema.dao.FilmCommentMapper;
 import com.woniu.woniuticket.cinema.dao.FilmMapper;
@@ -120,22 +121,31 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<Film> findByFilmNameKeyword(String filmName) {
+    public Map findByKeyword(String keyword) {
+        Map map = new HashMap();
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-
-        if(filmName == null || filmName.equals("")) {
+        if(keyword == null || keyword.equals("")) {
             System.out.println(1111111);
             throw new FilmException("未找到任何数据");
         }
-        queryBuilder.withQuery(QueryBuilders.fuzzyQuery("filmName",filmName));
+        //关键字搜索影片
+        queryBuilder.withQuery(QueryBuilders.fuzzyQuery("filmName",keyword));
         queryBuilder.withPageable(PageRequest.of(1,10));
         Page<Film> page = filmRepository.search(queryBuilder.build());
-        if(page.getContent().size()==0){
-            System.out.println(2222);
+        PageInfo<Film> pageByName = new PageInfo<>(page.getContent());
+        map.put("pageByName",pageByName);
+        //关键字搜索主角
+        queryBuilder.withQuery(QueryBuilders.fuzzyQuery("stars",keyword));
+        queryBuilder.withPageable(PageRequest.of(1,10));
+        Page<Film> page1=filmRepository.search(queryBuilder.build());
+        PageInfo<Film> pageByStars = new PageInfo<>(page1.getContent());
+        map.put("pageByStars",pageByStars);
+        if(page.getSize()==0 && page1.getSize()==0){
             throw new FilmException("未找到任何数据");
         }
-        return page.getContent();
-}
+
+        return map;
+    }
 
 
 //    public void PaseCategory(Film film){

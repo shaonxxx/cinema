@@ -2,6 +2,7 @@ package com.woniu.woniuticket.cinema.service.serviceimpl;
 
 import com.woniu.woniuticket.cinema.dao.UserMapper;
 import com.woniu.woniuticket.cinema.pojo.User;
+import com.woniu.woniuticket.cinema.pojo.condition.UserCondition;
 import com.woniu.woniuticket.cinema.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ public class MemberServiceImpl implements MemberService {
     UserMapper userMapper;
 
     @Override
-    public List<User> selectPageCondition(Integer currentPage, Integer pageSize, User user) {
-        return userMapper.selectPageCondition(currentPage,pageSize,user);
+    public List<User> selectPageCondition(Integer currentPage, Integer pageSize, UserCondition condition) {
+        return userMapper.selectPageCondition(currentPage,pageSize,condition.getStart(),condition.getEnd(),condition.getNikeName());
     }
 
     @Override

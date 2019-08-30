@@ -1,6 +1,7 @@
 package com.woniu.woniuticket.cinema.service;
 
 import com.woniu.woniuticket.cinema.pojo.User;
+import com.woniu.woniuticket.cinema.pojo.condition.UserCondition;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface MemberService {
      * @param user
      * @return
      */
-    public List<User> selectPageCondition(Integer currentPage,Integer pageSize,User user);
+    public List<User> selectPageCondition(Integer currentPage, Integer pageSize, UserCondition condition);
 
 
     public void changeActive(Integer id,Integer state);
