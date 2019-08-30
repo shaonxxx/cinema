@@ -22,4 +22,7 @@ public interface ScreeningService {
     public int updateScreening(Screening screening);
 
     List<Screening> findScreeningByhid(Integer hid);
+
+    List<ScreeningDTO> findScreeningByFilmId(Integer filmId);
+
 }

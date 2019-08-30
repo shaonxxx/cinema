@@ -7,7 +7,7 @@ spring:
   mvc:
     date-format: yyyy-MM-dd
   jackson:
-    date-format: yyyy-MM-dd
+    date-format: yyyy-MM-dd HH:mm
   application:
     name: cinema-m
   resources:
@@ -35,20 +35,20 @@ logging:
   level:
     com.woniu.woniuticket.cinema.dao: debug
 server:
-  port: 8081
+  port: 8088
 template:
   path: e:\template\
 #注册中心注册
 eureka:
   client:
     service-url:
-      defaultZone: http://106.52.231.180:8761/eureka,http://106.52.231.180:8762/eureka
+      defaultZone: http://192.168.10.53:8761/eureka,http://192.168.10.53:8762/eureka
 #内网穿透配置
-  instance:
-    hostname: 263g03u837.wicp.vip:35981
-    status-page-url: http://${eureka.instance.hostname}
-    instance-id: http://${eureka.instance.hostname}
-    ip-address: ${eureka.instance.hostname}
+#  instance:
+#    hostname: 263g03u837.wicp.vip:35981
+#    status-page-url: http://${eureka.instance.hostname}
+#    instance-id: http://${eureka.instance.hostname}
+#    ip-address: ${eureka.instance.hostname}
 #微服务访问feign
 feign:
   hystrix:
