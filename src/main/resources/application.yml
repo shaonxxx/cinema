@@ -9,7 +9,7 @@ spring:
   jackson:
     date-format: yyyy-MM-dd
   application:
-    name: cinema-m
+    name: cinema-mp
   resources:
     static-locations: classpath:/templates/,classpath:/static/
   #Elasticsearch配置

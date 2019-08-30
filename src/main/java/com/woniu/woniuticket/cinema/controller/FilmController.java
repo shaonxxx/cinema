@@ -153,4 +153,20 @@ public class FilmController {
         PageInfo<Film> pageInfo = new PageInfo<>(films);
         return pageInfo;
     }
+
+//    @GetMapping("/filmlist")
+//    public Result<PageInfo> findfilmByCondition(
+//            @RequestParam(value = "filmVO",required = false)FilmVO filmVO,
+//            @RequestParam(value ="currentPage",defaultValue = "1",required = true)Integer currentPage,
+//            @RequestParam(value = "pageSize",defaultValue = "10",required = true)Integer pagesize){
+//        Result result = new Result();
+//        List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
+//        PageInfo<Film> pageInfo = new PageInfo<Film>(films);
+//        result.setCode("200");
+//        result.setMessage("查询成功");
+//        result.setData(pageInfo);
+//        return result;
+//    }
+
+
 }
