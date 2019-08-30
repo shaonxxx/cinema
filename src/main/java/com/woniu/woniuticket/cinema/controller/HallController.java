@@ -119,4 +119,9 @@ public class HallController {
         return "200";
     }
 
+    @GetMapping("skipAddHall")
+    public String skipAddHall(int id){
+        return "addHall";
+    }
+
 }
