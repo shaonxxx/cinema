@@ -8,6 +8,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         <link rel="stylesheet" href="css/timestyles.css">
+        <link rel="stylesheet" th:href="@{/css/layui.css}">
+        <script type="text/javascript" th:src="@{/js/layui.all.js}"></script>
+        <script th:src="@{/layui/layui.js}" type="text/javascript"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.timelinr-0.9.7.js"></script>
         <script type="text/javascript">
@@ -17,42 +20,39 @@
         </script>
     </head>
     <body id="introduction">
-    <div class="demotips">排片时间戳</div>
+    <div class="demotips">[[${pageInfo.list[0].hall.hallName}]]排片管理</div>
     <div id="container" class="content clearfix">
         <div id="timeline">
             <ul id="dates">
-                <li><a href="#1900">15:30:00</a></li>
-                <li><a href="#1944">16:30:00</a></li>
-                <li><a href="#1950">17:30:00</a></li>
-                <li><a href="#1971">18:30:00</a></li>
-                <li><a href="#1999">19:30:00</a></li>
-                <li><a href="#2001">20:30:00</a></li>
-                <li><a href="#2011">21:30:00</a></li>
+                <li th:each="screening:${pageInfo.list}">
+                    <a th:href="|#${screening.chipId}|">[[${#dates.format(screening.startTime,'MM-dd HH:mm:ss')}]]</a>
+                </li>
             </ul>
             <ul id="issues">
-                <li id="1900"><!--@{/images/nezha.png}-->
-                    <img th:src="@{/images/nezha.png}" width="256" height="256" />
-                    <div class="filmName">哪吒之魔童降世</div>
-                   	<div class="filmSub">
-						<div class="filmTime">
-							播放时间：2019-08-28 15:30:00 -- 19:30:00
-						</div>
-						<div class="filmeLong">
-							播放时长：134分钟
-						</div>
-						<div class="filmePrice">
-							当前票价：134 RMB
-						</div>
-						<div class="caozuo">
-							操作：<button>修改</button><button>修改</button><button>修改</button>
-						</div>
-					</div>
-                </li>
-                <li id="1944">
-                    <img th:src="@{/images/1.png}" width="256" height="256" />
-                    <h1>1944</h1>
-                    <p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p>
-                </li>
+                <div th:each="screening:${pageInfo.list}">
+                    <li th:id="${screening.chipId}" >
+                        <img th:src="${screening.film.covers}" width="256" height="256" />
+                        <div class="filmName">[[${screening.film.filmName}]]</div>
+                        <div class="filmSub">
+                            <div class="filmTime">
+                                播放时间：[[${#dates.format(screening.startTime,'MM-dd HH:mm:ss')}]]----[[${#dates.format(screening.endTime,'HH:mm:ss')}]]
+                            </div>
+                            <div class="filmeLong">
+                                播放时长：[[${screening.film.duration}]] 分钟
+                            </div>
+                            <div class="filmelanguage">
+                                播放语言：[[${screening.film.language}]]
+                            </div>
+                            <div class="filmePrice">
+                                当前票价：[[${screening.price}]] RMB
+                            </div>
+                            <div class="caozuo">
+                                操作：  <button type="button"  class="layui-btn layui-btn-radius layui-btn-normal">修改</button>
+                                        <button type="button" class="layui-btn layui-btn-radius layui-btn-danger">删除</button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
             </ul>
             <div id="grad_left"></div>
             <div id="grad_right"></div>
@@ -60,61 +60,30 @@
             <a href="#" id="prev">-</a>
         </div>
     </div>
+    <div class="Screening">
+        <div class="add">
+            <div class="layui-btn-group">
+                <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+            </div>
+            <div class="add-text">
+
+                    <div class="layui-form">
+                        <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                            选择时间：
+                            <select name="city" lay-verify="">
+                                <option value="">请选择一个城市</option>
+                                <option value="010">北京</option>
+                                <option value="021">上海</option>
+                                <option value="0571">杭州</option>
+                            </select>
+                    </div>
+            </div>
+        </div>
+    </div>
 
 
-       <!-- <script>
-            $(function() {
-                $("timeline").timeline({
-                    orientation:'horizontal'
-                })});
-
-        </script>
-        <script>layui.use(['form', 'layer','jquery'],
-            function() {
-                $ = layui.jquery;
-                var form = layui.form,
-                layer = layui.layer;
-
-                //自定义验证规则
-                form.verify({
-                    nikename: function(value) {
-                        if (value.length < 5) {
-                            return '昵称至少得5个字符啊';
-                        }
-                    },
-                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
-                    repass: function(value) {
-                        if ($('#L_pass').val() != $('#L_repass').val()) {
-                            return '两次密码不一致';
-                        }
-                    }
-                });
-
-                //监听提交
-                form.on('submit(add)',
-                function(data) {
-                    console.log(data);
-                    //发异步，把数据提交给php
-                    layer.alert("增加成功", {
-                        icon: 6
-                    },
-                    function() {
-                        //关闭当前frame
-                        xadmin.close();
-
-                        // 可以对父窗口进行刷新 
-                        xadmin.father_reload();
-                    });
-                    return false;
-                });
-
-            });</script>
-        <script>var _hmt = _hmt || []; (function() {
-                var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-                var s = document.getElementsByTagName("script")[0];
-                s.parentNode.insertBefore(hm, s);
-            })();</script>-->
     </body>
 
 </html>

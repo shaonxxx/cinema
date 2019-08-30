@@ -16,7 +16,7 @@ spring:
   data:
     elasticsearch:
       cluster-name: my-application
-      cluster-nodes: 127.0.0.1:9300
+      cluster-nodes: 148.70.167.3:9300
   #redis配置
   redis:
     host: 148.70.167.3
