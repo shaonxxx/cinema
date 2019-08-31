@@ -53,7 +53,7 @@ eureka:
     service-url:
 #      defaultZone: http://148.70.167.3:8761/eureka/,http://148.70.167.3:8762/eureka/
 #      defaultZone: http://106.52.231.180:8761/eureka,http://106.52.231.180:8762/eureka
-      defaultZone: http://localhost:8761/eureka,http://localhost:8762/eureka
+      defaultZone: http://192.168.10.56:8761/eureka,http://192.168.10.56:8762/eureka
 
 #内网穿透配置
 #  instance:
