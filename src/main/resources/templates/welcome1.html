@@ -32,12 +32,21 @@
                     <div class="layui-card">
                         <div class="layui-card-header">最新一周PV/UV量</div>
                         <div class="layui-card-body" style="min-height: 280px;">
-                            <div id="main2" class="layui-col-sm12" style="height: 300px;"></div>
+                            <div name="main2" class="layui-col-sm12" style="height: 300px;"></div>
 
                         </div>
                     </div>
                 </div>
                 <div class="layui-col-sm12 layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">最新一周PV/UV量</div>
+                        <div class="layui-card-body" style="min-height: 280px;">
+                            <div name="main2" class="layui-col-sm12" style="height: 300px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="layui-col-sm12 layui-col-md6">
                     <div class="layui-card">
                         <div class="layui-card-header">用户来源</div>
                         <div class="layui-card-body" style="min-height: 280px;">
@@ -45,16 +54,15 @@
 
                         </div>
                     </div>
-                </div>
-                <div class="layui-col-sm12 layui-col-md6">
+                </div>-->
+<!--                <div class="layui-col-sm12 layui-col-md6">
                     <div class="layui-card">
                         <div class="layui-card-header">硬盘使用量</div>
                         <div class="layui-card-body" style="min-height: 280px;">
                             <div id="main4" class="layui-col-sm12" style="height: 300px;"></div>
-
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
         </div>
@@ -96,7 +104,12 @@
         myChart.setOption(option);
 
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main2'));
+        var elements =document.getElementsByName('main2')
+        var myChart;
+        for(var i in elements){
+            myChart[i]= echarts.init(elements[i]);
+        }
+
 
         // 指定图表的配置项和数据
         var option = {
@@ -149,7 +162,10 @@
 
 
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+        for(var i in myChart){
+            myChart[i].setOption(option);
+        }
+
 
 
         // 基于准备好的dom，初始化echarts实例

@@ -111,10 +111,16 @@ public class HallController {
     }
 
     @PutMapping("/testUpdate")
-    public String testUpdate(String state){
-        System.out.println("=============="+state);
-
-        return "200";
+    @ResponseBody
+    @CrossOrigin
+    public Result testUpdate(Integer chipId,String state){
+        // 根据排片Id关闭或打开放映厅状态
+        if (state.equals("true")){
+            state = "1";
+        }else {
+            state = "0";
+        }
+        return hallService.updateHallStateByChipId(chipId,state);
     }
 
 }
