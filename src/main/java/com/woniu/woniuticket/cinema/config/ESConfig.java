@@ -5,11 +5,10 @@ import com.woniu.woniuticket.cinema.repository.FilmRepository;
 import com.woniu.woniuticket.cinema.service.FilmService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-@Configuration
+//@Configuration
 public class ESConfig implements InitializingBean {
 
     @Autowired

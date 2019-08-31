@@ -9,12 +9,16 @@ import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.utils.ImgUpload;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.DataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -166,18 +170,31 @@ public class FilmController {
 
     @GetMapping("/film/showList")
     public ModelAndView showList(
-            @RequestParam(value = "filmVO",required = false)FilmVO filmVO,
+            FilmVO filmVO,//@RequestParam(value = "filmVO",required = false)
             @RequestParam(value ="currentPage",defaultValue = "1",required = true)Integer currentPage,
             @RequestParam(value = "pageSize",defaultValue = "10",required = true)Integer pagesize){
+
+
         List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
         ModelAndView modelAndView=new ModelAndView();
 
         PageInfo<Film> pageInfo = new PageInfo<Film>(films);
         modelAndView.addObject("page",pageInfo);
-        modelAndView.addObject("con",filmVO);
+        if(filmVO!=null){
+//            System.out.println("名字"+filmVO.getFilmName());
+//            System.out.println("地区:"+filmVO.getLocal());
+//            System.out.println("上映时间:"+filmVO.getReleseDate());
+            modelAndView.addObject("con",filmVO);
+        }
+
         modelAndView.setViewName("/film-list");
         return modelAndView;
     }
 
+    @InitBinder
+    public void yearConvers(DataBinder binder){
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class,new CustomDateEditor(dateFormat,true));
+    }
 
 }

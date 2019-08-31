@@ -24,9 +24,9 @@
           and film_name like '%' #{filmVO.filmName} '%'
         </if>
         <if test="filmVO.stars != null and filmVO.stars != ''">
-          and film_stars like '%' #{filmVO.stars} '%'
+          and stars like '%' #{filmVO.stars} '%'
         </if>
-        <if test="filmVO.releseDate != null and filmVO.releseDate != ''">
+        <if test="filmVO.releseDate != null">
 --           and relese_date = #{filmVO.releseDate}
           and DATE_FORMAT(relese_date,'%Y') =  DATE_FORMAT(#{filmVO.releseDate},'%Y')
         </if>

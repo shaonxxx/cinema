@@ -31,13 +31,13 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <!--<form id="hideForm" method="get" action="/film/showListlist">-->
-                        <!--<input id="index" type="hidden" name="currentPage" th:value="${page.pageNum}">-->
-                        <!--<input type="hidden" name="start" th:value="${#dates.format(con.start,'yyyy-MM-dd')}">-->
-                        <!--<input type="hidden" name="end" th:value="${#dates.format(con.start,'yyyy-MM-dd')}">-->
-                        <!--<input type="hidden" th:value="${con.nikeName}" name="nikeName">-->
-                    <!--</form>-->
-                    <form id="conf" method="get" action="film/showList" class="layui-form layui-col-space5">
+                    <form id="hideForm" method="get" action="/film/showList">
+                        <input id="index" type="hidden" name="currentPage" th:value="${page.pageNum}">
+                        <!--<input type="hidden" name="releseDate" th:value="${#dates.format(con.releseDate,'yyyy-MM-dd')}">-->
+                        <input type="hidden" name="stars" th:value="${con.stars}">
+                        <input type="hidden" th:value="${con.filmName}" name="filmName">
+                    </form>
+                    <form id="conf" method="get" action="/film/showList" class="layui-form layui-col-space5">
                         <!--<input id="index" type="hidden" name="currentPage" th:value="${page.pageNum}">-->
                         <div class="layui-inline layui-show-xs-block">
                             <input class="layui-input"  autocomplete="off" placeholder="查找上映年份（1999）" name="releseDate">
@@ -46,10 +46,10 @@
                             <input class="layui-input"  autocomplete="off" placeholder="查找主演" name="stars">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="filmName"  placeholder="查找用户名" autocomplete="off" class="layui-input">
+                            <input type="text" name="filmName"  placeholder="查找影片名" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="submit" class="layui-btn"   lay-filter="sreach"></input>
+                            <input type="submit" class="layui-btn"   lay-filter="sreach" >
                         </div>
                     </form>
                 </div>
@@ -84,13 +84,13 @@
                             <td>
                                 <input type="checkbox" name="filmId" th:value="${it.filmId}"   lay-skin="primary">
                             </td>
-                            <td th:text="${i.count}"></td><!---->
+                            <td th:text="${i.count+(page.pageNum-1)*page.size}"></td><!---->
                             <td th:text="${it.filmName}"></td><!---->
                             <td th:text="${it.local}"></td><!---->
                             <td th:text="${it.stars}"></td><!---->
-                            <td th:text="${it.duration}"></td><!--时长-->
-                            <td th:text="${it.grage}"></td><!---->
-                            <td th:text="${it.peopleNum}"></td><!---->
+                            <td th:text="|${it.duration}分钟|"></td><!--时长-->
+                            <td th:text="|${it.grage}分|"></td><!---->
+                            <td th:text="|${it.peopleNum}人观看|"></td><!---->
                             <td th:text="${#dates.format(it.releseDate,'yyyy-MM-dd')}"></td><!---->
                             <td th:text="${it.language}"></td><!---->
                             <td th:text="${it.otherStats}"></td><!---->
