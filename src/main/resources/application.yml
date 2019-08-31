@@ -7,9 +7,9 @@ spring:
   mvc:
     date-format: yyyy-MM-dd
   jackson:
-    date-format: yyyy-MM-dd
+    date-format: yyyy-MM-dd HH:mm
   application:
-    name: cinema-mp
+    name: cinema-m
   resources:
     static-locations: classpath:/templates/,classpath:/static/
   #Elasticsearch配置
@@ -35,7 +35,7 @@ logging:
   level:
     com.woniu.woniuticket.cinema.dao: debug
 server:
-  port: 8081
+  port: 8085
 template:
   path: e:\template\
 #注册中心注册

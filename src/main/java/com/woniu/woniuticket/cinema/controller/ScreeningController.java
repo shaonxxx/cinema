@@ -89,4 +89,15 @@ public class ScreeningController {
         }
         return result;
     }
+
+    @GetMapping("/screening/film/{filmId}")
+    public Map getScreeningByFilmId(@PathVariable("filmId") Integer filmId){
+        Map result = new HashMap();
+        List<ScreeningDTO> list = screeningService.findScreeningByFilmId(filmId);
+        result.put("data",list);
+        for (ScreeningDTO screeningDTO : list) {
+            System.out.println(screeningDTO.getStartTime());
+        }
+        return result;
+    }
 }

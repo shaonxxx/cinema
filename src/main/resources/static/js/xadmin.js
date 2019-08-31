@@ -86,9 +86,9 @@
 	    if (h == null || h == '') {
 	        var h=($(window).height() - 50);
 	    };
-        if (id == null || id == '') {
+        /*if (id == null || id == '') {
             var url="404.html";
-        };
+        };*/
 	    var index = layer.open({
 	        type: 2,
 	        area: [w+'px', h +'px'],

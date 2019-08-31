@@ -1,5 +1,6 @@
 package com.woniu.woniuticket.cinema.dao;
 
+import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
 import com.woniu.woniuticket.cinema.pojo.Screening;
 import com.woniu.woniuticket.cinema.vo.ScreeningVO;
 import org.apache.ibatis.annotations.Param;
@@ -42,4 +43,6 @@ public interface ScreeningMapper {
     void deleteScreenings(List<String> ids);
 
     List<Screening> selectScreeningByfid();
+
+    List<ScreeningDTO> selectScreeningByFilmId(Integer filmId);
 }

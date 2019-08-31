@@ -1,5 +1,6 @@
 package com.woniu.woniuticket.cinema.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.woniu.woniuticket.cinema.pojo.Cinema;
 import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.pojo.Hall;
@@ -10,8 +11,9 @@ public class ScreeningDTO {
 
     private Integer chipId;
 
+    @JsonFormat(timezone = "GMT+8",pattern = "HH:mm")
     private Date startTime;
-
+    @JsonFormat(timezone = "GMT+8",pattern = "HH:mm")
     private Date endTime;
 
     private Film film;

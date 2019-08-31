@@ -1,8 +1,11 @@
 package com.woniu.woniuticket.cinema.elasticsearch;
 
+import com.github.pagehelper.PageInfo;
+import com.woniu.woniuticket.cinema.client.OrderClient;
 import com.woniu.woniuticket.cinema.dao.FilmCommentMapper;
 import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.pojo.FilmComment;
+import com.woniu.woniuticket.cinema.pojo.Order;
 import com.woniu.woniuticket.cinema.repository.FilmRepository;
 import com.woniu.woniuticket.cinema.service.FilmCommentService;
 import com.woniu.woniuticket.cinema.service.FilmService;
@@ -48,8 +51,12 @@ public class FilmTest {
     @Autowired
     FilmCommentService filmCommentService;
 
+    @Autowired
+    OrderClient orderClient;
+
     @Value("${template.path}")
     private String path;
+
 
     @Test
     public void testCreateIndex(){
@@ -161,5 +168,11 @@ public class FilmTest {
         }
 
     }
+
+    @Test
+    public void testOrderClient(){
+        PageInfo<Order> pa = orderClient.getAllOrder(1, 10, null, null, null, null, null);
+        System.out.println(pa);
     }
+}
 

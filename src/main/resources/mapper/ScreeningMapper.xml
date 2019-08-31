@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniu.woniuticket.cinema.dao.ScreeningMapper">
 
+  <select id="selectScreeningByFilmId" resultMap="ScreeningDTOMap">
+    SELECT * FROM screening s
+    LEFT JOIN
+    film f
+    ON s.film_id=f.film_id
+    LEFT JOIN
+    hall h
+    ON s.hall_id=h.hall_id
+    WHERE s.film_id=#{filmId}
+    and
+    DATE_FORMAT(start_time,"%Y%m%d") = DATE_FORMAT(NOW(),"%Y%m%d")
+    order by start_time
+  </select>
+  <resultMap id="ScreeningDTOMap" type="com.woniu.woniuticket.cinema.dto.ScreeningDTO">
+    <id column="chip_id" jdbcType="INTEGER" property="chipId" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <association property="film" javaType="com.woniu.woniuticket.cinema.pojo.Film" autoMapping="true"></association>
+    <association property="hall" javaType="com.woniu.woniuticket.cinema.pojo.Hall" autoMapping="true"></association>
+  </resultMap>
+
+
   <!-- 根据放映厅id查询 -->
   <select id="selectScreeningsByHallId" resultMap="BaseResultMap">
   select * from screening where hall_id = #{hallId}
