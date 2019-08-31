@@ -43,14 +43,9 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5">
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <!--<input class="layui-input" placeholder="分类名" name="cate_name"></div>-->
-                            <div class="layui-input-inline layui-show-xs-block">
-                                <button class="layui-btn" lay-submit="" th:onclick="'handleAddHall()'" lay-filter="sreach"><i class="layui-icon"></i>增加
-                                </button>
-                            </div>
-                    </form>
+                    <button class="layui-btn"
+                            th:onclick="handleAddHall()" ><i class="layui-icon"></i>增加
+                    </button>
                     <hr>
                     <!--<blockquote class="layui-elem-quote">每个tr 上有两个属性 cate-id='1' 当前分类id fid='0' 父级id ,顶级分类为 0，有子分类的前面加收缩图标<i class="layui-icon x-show" status='true'>&#xe623;</i></blockquote>-->
                 </div>
@@ -114,19 +109,13 @@
     function handleAddScreening(hid) {
         xadmin.open('排片设置','/queryScreening?resUrl=addScreening&hallId=',hid);
     }
+<<<<<<< HEAD
+
+=======
     function handleAddHall() {
-        /*xadmin.open('添加','/addHall');*/
-        layer.open({
-            type: 2,
-            area: [500+'px', 500 +'px'],
-            fix: false, //不固定
-            maxmin: true,
-            shadeClose: true,
-            shade:0.4,
-            title: "添加",
-            content:"/addHall"
-        });
+        xadmin.open('添加','/skipAddHall?id=',1,600,800);
     }
+>>>>>>> origin/master
 
 
 
@@ -206,7 +195,7 @@
 
     // 分类展开收起的分类的逻辑
     //
-    $(function () {
+   /* $(function () {
         $("tbody.x-cate tr[fid!='0']").hide();
         // 栏目多级显示效果
         $('.x-show').click(function () {
@@ -226,9 +215,9 @@
                 }
             }
         })
-    })
+    })*/
 
-    var cateIds = [];
+    /*var cateIds = [];
 
     function getCateId(cateId) {
         $("tbody tr[fid=" + cateId + "]").each(function (index, el) {
@@ -236,7 +225,7 @@
             cateIds.push(id);
             getCateId(id);
         });
-    }
+    }*/
 
 </script>
 </html>

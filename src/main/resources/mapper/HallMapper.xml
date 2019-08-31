@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniu.woniuticket.cinema.dao.HallMapper">
+  <!--根据排片id查询是否有订单-->
+  <select id="selectOrderByChipId" resultType="com.woniu.woniuticket.cinema.pojo.Order">
+    select * from `order` where chip_id = #{chipId}
+  </select>
+  <!--通过排片id查询出排片对象-->
+  <select id="selectScreeningByChipId" resultType="com.woniu.woniuticket.cinema.pojo.Screening">
+    select * from screening where chip_id = #{chipId}
+  </select>
+  <!--通过影厅Id开启影厅-->
+  <update id="updateHallStateByHallId">
+    update `hall` set state = #{hallState} where hall_id = #{hallId}
+  </update>
   <resultMap id="BaseResultMap" type="com.woniu.woniuticket.cinema.pojo.Hall">
     <id column="hall_id" jdbcType="INTEGER" property="hallId" />
     <result column="hall_name" jdbcType="VARCHAR" property="hallName" />
