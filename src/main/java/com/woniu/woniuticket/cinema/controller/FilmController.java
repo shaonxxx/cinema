@@ -20,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @CrossOrigin
@@ -57,6 +56,43 @@ public class FilmController {
                                     @RequestParam(value ="currentPage",defaultValue = "1",required = true)Integer currentPage,
                                     @RequestParam(value = "pageSize",defaultValue = "10",required = true)Integer pagesize){
         Result result = new Result();
+        /*System.out.println("========================================"+filmVO.getCategoryId());*/
+        List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
+        PageInfo<Film> pageInfo = new PageInfo<Film>(films);
+        result.setCode("200");
+        result.setMessage("查询成功");
+        result.setData(pageInfo);
+        return result;
+    }
+
+
+
+    /**
+     * 条件查询影片，没有条件则查询所有影片
+     * @param categoryId
+     * @param local
+     * @param currentPage
+     * @param pagesize
+     * @return
+     */
+    @GetMapping("/filmlistBelongGrading")
+    @ResponseBody
+    public Result<PageInfo> findfilmByConditionBelongGrading(
+            @RequestParam(value ="categoryId",required = false) String categoryId,
+            @RequestParam(value ="local",required = false) String local,
+            @RequestParam(value ="currentPage",defaultValue = "1",required = true)Integer currentPage,
+            @RequestParam(value = "pageSize",defaultValue = "10",required = true)Integer pagesize){
+        Result result = new Result();
+        FilmVO filmVO=new FilmVO();
+
+       if(categoryId!=null){
+           System.out.println(local+"====================="+categoryId);
+           filmVO.setLocal(local);
+       }
+        if(local!=null){
+            System.out.println(local+"====================="+categoryId);
+            filmVO.setLocal(local);
+        }
         List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
         PageInfo<Film> pageInfo = new PageInfo<Film>(films);
         result.setCode("200");
@@ -113,7 +149,12 @@ public class FilmController {
         List<Film> films=filmService.selectRandom(num);
         result.setData(films);
         result.setCode("0");
+
+        Integer integer=new Integer(3);
+
+
         return result;
+
     }
 
 
@@ -160,13 +201,13 @@ public class FilmController {
         return pageInfo;
     }
 
-    @GetMapping("/keyword")
+    /*@GetMapping("/keyword")
     @ResponseBody
     public Map getByKeyword(String keyword){
         System.out.println(keyword);
         Map result = filmService.findByKeyword(keyword);
         return result;
-    }
+    }*/
 
     @GetMapping("/film/showList")
     public ModelAndView showList(
@@ -207,5 +248,7 @@ public class FilmController {
         PageInfo<Film> pageInfo = new PageInfo<Film>(films);
         return pageInfo;
     }
+
+
 
 }
