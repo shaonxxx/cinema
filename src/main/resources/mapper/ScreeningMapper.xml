@@ -54,6 +54,9 @@
     <result column="cinema_id" jdbcType="INTEGER" property="cinemaId" />
     <result column="hall_id" jdbcType="INTEGER" property="hallId" />
     <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="seatmap" jdbcType="DECIMAL" property="seatmap" />
+    <result column="unseat" jdbcType="DECIMAL" property="unseat" />
+    <result column="state" jdbcType="DECIMAL" property="state" />
   </resultMap>
   <sql id="Base_Column_List">
     chip_id, start_time, end_time, film_id, cinema_id, hall_id, price
@@ -77,10 +80,10 @@
   <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.Screening">
     insert into screening (chip_id, start_time, end_time, 
       film_id, cinema_id, hall_id, 
-      price)
+      price,seatmap,unseat,state)
     values (#{chipId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
       #{filmId,jdbcType=INTEGER}, #{cinemaId,jdbcType=INTEGER}, #{hallId,jdbcType=INTEGER}, 
-      #{price,jdbcType=DECIMAL})
+      #{price,jdbcType=DECIMAL},#{seatmap,jdbcType=DECIMAL},#{unseat,jdbcType=DECIMAL},#{state,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.woniu.woniuticket.cinema.pojo.Screening">
     insert into screening
@@ -106,6 +109,15 @@
       <if test="price != null">
         price,
       </if>
+      <if test="seatmap != null">
+        seatmap,
+      </if>
+      <if test="unseat != null">
+        unseat,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="chipId != null">
@@ -128,6 +140,15 @@
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="seatmap != null">
+        #{seatmap,jdbcType=DECIMAL},
+      </if>
+      <if test="unseat != null">
+        #{unseat,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -152,6 +173,15 @@
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
       </if>
+      <if test="seatmap != null">
+        seatmap = #{seatmap,jdbcType=DECIMAL},
+      </if>
+      <if test="unseat != null">
+        unseat = #{unseat,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=DECIMAL},
+      </if>
     </set>
     where chip_id = #{chipId,jdbcType=INTEGER}
   </update>
@@ -163,6 +193,9 @@
       cinema_id = #{cinemaId,jdbcType=INTEGER},
       hall_id = #{hallId,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL}
+      seatmap = #{seatmap,jdbcType=DECIMAL}
+      unseat = #{unseat,jdbcType=DECIMAL}
+      state = #{state,jdbcType=DECIMAL}
     where chip_id = #{chipId,jdbcType=INTEGER}
   </update>
 </mapper>
