@@ -32,6 +32,96 @@ public class Order {
 
     private String orderQrcode;
 
+    private Date startTime;
+
+    private Date endTime;
+    // 电影时长
+    private Integer duration;
+    // 影厅
+    private String hallName;
+    // 影院
+    private String location;
+    // 电影封面
+    private String covers;
+    // 开始播放时间
+    private String palyTime;
+    // 电影名字
+    private String filmName;
+
+    private long price;
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public String getFilmName() {
+        return filmName;
+    }
+
+    public void setFilmName(String filmName) {
+        this.filmName = filmName;
+    }
+
+    public String getPalyTime() {
+        return palyTime;
+    }
+
+    public void setPalyTime(String palyTime) {
+        this.palyTime = palyTime;
+    }
+
+    public String getCovers() {
+        return covers;
+    }
+
+    public void setCovers(String covers) {
+        this.covers = covers;
+    }
+
+    public String getHallName() {
+        return hallName;
+    }
+
+    public void setHallName(String hallName) {
+        this.hallName = hallName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -142,5 +232,34 @@ public class Order {
 
     public void setOrderQrcode(String orderQrcode) {
         this.orderQrcode = orderQrcode;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", userId=" + userId +
+                ", chipId=" + chipId +
+                ", pipeNum='" + pipeNum + '\'' +
+                ", createTime=" + createTime +
+                ", seat='" + seat + '\'' +
+                ", proof='" + proof + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", orderNum='" + orderNum + '\'' +
+                ", orderState=" + orderState +
+                ", payType='" + payType + '\'' +
+                ", filmNum=" + filmNum +
+                ", couponId=" + couponId +
+                ", orderQrcode='" + orderQrcode + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", duration=" + duration +
+                ", hallName='" + hallName + '\'' +
+                ", location='" + location + '\'' +
+                ", covers='" + covers + '\'' +
+                ", palyTime='" + palyTime + '\'' +
+                ", filmName='" + filmName + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

@@ -4,7 +4,10 @@ import com.github.pagehelper.PageInfo;
 import com.woniu.woniuticket.cinema.client.OrderClient;
 import com.woniu.woniuticket.cinema.pojo.Order;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -36,11 +39,16 @@ public class orderController {
     }
 
 
-    @GetMapping("/list")
-    public void listOrder(){
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("order-list");
+    @GetMapping("/Orderlist")
+    public ModelAndView listOrder(){
+        System.out.println("进入=========================");
+        ModelAndView mv=new ModelAndView();
+        PageInfo<Order> PageInfo =  orderClient.getAllOrder(1,30,null,null,null,null,null);
 
+        System.out.println("========================="+PageInfo.getList());
+        mv.addObject("pageInfo",PageInfo);
+        mv.setViewName("order-list");
+        return mv;
     }
 
     //@RequestMapping("/orders/show.do")
