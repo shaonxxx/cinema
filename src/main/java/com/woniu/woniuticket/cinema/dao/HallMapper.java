@@ -1,7 +1,6 @@
 package com.woniu.woniuticket.cinema.dao;
 
 import com.woniu.woniuticket.cinema.pojo.Hall;
-import com.woniu.woniuticket.cinema.pojo.Order;
 import com.woniu.woniuticket.cinema.pojo.Screening;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,10 +20,8 @@ public interface HallMapper {
     int updateByPrimaryKey(Hall record);
 
     List<Hall> selectAllHall();
-    // 根据排片id查询是否有订单
-    List<Order> selectOrderByChipId(Integer chipId);
-    // 通过排片id查询出排片对象
-    Screening selectScreeningByChipId(Integer chipId);
+    // 通过影厅Id查询出排片对象
+    Screening selectScreeningByChipId(Integer hallId);
     // 通过影厅Id开启影厅
     int updateHallStateByHallId(@Param("hallId") Integer hallId,@Param("hallState") Integer hallState);
 }
