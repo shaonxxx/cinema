@@ -1,6 +1,7 @@
 package com.woniu.woniuticket.cinema.dao;
 
 import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
+import com.woniu.woniuticket.cinema.pojo.Order;
 import com.woniu.woniuticket.cinema.pojo.Screening;
 import com.woniu.woniuticket.cinema.vo.ScreeningVO;
 import org.apache.ibatis.annotations.Param;
@@ -45,4 +46,8 @@ public interface ScreeningMapper {
     List<Screening> selectScreeningByfid();
 
     List<ScreeningDTO> selectScreeningByFilmId(Integer filmId);
+    // 通过排片id查询订单对象
+    List<Order> selectOrderByChipId(Integer chipId);
+    // 删除排片(0:删除,1:存活)
+    int deleteScreeningByChipId(Integer chipId);
 }

@@ -2,6 +2,7 @@ package com.woniu.woniuticket.cinema.service;
 
 
 import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
+import com.woniu.woniuticket.cinema.pojo.Result;
 import com.woniu.woniuticket.cinema.pojo.Screening;
 import com.woniu.woniuticket.cinema.vo.ScreeningVO;
 
@@ -24,5 +25,6 @@ public interface ScreeningService {
     List<Screening> findScreeningByhid(Integer hid);
 
     List<ScreeningDTO> findScreeningByFilmId(Integer filmId);
-
+    // 删除排片
+    Result deleteScreeningByChipId(Integer chipId);
 }

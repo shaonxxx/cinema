@@ -3,6 +3,7 @@ package com.woniu.woniuticket.cinema.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
+import com.woniu.woniuticket.cinema.pojo.Result;
 import com.woniu.woniuticket.cinema.pojo.Screening;
 import com.woniu.woniuticket.cinema.service.ScreeningService;
 import com.woniu.woniuticket.cinema.vo.ScreeningVO;
@@ -99,5 +100,13 @@ public class ScreeningController {
             System.out.println(screeningDTO.getStartTime());
         }
         return result;
+    }
+
+    // 删除排片
+    @PutMapping("/deleteScreening")
+    @ResponseBody
+    @CrossOrigin
+    public Result deleteScreeningByChipId(Integer chipId){
+        return screeningService.deleteScreeningByChipId(chipId);
     }
 }
