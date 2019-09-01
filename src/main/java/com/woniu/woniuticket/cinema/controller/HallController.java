@@ -26,41 +26,43 @@ public class HallController {
 
     /**
      * 根据ID查找放映厅
+     *
      * @param hid
      * @return
      */
     @GetMapping("/hall/{hid}")
     @ResponseBody
-    public Map findHallById(@PathVariable(value = "hid") Integer hid){
-        Map result=new HashMap();
+    public Map findHallById(@PathVariable(value = "hid") Integer hid) {
+        Map result = new HashMap();
         Hall hall = hallService.findHallById(hid);
-        result.put("hall",hall);
+        result.put("hall", hall);
         System.out.println(result);
         return result;
     }
 
     @GetMapping("/findhallById")
-    public ModelAndView findHallByOneId(@RequestParam(value = "hid",required = false) Integer hid){
-        ModelAndView mv=new ModelAndView();
+    public ModelAndView findHallByOneId(@RequestParam(value = "hid", required = false) Integer hid) {
+        ModelAndView mv = new ModelAndView();
         Hall hall = hallService.findHallById(hid);
-        String[] sts=(hall.getSeatmap()).split(",");
-        mv.addObject("hall",hall);
-        mv.addObject("sts",sts);
+        String[] sts = (hall.getSeatmap()).split(",");
+        mv.addObject("hall", hall);
+        mv.addObject("sts", sts);
         mv.setViewName("hall-details");
         return mv;
     }
 
     /**
      * 查找所有放映厅
+     *
      * @return 放映厅列表
      */
     @GetMapping("/hall")
-    public ModelAndView findAllHall(){
-        ModelAndView modelAndView=new ModelAndView();
-        Map result=new HashMap();
-        List<Hall> halls=hallService.findAllHall();
-        result.put("halls",halls);
-        modelAndView.addObject("halls",halls);
+    public ModelAndView findAllHall() {
+        ModelAndView modelAndView = new ModelAndView();
+        Map result = new HashMap();
+        List<Hall> halls = hallService.findAllHall();
+        result.put("halls", halls);
+        modelAndView.addObject("halls", halls);
         modelAndView.setViewName("cate");
         return modelAndView;
     }
@@ -68,28 +70,30 @@ public class HallController {
 
     /**
      * 放映厅详情页面跳转
+     *
      * @param hid
      * @return
      */
     @GetMapping("/details/{hid}")
-    public ModelAndView Test01(@PathVariable("hid") Integer hid){
-        ModelAndView modelAndView=new ModelAndView();
+    public ModelAndView Test01(@PathVariable("hid") Integer hid) {
+        ModelAndView modelAndView = new ModelAndView();
         Hall hall = hallService.findHallById(hid);
-        modelAndView.addObject("hall",hall);
+        modelAndView.addObject("hall", hall);
         modelAndView.setViewName("hall-details");
         return modelAndView;
     }
 
     /**
-     *  放映厅添加排片页面跳转
+     * 放映厅添加排片页面跳转
+     *
      * @param hid
      * @return
      */
     @GetMapping("/skipScreening")
-    public ModelAndView skipScreening(Integer hid){
-        ModelAndView modelAndView=new ModelAndView();
+    public ModelAndView skipScreening(Integer hid) {
+        ModelAndView modelAndView = new ModelAndView();
         Hall hall = hallService.findHallById(hid);
-        modelAndView.addObject("hall",hall);
+        modelAndView.addObject("hall", hall);
         modelAndView.setViewName("addScreening");
         return modelAndView;
     }
@@ -97,8 +101,8 @@ public class HallController {
 
     @PostMapping("/addhall")
     @ResponseBody
-    public Result addHall(@RequestBody  Hall hall){
-        Result result=new Result();
+    public Result addHall(@RequestBody Hall hall) {
+        Result result = new Result();
         String seats = HallUtil.seattransmap(hall.getSeats());
         hall.setSeatmap(seats);
         hall.setSeats(HallUtil.seat(seats));
@@ -113,15 +117,20 @@ public class HallController {
     @PutMapping("/testUpdate")
     @ResponseBody
     @CrossOrigin
-    public String testUpdate(String state){
-        System.out.println("=============="+state);
+    public Result testUpdate(Integer chipId, String state) {
+        // 根据排片Id关闭或打开放映厅状态
+        if (state.equals("true")) {
+            state = "1";
+        } else {
+            state = "0";
+        }
+        return hallService.updateHallStateByChipId(chipId, state);
 
-        return "200";
+
     }
 
-    @GetMapping("skipAddHall")
-    public String skipAddHall(int id){
+    @GetMapping("/skipAddHall")
+    public String skipAddHall(int id) {
         return "addHall";
     }
-
 }

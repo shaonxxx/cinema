@@ -32,7 +32,7 @@
                     <div class="layui-card">
                         <div class="layui-card-header">最新一周PV/UV量</div>
                         <div class="layui-card-body" style="min-height: 280px;">
-                            <div id="main2" class="layui-col-sm12" style="height: 300px;"></div>
+                            <div name="main2" class="layui-col-sm12" style="height: 300px;"></div>
 
                         </div>
                     </div>
@@ -41,7 +41,11 @@
                     <div class="layui-card">
                         <div class="layui-card-header">最新一周PV/UV量</div>
                         <div class="layui-card-body" style="min-height: 280px;">
+<<<<<<< HEAD
+                            <div name="main2" class="layui-col-sm12" style="height: 300px;"></div>
+=======
                             <div id="main21" class="layui-col-sm12" style="height: 300px;"></div>
+>>>>>>> origin/master
 
                         </div>
                     </div>
@@ -106,8 +110,18 @@
         myChart.setOption(option);
 
         // 基于准备好的dom，初始化echarts实例
+<<<<<<< HEAD
+        var elements =document.getElementsByName('main2')
+        var myChart;
+        for(var i in elements){
+            myChart[i]= echarts.init(elements[i]);
+        }
+
+
+=======
         var myChart = echarts.init(document.getElementById('main2'));
         var myChart1 = echarts.init(document.getElementById('main21'));
+>>>>>>> origin/master
         // 指定图表的配置项和数据
         var option = {
             tooltip : {
@@ -207,8 +221,15 @@
 
 
         // 使用刚指定的配置项和数据显示图表。
+<<<<<<< HEAD
+        for(var i in myChart){
+            myChart[i].setOption(option);
+        }
+
+=======
         myChart.setOption(option);
         myChart1.setOption(option2);
+>>>>>>> origin/master
 
 
         // 基于准备好的dom，初始化echarts实例
