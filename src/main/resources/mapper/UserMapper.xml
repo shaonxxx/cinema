@@ -3,7 +3,7 @@
 <mapper namespace="com.woniu.woniuticket.cinema.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.woniu.woniuticket.cinema.pojo.User">
     <id column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="user_name" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
@@ -22,13 +22,13 @@
   <select id="selectPageCondition" resultMap="BaseResultMap">
     select * from user where user_state= 0
     <choose>
-      <when test="start!= null and end==null">
+      <when test="start != null and end == null">
         and regist_time > #{start}
       </when>
-      <when test="start== null and end!=null">
+      <when test="start == null and end != null">
         and #{end} > regist_time
       </when>
-      <when test="start!= null and end!=null">
+      <when test="start != null and end != null">
         and regist_time between #{start} and #{end}
       </when>
     </choose>

@@ -80,33 +80,29 @@
                                         <th>影片</th>
                                         <th>单价</th>
                                         <th>总金额</th>
-                                        <th>应付金额</th>
                                         <th>订单状态</th>
-                                        <th>支付状态</th>
                                         <th>座位号</th>
                                         <th>支付方式</th>
                                         <th>下单时间</th>
                                         <th>操作</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="">
-                                        <td><input type="checkbox" style="width: 15px;height:15px;"></td>
-                                        <td><a onclick="xadmin.open('查看','member-add.html')" href="javascript:;" >{{item.ordernum}}</a></td>
-                                        <td >{{item.userid}}</td><!--老王:18925139194-->
-                                        <td >{{item.orderid}}</td><!--100-->
-                                        <td >{{item.filmnum}}</td><!--1-->
-                                        <td >{{item.orderid}}</td><!--7854.10-->
-                                        <td >{{item.orderid}}</td><!--7854.10-->
-                                        <td >{{item.orderid}}</td><!--待确认-->
-                                        <td >{{item.orderid}}</td><!--未支付-->
-                                        <td >{{item.orderid}}</td><!--未发货-->
-                                        <td >{{item.orderid}}</td><!--其他方式-->
-                                        <td >{{item.orderid}}</td><!--2017-08-17 18:22-->
+                                    <tr th:each="item:${pageInfo.list}">
+                                        <td><input type="checkbox" lay-skin="primary"></td>
+                                        <td><a onclick="xadmin.open('查看','member-add.html')" href="javascript:;" >[[${item.orderNum}]]</a></td>
+                                        <td >[[${item.userId}]]</td><!--老王:18925139194-->
+                                        <td >[[${{item.filmName}}]]</td><!--100-->
+                                        <td >[[${{item.price}}]]</td><!--1-->
+                                        <td >[[${item.totalPrice}]]</td><!--7854.10-->
+                                        <td >[[${item.orderState}]]</td><!--待确认-->
+                                        <td >[[${item.seat}]]</td>
+                                        <td >[[${item.payType}]]</td><!--其他方式-->
+                                        <td >[[${#dates.format(item.createTime,'yyyy-MM-dd HH-mm-ss')}]]</td><!--2017-08-17 18:22-->
                                         <td class="td-manage">
-                                            <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
-                                                <i class="layui-icon">&#xe63c;</i></a>
-                                            <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                                <i class="layui-icon">&#xe640;</i></a>
+                                           <!-- <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
+                                                <i class="layui-icon">&#xe63c;</i></a>-->
+                                            <!--<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                                <i class="layui-icon">&#xe640;</i></a>-->
                                         </td>
                                     </tr>
 
@@ -125,7 +121,6 @@
                                     <a class="next" href="">&gt;&gt;</a></div>
                             </div>
                         </div>
-                        <input id="test" value="test">
                     </div>
                 </div>
             </div>
@@ -133,14 +128,14 @@
     </body>
     <script>
        /* var orders={ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"};*/
-        var app=new Vue({
+       /* var app=new Vue({
             el:"#app",
             data:{
                 orders: []
-                   /* { ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"},
+                   /!* { ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"},
                     { ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"},
                     { ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"},
-                    { ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"}*/
+                    { ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"}*!/
             }
             }
         );
@@ -148,24 +143,25 @@
                 url:"http://localhost:8081/film",
                 method:"post",
                 params:{
-                   /* filmName:"xly"*/
+                   /!* filmName:"xly"*!/
                 }
             })
                 .then((result)=>{
                     console.log(result);
-                   /* alert("获取服务器数据");*/
-                    /*var orders=[
+                   /!* alert("获取服务器数据");*!/
+                    /!*var orders=[
                             { ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"},
                             { ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"},
                             { ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"},
                             { ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"}
-                    ];*/
+                    ];*!/
 
                     this.app.orders=result.data.data.list
-                   /* alert(this.app.orders=orders)*/
-                })
+                   /!* alert(this.app.orders=orders)*!/
+                })*/
     </script>
-    <script>layui.use(['laydate', 'form'],
+    <script>
+        layui.use(['laydate', 'form'],
         function() {
             var laydate = layui.laydate;
 
@@ -236,6 +232,7 @@
                 });
                 $(".layui-form-checked").not('.header').parents('tr').remove();
             });
-        }</script>
+        }
+    </script>
 
 </html>

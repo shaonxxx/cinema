@@ -52,6 +52,34 @@ public class ScreeningSeerviceImpl implements ScreeningService {
         return screeningMapper.selectScreeningByFilmId(filmId);
     }
 
+    // 删除排片
+    @Override
+    public Result deleteScreeningByChipId(Integer chipId) {
+        Result result = null;
+        // 通过排片id查询订单对象
+        List<Order> orders = screeningMapper.selectOrderByChipId(chipId);
+        if (orders != null){
+            result.setCode("500");
+            result.setMessage("该影片有订单未消费,不能删除!");
+            result.setData(null);
+            return result;
+        }else {
+            // 删除排片(0:删除,1:存活)
+            int row = screeningMapper.deleteScreeningByChipId(chipId);
+            if (row > 0){
+                result.setCode("200");
+                result.setMessage("排片删除成功!");
+                result.setData(null);
+                return result;
+            }else {
+                result.setCode("500");
+                result.setMessage("排片删除失败!");
+                result.setData(null);
+                return result;
+            }
+        }
+    }
+
     @Override
     public Screening findScreenBychipid(Integer chipid) {
         return screeningMapper.selectByPrimaryKey(chipid);

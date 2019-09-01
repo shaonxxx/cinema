@@ -12,6 +12,12 @@
         <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
         <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
         <script type="text/javascript" th:src="@{/js/jquery.timelinr-0.9.7.js}"></script>
+
+        <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+        <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+
+
+
         <script type="text/javascript">
             $(function(){
                 $().timelinr()
@@ -75,10 +81,17 @@
         <div class="add">
 
             <div class="add-text">
-                <form >
+                <!--<form id="conf" method="get" action="/member/list.do" class="layui-form layui-col-space5">-->
+                    <!--&lt;!&ndash;<input id="index" type="hidden" name="currentPage" th:value="${page.pageNum}">&ndash;&gt;-->
+                    <!--<div class="layui-inline layui-show-xs-block">-->
+                        <!---->
+                    <!--</div>-->
+                <!--</form>-->
+                <form class="layui-col-space5">
                     <div class="layui-form">
-                        <div class="layui-inline">
-                            选择时间：
+                        <div class="layui-inline layui-col-space5">
+
+                            <input class="layui-input"  autocomplete="off" placeholder="开始时间" name="start" id="start">
                             <select name="city" lay-verify="required" lay-search>
                                 <option value="">请选择一个城市</option>
                                 <option value="010">北京</option>
@@ -148,6 +161,21 @@
             })();</script>-->
     </body>
 <script>
+    
+    // $(function () {
+    //     $.ajax({
+    //         url : 'http://localhost:8081/',
+    //         data:{name:value},
+    //         cache : false,
+    //         async : true,
+    //         type : "POST",
+    //         dataType : 'json/xml/html',
+    //         success : function (result){
+    //             do something....
+    //         }
+    //     });
+    // })
+    
     /*layui.use('form', function(){
         var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
 
@@ -157,12 +185,45 @@
         //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
         form.render();
     });*/
-        layui.use(['form'], function(){
-           var form = layui.form;
+        layui.use(['laydate','form'], function(){
+            var laydate = layui.laydate;
+            var form = layui.form;
 
             form.render();
-
+            laydate.render({
+                elem: '#start', //指定元素
+                type: 'datetime'
+            });
         });
+    // layui.use(['laydate','form'], function(){
+    //     var laydate = layui.laydate;
+    //     var  form = layui.form;
+    //
+    //
+    //     // 监听全选
+    //     form.on('checkbox(checkall)', function(data){
+    //
+    //         if(data.elem.checked){
+    //             $('tbody input').prop('checked',true);
+    //         }else{
+    //             $('tbody input').prop('checked',false);
+    //         }
+    //         form.render('checkbox');
+    //     });
+    //
+    //     //执行一个laydate实例
+    //     laydate.render({
+    //         elem: '#start' //指定元素
+    //     });
+    //
+    //     //执行一个laydate实例
+    //     laydate.render({
+    //         elem: '#end' //指定元素
+    //     });
+    //
+    //
+    // });
+
 </script>
 
 </html>

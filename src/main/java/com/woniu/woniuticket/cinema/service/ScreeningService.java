@@ -27,4 +27,6 @@ public interface ScreeningService {
 
     Screening findScreenBychipid(Integer chipid);
 
+    // 删除排片
+    Result deleteScreeningByChipId(Integer chipId);
 }

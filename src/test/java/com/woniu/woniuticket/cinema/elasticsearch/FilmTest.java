@@ -6,21 +6,14 @@ import com.woniu.woniuticket.cinema.dao.FilmCommentMapper;
 import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.pojo.FilmComment;
 import com.woniu.woniuticket.cinema.pojo.Order;
-import com.woniu.woniuticket.cinema.repository.FilmRepository;
 import com.woniu.woniuticket.cinema.service.FilmCommentService;
 import com.woniu.woniuticket.cinema.service.FilmService;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.sort.SortBuilders;
-import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.thymeleaf.TemplateEngine;
@@ -44,8 +37,6 @@ public class FilmTest {
     ElasticsearchTemplate esTemplate;
 
     @Autowired
-    FilmRepository filmRepository;
-    @Autowired
     FilmCommentMapper filmCommentMapper;
 
     @Autowired
@@ -65,7 +56,7 @@ public class FilmTest {
     }
 
 
-    @Test
+    /*@Test
     public void testInsertList(){
         List<Film> films = filmService.findAll();
         filmRepository.saveAll(films);
@@ -125,7 +116,7 @@ public class FilmTest {
         for (Film film : page) {
             System.out.println(film);
         }
-    }
+    }*/
 
     @Test
     public void testselectComment(){
