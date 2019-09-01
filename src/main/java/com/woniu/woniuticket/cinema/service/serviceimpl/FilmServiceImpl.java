@@ -27,7 +27,7 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public List<Film> findFilmByCondition(FilmVO filmVO, Integer currentPage, Integer pageSize) {
-
+        System.out.println("service==========================="+filmVO.getCategoryId()+filmVO.getLocal());
         return filmMapper.selectFilmByCondition(filmVO,currentPage,pageSize);
     }
 
