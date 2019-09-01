@@ -31,10 +31,13 @@
           and DATE_FORMAT(relese_date,'%Y') =  DATE_FORMAT(#{filmVO.releseDate},'%Y')
         </if>
         <if test="filmVO.categoryId != null and filmVO.categoryId != ''">
-          and category_id = #{filmVO.categoryId}
+          and category_id like '%' #{filmVO.categoryId} '%'
         </if>
         <if test="filmVO.filmStatus != null and filmVO.filmStatus != ''">
           and film_status like '%' #{filmVO.filmStatus} '%'
+        </if>
+        <if test="filmVO.local != null and filmVO.local != ''">
+          and local = #{filmVO.local}
         </if>
           <!-- order by relese_date -->
       </if>

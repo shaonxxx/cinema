@@ -114,17 +114,17 @@ public class HallController {
         return result;
     }
 
-    @PutMapping("/testUpdate")
+    // 更新影厅开启关闭状态
+    @PutMapping("/updateHallState")
     @ResponseBody
     @CrossOrigin
-    public Result testUpdate(Integer chipId, String state) {
-        // 根据排片Id关闭或打开放映厅状态
+    public Result testUpdate(Integer hallId, String state) {
         if (state.equals("true")) {
             state = "1";
         } else {
             state = "0";
         }
-        return hallService.updateHallStateByChipId(chipId, state);
+        return hallService.updateHallStateByChipId(hallId, state);
 
 
     }

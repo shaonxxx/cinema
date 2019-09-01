@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniu.woniuticket.cinema.dao.ScreeningMapper">
-
+<!--通过排片id查询订单对象-->
+  <select id="selectOrderByChipId" resultType="com.woniu.woniuticket.cinema.pojo.Order">
+    select * from `order` where chip_id = #{chipId}
+  </select>
+  <!--删除排片(0:删除,1:存活)-->
+  <update id="deleteScreeningByChipId">
+    update screening set state = 0 where chip_id = #{chipId}
+  </update>
   <select id="selectScreeningByFilmId" resultMap="ScreeningDTOMap">
     SELECT * FROM screening s
     LEFT JOIN

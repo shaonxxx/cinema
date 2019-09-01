@@ -87,7 +87,7 @@ public class FilmController {
 
        if(categoryId!=null){
            System.out.println(local+"====================="+categoryId);
-           filmVO.setLocal(local);
+           filmVO.setCategoryId(categoryId);
        }
         if(local!=null){
             System.out.println(local+"====================="+categoryId);
