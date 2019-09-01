@@ -25,4 +25,6 @@ public interface ScreeningService {
 
     List<ScreeningDTO> findScreeningByFilmId(Integer filmId);
 
+    Screening findScreenBychipid(Integer chipid);
+
 }

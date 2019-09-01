@@ -3,7 +3,9 @@ package com.woniu.woniuticket.cinema.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
+import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.pojo.Screening;
+import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.service.ScreeningService;
 import com.woniu.woniuticket.cinema.vo.ScreeningVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 public class ScreeningController {
 
     @Autowired
     ScreeningService screeningService;
+
+    @Autowired
+    FilmService filmService;
 
     /**
      *  根据放映查找拍片(暂时没用)
@@ -99,5 +105,20 @@ public class ScreeningController {
             System.out.println(screeningDTO.getStartTime());
         }
         return result;
+    }
+
+    /**
+     * 根据拍拍你chipid查找拍片信息
+     * @param chipid
+     * @return
+     */
+    @GetMapping("/findscreening/{chipid}")
+    public Map findScreeningById(@PathVariable("chipid") Integer chipid){
+        Map result=new HashMap();
+        Screening screening = screeningService.findScreenBychipid(chipid);
+        Film film = filmService.selectFilmByfid(screening.getFilmId());
+        result.put("result",result);
+        result.put("film",film);
+        return  result;
     }
 }

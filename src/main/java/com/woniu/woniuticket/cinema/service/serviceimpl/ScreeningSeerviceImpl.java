@@ -53,6 +53,11 @@ public class ScreeningSeerviceImpl implements ScreeningService {
     }
 
     @Override
+    public Screening findScreenBychipid(Integer chipid) {
+        return screeningMapper.selectByPrimaryKey(chipid);
+    }
+
+    @Override
     public List<Screening> findScreeningByhid(Integer hid) {
 
         return  screeningMapper.selectScreeningByfid();
