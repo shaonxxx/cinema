@@ -18,6 +18,12 @@ public class Screening {
 
     private Long price;
 
+    private String seatmap;
+
+    private String unseat;
+
+    private Integer state;
+
     public Integer getChipId() {
         return chipId;
     }
@@ -72,5 +78,29 @@ public class Screening {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public String getSeatmap() {
+        return seatmap;
+    }
+
+    public void setSeatmap(String seatmap) {
+        this.seatmap = seatmap;
+    }
+
+    public String getUnseat() {
+        return unseat;
+    }
+
+    public void setUnseat(String unseat) {
+        this.unseat = unseat;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

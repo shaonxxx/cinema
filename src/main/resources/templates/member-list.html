@@ -34,7 +34,7 @@
                             <form id="hideForm" method="get" action="/member/list.do">
                                 <input id="index" type="hidden" name="currentPage" th:value="${page.pageNum}">
                                 <input type="hidden" name="start" th:value="${#dates.format(con.start,'yyyy-MM-dd')}">
-                                <input type="hidden" name="end" th:value="${#dates.format(con.start,'yyyy-MM-dd')}">
+                                <input type="hidden" name="end" th:value="${#dates.format(con.end,'yyyy-MM-dd')}">
                                 <input type="hidden" th:value="${con.nikeName}" name="nikeName">
                             </form>
                             <form id="conf" method="get" action="/member/list.do" class="layui-form layui-col-space5">
@@ -83,7 +83,7 @@
                                     <td>
                                       <input type="checkbox" name="userId" th:value="${it.userId}"   lay-skin="primary">
                                     </td>
-                                    <td th:text="${i.count}"></td>
+                                    <td th:text="${i.count+(page.pageNum-1)*page.size}"></td>
                                     <td th:text="${it.username}"></td>
                                       <td th:text="${it.nickname}"></td>
                                       <td th:text="${it.mobile}"></td>

@@ -30,13 +30,15 @@ public class MemberController {
     public ModelAndView showPage(@RequestParam(value="currentPage",required = true,defaultValue = "1") Integer currentPage,
                                  UserCondition condition){
         //System.out.println("123");
-        System.out.println("start:"+condition.getStart());
-        System.out.println("nikeName:"+condition.getNikeName());
+//        System.out.println("start:"+condition.getStart());
+//        System.out.println("end:"+condition.getEnd());
+//        System.out.println("nikeName:"+condition.getNikeName());
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("/member-list");
         modelAndView.addObject("con",condition);
         List<User> users=memberService.selectPageCondition(currentPage,10,condition);
         PageInfo<User> pageInfo=new PageInfo<>(users);
+        System.out.println("用户名："+pageInfo.getList().get(0).getUsername());
         System.out.println(pageInfo);
         modelAndView.addObject("page",pageInfo);
         return modelAndView;

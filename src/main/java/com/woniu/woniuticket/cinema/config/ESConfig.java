@@ -1,26 +1,19 @@
 package com.woniu.woniuticket.cinema.config;
 
-import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.repository.FilmRepository;
 import com.woniu.woniuticket.cinema.service.FilmService;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
 
-@Configuration
-public class ESConfig implements InitializingBean {
+public class ESConfig{
 
-    @Autowired
+
     FilmRepository filmRepository;
 
-    @Autowired
     FilmService filmService;
 
-    @Override
+    /*@Override
     public void afterPropertiesSet() throws Exception {
         List<Film> films = filmService.findAll();
         filmRepository.saveAll(films);
-    }
+    }*/
 }

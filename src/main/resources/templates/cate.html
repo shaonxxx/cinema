@@ -66,7 +66,7 @@
                             <td>[[${hall.hallId}]]</td>
                             <td th:text="${hall.hallName}"></td>
                             <td>
-                                <input type="checkbox"   lay-filter="zzz"  lay-skin="switch" lay-text="开启|关闭" checked>
+                                <input type="checkbox" th:name="${hall.hallId}"  lay-filter="zzz"  lay-skin="switch" lay-text="开启|关闭" checked>
                                <!-- <input type="checkbox" lay-skin="switch" lay-text="开启|关闭">-->
                             </td>
                             <td class="td-manage">
@@ -109,13 +109,11 @@
     function handleAddScreening(hid) {
         xadmin.open('排片设置','/queryScreening?resUrl=addScreening&hallId=',hid);
     }
-<<<<<<< HEAD
 
-=======
     function handleAddHall() {
         xadmin.open('添加','/skipAddHall?id=',1,600,800);
     }
->>>>>>> origin/master
+
 
 
 
@@ -139,14 +137,16 @@
                 content: contexts
                 , btn: ['确定', '取消']
                 , yes: function (index, layero) {
+                   var hallId= data.elem.name;
                     data.elem.checked = x;
                     form.render();
                     layer.close(index);
                     $.ajax({
-                        url:"/testUpdate",
+                        url:"/hallUpdate",
                         type:"put",
                         data:{
-                            state:x
+                            state:x,
+                            hallId:hallId
                         },
                         success:function (value){
                             value = eval("("+value+")");
