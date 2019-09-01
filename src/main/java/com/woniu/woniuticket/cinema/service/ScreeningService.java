@@ -2,6 +2,7 @@ package com.woniu.woniuticket.cinema.service;
 
 
 import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
+import com.woniu.woniuticket.cinema.pojo.Result;
 import com.woniu.woniuticket.cinema.pojo.Screening;
 import com.woniu.woniuticket.cinema.vo.ScreeningVO;
 

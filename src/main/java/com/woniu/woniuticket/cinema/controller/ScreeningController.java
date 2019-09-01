@@ -6,6 +6,7 @@ import com.woniu.woniuticket.cinema.dto.ScreeningDTO;
 import com.woniu.woniuticket.cinema.pojo.Result;
 import com.woniu.woniuticket.cinema.pojo.Film;
 import com.woniu.woniuticket.cinema.pojo.Screening;
+import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.service.ScreeningService;
 import com.woniu.woniuticket.cinema.vo.ScreeningVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class ScreeningController {
 
     @Autowired
     ScreeningService screeningService;
+
+    @Autowired
+    FilmService filmService;
 
     /**
      *  根据放映查找拍片(暂时没用)
