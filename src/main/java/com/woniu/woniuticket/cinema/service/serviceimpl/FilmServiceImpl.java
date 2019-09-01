@@ -1,20 +1,14 @@
 package com.woniu.woniuticket.cinema.service.serviceimpl;
 
-import com.github.pagehelper.PageInfo;
 import com.woniu.woniuticket.cinema.dao.CategoryMapper;
 import com.woniu.woniuticket.cinema.dao.FilmCommentMapper;
 import com.woniu.woniuticket.cinema.dao.FilmMapper;
 import com.woniu.woniuticket.cinema.execption.FilmException;
 import com.woniu.woniuticket.cinema.pojo.Category;
 import com.woniu.woniuticket.cinema.pojo.Film;
-import com.woniu.woniuticket.cinema.repository.FilmRepository;
 import com.woniu.woniuticket.cinema.service.FilmService;
 import com.woniu.woniuticket.cinema.vo.FilmVO;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -30,8 +24,6 @@ public class FilmServiceImpl implements FilmService {
     @Autowired
     FilmCommentMapper filmCommentMapper;
 
-    @Autowired
-    FilmRepository filmRepository;
 
     @Override
     public List<Film> findFilmByCondition(FilmVO filmVO, Integer currentPage, Integer pageSize) {
@@ -120,7 +112,7 @@ public class FilmServiceImpl implements FilmService {
         return filmMapper.selectAll();
     }
 
-    @Override
+    /*@Override
     public Map findByKeyword(String keyword) {
         Map map = new HashMap();
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
@@ -145,7 +137,7 @@ public class FilmServiceImpl implements FilmService {
         }
 
         return map;
-    }
+    }*/
 
 
 //    public void PaseCategory(Film film){
