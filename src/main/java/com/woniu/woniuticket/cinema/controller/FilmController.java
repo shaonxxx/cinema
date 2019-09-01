@@ -197,4 +197,15 @@ public class FilmController {
         binder.registerCustomEditor(Date.class,new CustomDateEditor(dateFormat,true));
     }
 
+    @GetMapping("/film/asyncList")
+    @ResponseBody
+    public PageInfo showAsyncList(
+            FilmVO filmVO,//@RequestParam(value = "filmVO",required = false)
+            @RequestParam(value ="currentPage",defaultValue = "1",required = true)Integer currentPage,
+            @RequestParam(value = "pageSize",defaultValue = "10",required = true)Integer pagesize){
+        List<Film> films = filmService.findFilmByCondition(filmVO, currentPage, pagesize);
+        PageInfo<Film> pageInfo = new PageInfo<Film>(films);
+        return pageInfo;
+    }
+
 }
