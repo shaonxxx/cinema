@@ -81,6 +81,69 @@ public class ScreeningSeerviceImpl implements ScreeningService {
     }
 
     @Override
+    public void modifyScreeningByChipId(Screening screening) {
+        screeningMapper.updateScreeningByChipid(screening);
+    }
+
+    //判断定座位的状态
+    @Override
+    public Screening modifybefor(Integer chipid, String seat) {
+        Screening screening = screeningMapper.selectByPrimaryKey(chipid);
+        List<String> list=new ArrayList<>();
+        StringBuilder sb=new StringBuilder();
+        try {
+            String[] sts=seat.split(",");
+            if(screening.getSeatmap()==null){
+                for (int i = 0; i <sts.length ; i++) {
+                    list.add(sts[i]);
+                }
+            }else{
+                String[] xtx=screening.getSeatmap().split(",");
+                for (int i = 0; i <xtx.length ; i++) {
+                    list.add(xtx[i]);
+                }
+                for (int i = 0; i <sts.length ; i++) {
+                    if(!list.contains(sts[i])){
+                        list.add(sts[i]);
+                    }
+                }
+            }
+            for(String s:list){
+                sb.append(s+",");
+            }
+            screening.setSeatmap(sb.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ScreeningExecption("选座失败");
+        }
+        return screening;
+    }
+
+    @Override
+    public Screening ordermodify(Integer chipid, String seat) {
+        Screening screening = screeningMapper.selectByPrimaryKey(chipid);
+        String[] sts=seat.split(",");
+        String[] xtx=screening.getSeatmap().split(",");
+        StringBuilder sb=new StringBuilder();
+        List<String> list=new ArrayList<>();
+        for (int i = 0; i <xtx.length ; i++) {
+            list.add(xtx[i]);
+        }
+        for (int i = 0; i <sts.length ; i++) {
+            sts[i]=sts[i].replace("-","_");
+            if(list.contains(sts[i])){
+                list.remove(sts[i]);
+            }
+        }
+        for(String s:list){
+            sb.append(s+",");
+        }
+        screening.setSeatmap(sb.toString());
+        screeningMapper.updateScreeningByChipid(screening);
+        return screening;
+    }
+
+    @Override
     public Screening findScreenBychipid(Integer chipid) {
         return screeningMapper.selectByPrimaryKey(chipid);
     }

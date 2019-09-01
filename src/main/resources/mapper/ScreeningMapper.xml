@@ -84,6 +84,11 @@
     delete from screening
     where chip_id = #{chipId,jdbcType=INTEGER}
   </delete>
+
+  <update id="updateScreeningByChipid" parameterType="com.woniu.woniuticket.cinema.pojo.Screening">
+    update screening set seatmap=#{seatmap}
+  </update>
+
   <insert id="insert" parameterType="com.woniu.woniuticket.cinema.pojo.Screening">
     insert into screening (chip_id, start_time, end_time, 
       film_id, cinema_id, hall_id, 

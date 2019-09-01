@@ -50,4 +50,8 @@ public interface ScreeningMapper {
     List<Order> selectOrderByChipId(Integer chipId);
     // 删除排片(0:删除,1:存活)
     int deleteScreeningByChipId(Integer chipId);
+
+    //支付完成后添加座位
+    void updateScreeningByChipid(Screening screening);
+
 }

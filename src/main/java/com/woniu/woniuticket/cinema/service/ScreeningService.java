@@ -30,4 +30,13 @@ public interface ScreeningService {
 
     // 删除排片
     Result deleteScreeningByChipId(Integer chipId);
+
+    //订单完成添加座位
+    void modifyScreeningByChipId(Screening screening);
+
+    //判断座位状态
+    Screening modifybefor(Integer chipid,String seat);
+
+    //退票修改座位状态
+    Screening ordermodify(Integer chipid,String seat);
 }

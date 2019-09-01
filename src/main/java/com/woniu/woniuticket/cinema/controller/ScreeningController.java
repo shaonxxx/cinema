@@ -129,4 +129,40 @@ public class ScreeningController {
         result.put("film",film);
         return  result;
     }
+
+
+    /**
+     * 支付成功后请求此方法改变座位状态
+     * @param chipid
+     * @param seat
+     * @return
+     */
+    @RequestMapping("/selected")
+    @ResponseBody
+    public Map selectedSeats(@RequestParam(value="chipid") Integer chipid,
+                             @RequestParam(value="seat") String seat){
+        Map result=new HashMap();
+        Screening screening = screeningService.modifybefor(chipid, seat);
+        screeningService.modifyScreeningByChipId(screening);
+        Film film = filmService.selectFilmByfid(screening.getFilmId());
+        result.put("film",film);
+        result.put("screening",screening);
+        return result;
+    }
+
+    /**
+     *
+     * @param chipid
+     * @param seat
+     * @return
+     */
+    @RequestMapping("/userorder")
+    public Map orderSeats(@RequestParam(value="chipid") Integer chipid,
+                          @RequestParam(value = "seat") String seat){
+        Map result=new HashMap();
+        screeningService.ordermodify(chipid, seat);
+        result.put("code","0");
+        result.put("message","退票成功");
+        return result;
+    }
 }
