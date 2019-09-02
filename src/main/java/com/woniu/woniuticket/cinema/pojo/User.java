@@ -1,16 +1,30 @@
 package com.woniu.woniuticket.cinema.pojo;
 
+import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private Integer userId;
 
-    private String username;
+    @NotNull(message = "姓名不能为空")
+//    @NotEmpty(message ="用户名不能为空")
+    @Size(min = 6,max = 20,message = "用户名长度为{min}-{max}")
+    private String userName;
 
+    @NotEmpty(message ="密码不能为空")
+//    @NotNull(message = "密码不能为空")
     private String password;
 
+    @NotEmpty(message = "邮箱不能为空")
+    @Email(message = "邮箱格式错误")
+    private String email;
+
+    @NotEmpty(message ="手机号不能为空")
+    @Pattern(regexp = "^1[38]\\d{9}$",message = "手机号码格式不正确")
     private String mobile;
 
+    @NotNull(message ="昵称不能为空")
     private String nickname;
 
     private Date registTime;
@@ -19,13 +33,33 @@ public class User {
 
     private Date vipActivetime;
 
-    private String heading;
+    private String headimg;
 
     private String inviteCode;
 
-    private String registCode;
+    private String registCode;  //注册码
 
     private Integer userState;
+
+    private String gender;
+
+    private Date birth;
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -35,12 +69,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -49,6 +83,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getMobile() {
@@ -91,12 +133,12 @@ public class User {
         this.vipActivetime = vipActivetime;
     }
 
-    public String getHeading() {
-        return heading;
+    public String getHeadimg() {
+        return headimg;
     }
 
-    public void setHeading(String heading) {
-        this.heading = heading;
+    public void setHeadimg(String headimg) {
+        this.headimg = headimg;
     }
 
     public String getInviteCode() {
@@ -121,5 +163,27 @@ public class User {
 
     public void setUserState(Integer userState) {
         this.userState = userState;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", registTime=" + registTime +
+                ", vipState=" + vipState +
+                ", vipActivetime=" + vipActivetime +
+                ", headimg='" + headimg + '\'' +
+                ", inviteCode='" + inviteCode + '\'' +
+                ", registCode='" + registCode + '\'' +
+                ", userState=" + userState +
+                ", gender='" + gender + '\'' +
+                ", birth=" + birth +
+                '}';
+
     }
 }

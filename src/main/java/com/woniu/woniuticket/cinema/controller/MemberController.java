@@ -38,7 +38,7 @@ public class MemberController {
         modelAndView.addObject("con",condition);
         List<User> users=memberService.selectPageCondition(currentPage,10,condition);
         PageInfo<User> pageInfo=new PageInfo<>(users);
-        System.out.println("用户名："+pageInfo.getList().get(0).getUsername());
+        System.out.println("用户名："+pageInfo.getList().get(0).getUserName());
         System.out.println(pageInfo);
         modelAndView.addObject("page",pageInfo);
         return modelAndView;
@@ -49,14 +49,14 @@ public class MemberController {
     public String add(){
         User user=new User();
         for (int i=200;i<=300;i++){
-            user.setHeading("heading"+i);
+            user.setHeadimg("heading"+i);
             user.setInviteCode("00"+i);
             user.setMobile("13988888"+i);
             user.setNickname(""+i);
             user.setPassword(""+i);
             user.setRegistCode("00"+(i-1));
             user.setRegistTime(new Date());
-            user.setUsername(""+i);
+            user.setUserName(""+i);
             user.setUserState(0);
             user.setVipActivetime(new Date());
             user.setVipState(0);
