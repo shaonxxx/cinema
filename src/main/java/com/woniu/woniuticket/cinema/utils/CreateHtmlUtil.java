@@ -30,7 +30,7 @@ public class CreateHtmlUtil {
     @Value("${template.path}")
     private String path;
 
-    @Scheduled(cron = "0 53 * * * ?")
+    @Scheduled(cron = "0 30 * * * ?")
     public String buildHtml() throws IOException {
         try {
             List<Film> films = filmService.findAll();

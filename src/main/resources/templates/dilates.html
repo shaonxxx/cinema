@@ -176,7 +176,8 @@
     var apps = new Vue({
         el: "#app",
         data: {
-            showComment:[]
+            showComment:[],
+            ss:[]
         }
     })
 
@@ -203,7 +204,25 @@
         }).then(function (res) {
             this.apps.showComment = res.data.data.list;
         });
+        //加载排片信息
+        axios({
+                url: "http://localhost:8081/screening/film/" + filmId,
+                method: "get",
+            }
+        ).then(function(res){
+            console.log(res);
+        this.apps.ss=res.data.data;
+        for(var i=0;i<this.apps.ss.length;i++){
+            this.apps.ss[i].startTime=this.apps.ss[i].startTime.substring(this.apps.apps.ss[i].startTime.indexOf(" "));
+            this.apps.ss[i].endTime=this.apps.ss[i].endTime.substring(this.apps.ss[i].endTime.indexOf(" "));
+        }
+    })
+
+
     });
+    function skipUserSeat() {
+        window.location.href="userseat.html?id="+1;
+    }
 
     // 提交评论内容
     function commitText(){

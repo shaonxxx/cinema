@@ -40,12 +40,18 @@ public class orderController {
 
 
     @GetMapping("/Orderlist")
-    public ModelAndView listOrder(){
-        System.out.println("进入=========================");
-        ModelAndView mv=new ModelAndView();
-        PageInfo<Order> PageInfo =  orderClient.getAllOrder(1,30,null,null,null,null,null);
+    public ModelAndView listOrder(@RequestParam(value = "currentPage",defaultValue = "1",required = false) Integer currentPage,
+                                  @RequestParam(value = "pageSize",defaultValue = "10",required = false) Integer pageSize,
+                                  @RequestParam(value = "startDay",required = false) String startDay,
+                                  @RequestParam(value = "endDay",required = false) String endDay,
+                                  @RequestParam(value = "payType",required = false) String payType,
+                                  @RequestParam(value = "orderState",required = false) String orderState,
+                                  @RequestParam(value = "orderNum",required = false) String orderNum){
 
-        System.out.println("========================="+PageInfo.getList());
+        ModelAndView mv=new ModelAndView();
+        PageInfo<Order> PageInfo =
+                orderClient.getAllOrder(currentPage,pageSize,startDay,endDay,payType,orderState,orderNum);
+
         mv.addObject("pageInfo",PageInfo);
         mv.setViewName("order-list");
         return mv;

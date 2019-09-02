@@ -132,32 +132,31 @@ public class FilmTest {
     @Test
     public void test05(){
         try {
-            List<Film> films=filmService.findAll();
+            List<Film> films = filmService.findAll();
             for (Film film : films) {
-                Film film1=filmService.selectFilmByfid(film.getFilmId());
-                List<FilmComment> filmComments=filmCommentService.findFilmCommentsByFilmId(film.getFilmId(),1,4);
-                List<Film> recommends=filmService.selectRandom(9);
+                Film film1 = filmService.selectFilmByfid(film.getFilmId());
+                List<FilmComment> filmComments = filmCommentService.findFilmCommentsByFilmId(film.getFilmId(), 1, 4);
+                List<Film> recommends = filmService.selectRandom(9);
                 Context context = new Context();
-                if(filmComments==null){
-                    context.setVariable("filmComments",filmComments);
+                if (filmComments == null) {
+                    context.setVariable("filmComments", filmComments);
                 }
-                context.setVariable("film",film1);
-                context.setVariable("recommends",recommends);
+                context.setVariable("film", film1);
+                context.setVariable("recommends", recommends);
 
-                File file = new File(path);//目录d:/template/goodsDetail
-                if(!file.exists()){
+                File file = new File(path);//目录
+                if (!file.exists()) {
                     file.mkdirs();
                 }
 
-                File f = new File(file,film.getFilmId()+".html");//参数1是文件的路径，参数2是文件名称
+                File f = new File(file, film.getFilmId() + ".html");//参数1是文件的路径，参数2是文件名称
                 FileWriter writer = null;
-                    writer = new FileWriter(f);
-                engine.process("dilates",context,writer);
+                writer = new FileWriter(f);
+                engine.process("dilates", context, writer);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Test

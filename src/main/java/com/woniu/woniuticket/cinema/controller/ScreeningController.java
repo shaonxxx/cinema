@@ -125,7 +125,7 @@ public class ScreeningController {
         Map result=new HashMap();
         Screening screening = screeningService.findScreenBychipid(chipid);
         Film film = filmService.selectFilmByfid(screening.getFilmId());
-        result.put("result",result);
+        result.put("screening",screening);
         result.put("film",film);
         return  result;
     }

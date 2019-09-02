@@ -9,6 +9,9 @@
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         <link rel="stylesheet" th:href="@{/css/font.css}">
         <link rel="stylesheet"  th:href="@{/css/xadmin.css}">
+
+
+
         <script  th:src="@{/layui/layui.js}" charset="utf-8"></script>
         <script type="text/javascript"  th:src="@{/js/xadmin.js}"></script>
 <!--        <script  th:src="./js/vue.js"></script>
@@ -31,13 +34,13 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5">
+                            <form class="layui-form layui-col-space5" action="/Orderlist" onsubmit="submitContext()">
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input class="layui-input" placeholder="开始日" name="start" id="start"></div>
+                                    <input class="layui-input" placeholder="开始日" name="startDay" id="start"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input class="layui-input" placeholder="截止日" name="end" id="end"></div>
+                                    <input class="layui-input" placeholder="截止日" name="endDay" id="end"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <select name="contrller">
+                                    <select name="payType">
                                         <option>支付方式</option>
                                         <option>支付宝</option>
                                         <option>微信</option>
@@ -45,19 +48,19 @@
                                     </select>
                                 </div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <select name="contrller">
+                                    <select name="orderState">
                                         <option value="">订单状态</option>
-                                        <option value="0">待确认</option>
-                                        <option value="1">已确认</option>
-                                        <option value="2">已收货</option>
-                                        <option value="3">已取消</option>
-                                        <option value="4">已完成</option>
-                                        <option value="5">已作废</option></select>
+                                        <option value="1">待支付</option>
+                                        <option value="2">未消费</option>
+                                        <option value="3">已消费</option>
+                                        <option value="4">已退款</option>
+                                        <option value="5">待评价</option>
+                                        <option value="6">无&nbsp;效</option></select>
                                 </div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="username" placeholder="请输入订单号" autocomplete="off" class="layui-input"></div>
+                                    <input type="text" name="orderNum" placeholder="请输入订单号" autocomplete="off" class="layui-input"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="sreach">
+                                    <button class="layui-btn" lay-submit="" lay-filter="sreach" type="submit">
                                         <i class="layui-icon">&#xe615;</i></button>
                                 </div>
                             </form>
@@ -127,6 +130,9 @@
         </div>
     </body>
     <script>
+        function submitContext() {
+
+        }
        /* var orders={ordernum:"ordernum",userid:"userid",orderid:"orderid",filmnum:"filmnum"};*/
        /* var app=new Vue({
             el:"#app",
